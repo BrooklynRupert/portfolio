@@ -20,6 +20,13 @@
       --accent-light: #A1BC98;    /* Muted Sage */
       --border: #DCCFC0;          /* Sand Accent */
       --border-subtle: #ebdcd0;
+      
+      /* Manila Folder Palette */
+      --manila-back: #d4bc91;
+      --manila-front: #dfcb9f;
+      --manila-tab: #c9b183;
+      --manila-line: #bba274;
+      
       --radius: 12px;
     }
 
@@ -167,7 +174,6 @@
       min-height: 80vh;
     }
 
-    /* Section In-Focus */
     .page-section.in-focus {
       opacity: 1;
       filter: blur(0px);
@@ -280,6 +286,162 @@
       margin-bottom: 0.35rem;
     }
 
+    /* =========================================================
+       ANIMATED INTERACTIVE MANILA FOLDER CONTACT WIDGET
+       ========================================================= */
+    .folder-widget-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2.5rem;
+      z-index: 1000;
+      perspective: 900px;
+      cursor: pointer;
+    }
+
+    .manila-folder {
+      position: relative;
+      width: 140px;
+      height: 95px;
+      transition: transform 0.3s ease;
+    }
+
+    .manila-folder:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Folder Tab (Back Flap) */
+    .folder-tab {
+      position: absolute;
+      top: -12px;
+      left: 10px;
+      width: 50px;
+      height: 14px;
+      background: var(--manila-tab);
+      border-radius: 6px 6px 0 0;
+      border: 1.5px solid var(--manila-line);
+      border-bottom: none;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+      color: #59482d;
+      line-height: 13px;
+      text-transform: uppercase;
+    }
+
+    /* Folder Back */
+    .folder-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--manila-back);
+      border-radius: 0 8px 8px 8px;
+      border: 1.5px solid var(--manila-line);
+      box-shadow: 0 10px 25px -4px rgba(119, 136, 115, 0.3);
+    }
+
+    /* Sliding Contact Document */
+    .folder-document {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      width: 250px;
+      opacity: 0;
+      transform: translateY(10px) translateX(-55px) scale(0.9);
+      transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .folder-document h4 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
+    .doc-row {
+      margin-bottom: 8px;
+    }
+
+    .doc-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-label {
+      display: block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .doc-value, .doc-value a {
+      font-size: 0.86rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .doc-value a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Folder Front Flap (Opens forward on 3D X-Axis) */
+    .folder-front {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 90%;
+      background: var(--manila-front);
+      border-radius: 4px 4px 8px 8px;
+      border: 1.5px solid var(--manila-line);
+      transform-origin: bottom center;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .front-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #635032;
+      border: 1px dashed #ad9363;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* OPEN STATE (Triggered via Hover or Click class) */
+    .folder-widget-container:hover .folder-front,
+    .folder-widget-container.is-open .folder-front {
+      transform: rotateX(-45deg) skewX(4deg);
+    }
+
+    .folder-widget-container:hover .folder-document,
+    .folder-widget-container.is-open .folder-document {
+      opacity: 1;
+      transform: translateY(-90px) translateX(-55px) scale(1);
+      pointer-events: auto;
+    }
+
     /* Mobile Adaptability */
     @media (max-width: 860px) {
       aside.island-dock {
@@ -292,23 +454,31 @@
       }
       .dock-link::after { display: none; }
       main.content-area {
-        padding: 3rem 1.5rem 7rem;
+        padding: 3rem 1.5rem 8rem;
+      }
+      .folder-widget-container {
+        bottom: 5.5rem;
+        right: 1.5rem;
+      }
+      .folder-document {
+        transform: translateY(10px) translateX(-110px) scale(0.9);
+      }
+      .folder-widget-container:hover .folder-document,
+      .folder-widget-container.is-open .folder-document {
+        transform: translateY(-95px) translateX(-110px) scale(1);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Island Dock -->
   <aside class="island-dock">
-    <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
       </svg>
     </a>
 
-    <!-- Profile / Experience Icon -->
     <a href="#about" class="dock-link" data-tooltip="About & Experience">
       <svg viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -316,27 +486,23 @@
       </svg>
     </a>
 
-    <!-- Notes & Essays Icon -->
     <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
         <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="16" x2="13" y2="16"/>
+        <line x1="9" y1="17" x2="13" y2="17"/>
       </svg>
     </a>
   </aside>
 
-  <!-- Scrollable Canvas -->
   <main class="content-area">
 
-    <!-- Top Identity Header -->
     <div class="header-intro">
       <h1>Brooklyn Rupert</h1>
       <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
     </div>
 
-    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
@@ -353,12 +519,10 @@
       </div>
     </section>
 
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
 
-      <!-- Education -->
       <div class="resume-block">
         <h3>Education</h3>
         <div class="resume-item">
@@ -374,7 +538,6 @@
         </div>
       </div>
 
-      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
@@ -390,7 +553,6 @@
         </div>
       </div>
 
-      <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
         <div class="resume-item">
@@ -429,7 +591,6 @@
       </div>
     </section>
 
-    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
@@ -444,39 +605,23 @@
 
   </main>
 
-  <!-- Scroll & Floating Island Controller -->
-  <script>
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncDockState() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', syncDockState, { passive: true });
-    window.addEventListener('load', syncDockState);
-    syncDockState();
-  </script>
-
-</body>
-</html>
+  <div class="folder-widget-container" id="contactFolder">
+    <div class="manila-folder">
+      <div class="folder-tab">Contact</div>
+      <div class="folder-back"></div>
+      
+      <div class="folder-document">
+        <h4>Contact Me</h4>
+        <div class="doc-row">
+          <span class="doc-label">Email</span>
+          <div class="doc-value">
+            <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
+          </div>
+        </div>
+        <div class="doc-row">
+          <span class="doc-label">Telephone</span>
+          <div class="doc-value">
+            <a href="tel:+13135550198">(313) 555-0198</a>
+          </div>
+        </div>
+        <div class="doc-row">
