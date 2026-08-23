@@ -48,7 +48,23 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    
+    /* Lenis Smooth Scroll CSS Overrides */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -63,10 +79,9 @@
        SEAMLESS HERO TITLE INTRO CHOREOGRAPHY
        ========================================================= */
     body.first-load {
-      overflow: hidden; /* Lock scroll during 2s hero stage */
+      overflow: hidden;
     }
 
-    /* Fullscreen initial backdrop layer */
     body.first-load::before {
       content: "";
       position: fixed;
@@ -82,7 +97,6 @@
       100% { opacity: 0; visibility: hidden; }
     }
 
-    /* The actual <h1> animates directly from center screen to top */
     body.first-load .header-intro h1 {
       position: relative;
       z-index: 600;
@@ -99,7 +113,6 @@
       }
     }
 
-    /* Everything else fades in seamlessly as the name lands */
     body.first-load .header-intro p,
     body.first-load .page-section,
     body.first-load aside.island-dock,
@@ -413,7 +426,6 @@
                   border-color 0.3s ease;
     }
 
-    /* Expands Outward & Downward */
     .feature-card:hover {
       transform: translateY(6px) scale(1.03);
       box-shadow: 0 14px 32px rgba(119, 136, 115, 0.22);
@@ -536,7 +548,6 @@
       transform: translateY(-2px);
     }
 
-    /* Attention Glow before first interaction */
     .folder-widget-container.unseen .folder {
       animation: sageGlowPulse 2.4s infinite ease-in-out;
     }
@@ -605,7 +616,7 @@
       background: #faf7f0;
     }
 
-    /* Contact Document (Desktop) */
+    /* Contact Document */
     .paper.contact-paper {
       width: 240px;
       height: auto;
@@ -838,7 +849,7 @@
     <!-- Top Identity Header -->
     <div class="header-intro">
       <h1>Brooklyn R. Rupert</h1>
-      <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
+      <p>Detroit, MI • Digital Portfolio</p>
     </div>
 
     <!-- SECTION 1: HOME -->
@@ -848,12 +859,12 @@
 
       <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
-          I am an honors undergraduate studying criminal justice, criminology, and psychology at the University of Michigan-Dearborn. 
-          This digital portfolio serves as a hub for my academic work, investigative writing, and civic involvement. 
+          I am an honors undergraduate studying Criminal Justice, Criminology, and Psychology at the University of Michigan-Dearborn. 
+          This digital portfolio serves as a hub for my academic work, investigative writing, and civic engagement. 
           If you'd like to reach me, my contact information can be found in the folder at the bottom corner of the page.
         </p>
         <p>
-          Scroll through to explore my background, leadership history, media features, and notes.
+          Scroll through to explore my background, leadership history, media features, and field notes.
         </p>
       </div>
     </section>
@@ -934,7 +945,7 @@
       </div>
     </section>
 
-    <!-- SECTION 3: NOTES & ESSAYS (CONTAINS EMBEDDED FEATURED IN SUBSECTION) -->
+    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
@@ -952,7 +963,7 @@
         <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
 
         <div class="features-carousel">
-          <!-- WXYZ Channel 7 / ABC News Story Card -->
+          <!-- 1. WXYZ Channel 7 / ABC News -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
@@ -972,7 +983,7 @@
             </div>
           </div>
 
-          <!-- WDIV Local 4 / ClickOnDetroit Feature -->
+          <!-- 2. WDIV Local 4 / ClickOnDetroit Feature -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
@@ -983,7 +994,7 @@
                 <span class="feature-date">2025</span>
               </div>
               <h4>Metro Detroit Students in NASA Culinary Contest</h4>
-              <p>In-studio broadcast segment covering our team's achievement as top 10 global finalists, where we joined the newsroom live to demonstrate and create our dish..</p>
+              <p>In-studio broadcast segment covering our team's achievement as top 10 global finalists, where we joined the newsroom live to demonstrate and create our dish.</p>
             </div>
             <div class="feature-links-row">
               <a href="https://www.clickondetroit.com/video/news/2025/03/09/metro-detroit-students-in-nasa-culinary-contest/" target="_blank" rel="noopener noreferrer" class="feature-link">
@@ -992,7 +1003,7 @@
             </div>
           </div>
           
-          <!-- SkillsUSA WLTI -->
+          <!-- 3. SkillsUSA WLTI -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
@@ -1012,7 +1023,7 @@
             </div>
           </div>
 
-          <!-- The Michigan Journal -->
+          <!-- 4. The Michigan Journal -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
@@ -1069,20 +1080,51 @@
     </div>
   </div>
 
-  <!-- Scroll, Dock & Session Script -->
+  <!-- Lenis Smooth Scroll Library -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <!-- Scripts -->
   <script>
-    // 1. Session-aware First Load Trigger
+    // 1. Initialize Lenis Smooth Scroll Engine
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. Smooth Scrolling on Island Dock Click
+    document.querySelectorAll('.dock-link').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          lenis.scrollTo(targetSection, { offset: -20, duration: 1.4 });
+        }
+      });
+    });
+
+    // 3. Session-aware First Load Trigger
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     if (!hasSeenIntro) {
       document.body.classList.add('first-load');
-      // Unlock scroll after intro finishes gliding
+      lenis.stop(); // Pause smooth scrolling during intro animation
       setTimeout(() => {
         document.body.classList.remove('first-load');
+        lenis.start(); // Resume scrolling
         sessionStorage.setItem('hasSeenIntro', 'true');
       }, 3400);
     }
 
-    // 2. Scroll & Island Dock Synchronizer
+    // 4. Scroll & Island Dock Synchronizer
     const sections = document.querySelectorAll('.page-section');
     const dockLinks = document.querySelectorAll('.dock-link');
 
@@ -1110,11 +1152,11 @@
       });
     }
 
-    window.addEventListener('scroll', syncDockState, { passive: true });
+    lenis.on('scroll', syncDockState);
     window.addEventListener('load', syncDockState);
     syncDockState();
 
-    // 3. Folder Interactions & Toggle
+    // 5. Folder Interactions & Toggle
     const folderWidget = document.getElementById('contactFolder');
 
     function markFolderSeen() {
