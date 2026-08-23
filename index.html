@@ -21,11 +21,10 @@
       --border: #DCCFC0;          /* Sand Accent */
       --border-subtle: #ebdcd0;
       
-      /* Manila Folder Palette */
-      --manila-back: #d4bc91;
-      --manila-front: #dfcb9f;
-      --manila-tab: #c9b183;
-      --manila-line: #bba274;
+      /* Folder Color Scheme */
+      --folder-color: #dfcb9f;
+      --folder-back-color: #d4bc91;
+      --paper-color: #FFFFFF;
       
       --radius: 12px;
     }
@@ -288,7 +287,7 @@
     }
 
     /* =========================================================
-       MANILA FOLDER CONTACT WIDGET (WITH #F7F4ED GLOW PULSE)
+       CUSTOM MULTI-LAYER FOLDER WIDGET
        ========================================================= */
     .folder-widget-container {
       position: fixed;
@@ -299,81 +298,104 @@
       cursor: pointer;
     }
 
-    .manila-folder {
+    .folder {
       position: relative;
-      width: 120px;
-      height: 82px;
+      width: 110px;
+      height: 75px;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
     }
 
-    .manila-folder:hover {
+    .folder:hover {
       transform: translateY(-2px);
     }
 
-    /* Warm Ivory (#F7F4ED) Breathing Light Animation */
-    .folder-widget-container.unseen .manila-folder {
-      animation: warmIvoryPulse 2.4s infinite ease-in-out;
+    /* Pink Attention Pulse before first interaction */
+    .folder-widget-container.unseen .folder {
+      animation: pinkGlowPulse 2.4s infinite ease-in-out;
     }
 
-    @keyframes warmIvoryPulse {
+    @keyframes pinkGlowPulse {
       0% {
-        filter: drop-shadow(0 0 6px rgba(247, 244, 237, 0.6)) brightness(1);
+        filter: drop-shadow(0 4px 8px rgba(244, 114, 182, 0.25)) saturate(1.15) hue-rotate(-20deg);
         opacity: 0.92;
       }
       50% {
-        filter: drop-shadow(0 0 20px #F7F4ED) drop-shadow(0 0 32px rgba(247, 244, 237, 0.8)) brightness(1.08);
+        filter: drop-shadow(0 8px 22px rgba(236, 72, 153, 0.55)) saturate(1.5) hue-rotate(-30deg);
         opacity: 1;
       }
       100% {
-        filter: drop-shadow(0 0 6px rgba(247, 244, 237, 0.6)) brightness(1);
+        filter: drop-shadow(0 4px 8px rgba(244, 114, 182, 0.25)) saturate(1.15) hue-rotate(-20deg);
         opacity: 0.92;
       }
     }
 
-    /* Clean Tab on top edge of folder (No Text) */
-    .folder-tab {
-      position: absolute;
-      top: -10px;
-      left: 8px;
-      width: 44px;
-      height: 12px;
-      background: var(--manila-tab);
-      border-radius: 5px 5px 0 0;
-      border: 1.5px solid var(--manila-line);
-      border-bottom: none;
-    }
-
-    /* Folder Back */
-    .folder-back {
-      position: absolute;
+    .folder__back {
+      position: relative;
       width: 100%;
       height: 100%;
-      background: var(--manila-back);
-      border-radius: 0 7px 7px 7px;
-      border: 1.5px solid var(--manila-line);
+      background: var(--folder-back-color);
+      border-radius: 0px 5px 5px 5px;
       box-shadow: 0 8px 20px -3px rgba(119, 136, 115, 0.25);
     }
 
-    /* Sliding Contact Document */
-    .folder-document {
+    .folder__back::after {
+      content: "";
       position: absolute;
-      right: 0;
+      bottom: 98%;
+      left: 0;
+      width: 35px;
+      height: 10px;
+      background: var(--folder-back-color);
+      border-radius: 4px 4px 0 0;
+    }
+
+    /* Layered Papers inside the folder */
+    .paper {
+      position: absolute;
       bottom: 6px;
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      width: 240px;
-      opacity: 0;
-      transform: translateY(12px) scale(0.92);
-      transform-origin: bottom right;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86%;
+      height: 78%;
+      background: var(--paper-color);
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
       z-index: 2;
     }
 
-    .folder-document h4 {
+    .paper:nth-child(1) {
+      width: 78%;
+      height: 72%;
+      bottom: 9px;
+      background: #fdfaf5;
+    }
+
+    .paper:nth-child(2) {
+      width: 82%;
+      height: 75%;
+      bottom: 7px;
+      background: #faf7f0;
+    }
+
+    /* Main Sliding Contact Document (Paper 3) */
+    .paper.contact-paper {
+      width: 240px;
+      height: auto;
+      right: 0;
+      left: auto;
+      transform: translateY(10px) scale(0.9);
+      transform-origin: bottom right;
+      opacity: 0;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .paper.contact-paper h4 {
       font-family: 'Newsreader', serif;
       font-size: 1.2rem;
       font-weight: 600;
@@ -413,29 +435,43 @@
       text-decoration: underline;
     }
 
-    /* Folder Front Flap (Clean Minimalist Surface) */
-    .folder-front {
+    /* Front Flap Elements */
+    .folder__front {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 88%;
-      background: var(--manila-front);
-      border-radius: 4px 4px 7px 7px;
-      border: 1.5px solid var(--manila-line);
+      background: var(--folder-color);
+      border-radius: 4px 4px 5px 5px;
       transform-origin: bottom center;
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 3;
+      z-index: 4;
     }
 
-    /* Gentle Opening on Hover / Click */
-    .folder-widget-container:hover .folder-front,
-    .folder-widget-container.is-open .folder-front {
-      transform: rotateX(-28deg);
+    .folder__front.right {
+      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
+      pointer-events: none;
     }
 
-    .folder-widget-container:hover .folder-document,
-    .folder-widget-container.is-open .folder-document {
+    /* Interactive Open State */
+    .folder-widget-container:hover .folder__front,
+    .folder-widget-container.is-open .folder__front {
+      transform: rotateX(-32deg);
+    }
+
+    .folder-widget-container:hover .paper:nth-child(1),
+    .folder-widget-container.is-open .paper:nth-child(1) {
+      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
+    }
+
+    .folder-widget-container:hover .paper:nth-child(2),
+    .folder-widget-container.is-open .paper:nth-child(2) {
+      transform: translateX(-50%) translateY(-24px) rotate(2deg);
+    }
+
+    .folder-widget-container:hover .paper.contact-paper,
+    .folder-widget-container.is-open .paper.contact-paper {
       opacity: 1;
       transform: translateY(-88px) scale(1);
       pointer-events: auto;
@@ -459,11 +495,11 @@
         bottom: 5.5rem;
         right: 1.5rem;
       }
-      .folder-document {
-        width: 220px;
+      .paper.contact-paper {
+        width: 215px;
       }
-      .folder-widget-container:hover .folder-document,
-      .folder-widget-container.is-open .folder-document {
+      .folder-widget-container:hover .paper.contact-paper,
+      .folder-widget-container.is-open .paper.contact-paper {
         transform: translateY(-90px) scale(1);
       }
     }
@@ -613,38 +649,37 @@
 
   </main>
 
-  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER (Starts with "unseen" #F7F4ED pulse) -->
+  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
   <div class="folder-widget-container unseen" id="contactFolder">
-    <div class="manila-folder">
-      <!-- Clean Tab (No Text) -->
-      <div class="folder-tab"></div>
-      <div class="folder-back"></div>
-      
-      <!-- Sliding Contact Sheet -->
-      <div class="folder-document">
-        <h4>Contact Me</h4>
-        <div class="doc-row">
-          <span class="doc-label">Email</span>
-          <div class="doc-value">
-            <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
+    <div class="folder">
+      <div class="folder__back">
+        <div class="paper"></div>
+        <div class="paper"></div>
+        <!-- Paper 3: Interactive Contact Sheet -->
+        <div class="paper contact-paper">
+          <h4>Contact Me</h4>
+          <div class="doc-row">
+            <span class="doc-label">Email</span>
+            <div class="doc-value">
+              <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
+            </div>
+          </div>
+          <div class="doc-row">
+            <span class="doc-label">Telephone</span>
+            <div class="doc-value">
+              <a href="tel:+13135550198">(313) 555-0198</a>
+            </div>
+          </div>
+          <div class="doc-row">
+            <span class="doc-label">LinkedIn</span>
+            <div class="doc-value">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklynrupert</a>
+            </div>
           </div>
         </div>
-        <div class="doc-row">
-          <span class="doc-label">Telephone</span>
-          <div class="doc-value">
-            <a href="tel:+13135550198">(313) 555-0198</a>
-          </div>
-        </div>
-        <div class="doc-row">
-          <span class="doc-label">LinkedIn</span>
-          <div class="doc-value">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklynrupert</a>
-          </div>
-        </div>
+        <div class="folder__front"></div>
+        <div class="folder__front right"></div>
       </div>
-
-      <!-- Clean Front Flap (No Text or Border Box) -->
-      <div class="folder-front"></div>
     </div>
   </div>
 
@@ -682,7 +717,7 @@
     window.addEventListener('load', syncDockState);
     syncDockState();
 
-    // 2. Folder Interactions & One-Time Pulse Removal
+    // 2. Folder Interactions & One-Time Pink Pulse Removal
     const folderWidget = document.getElementById('contactFolder');
 
     function markFolderSeen() {
