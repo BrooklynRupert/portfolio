@@ -197,6 +197,26 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
+    /* Subsection Styling */
+    .subsection-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin: 2.5rem 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .subsection-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
     /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
@@ -270,7 +290,7 @@
     }
 
     /* =========================================================
-       HORIZONTAL ROLLING BAR / SCROLL CAROUSEL FOR FEATURES
+       HORIZONTAL ROLLING CAROUSEL FOR FEATURED IN
        ========================================================= */
     .features-carousel {
       display: flex;
@@ -282,7 +302,6 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Custom Aesthetic Scrollbar */
     .features-carousel::-webkit-scrollbar {
       height: 7px;
     }
@@ -301,14 +320,13 @@
       background: var(--text-secondary);
     }
 
-    /* Feature Card styled for horizontal scrolling */
     .feature-card {
-      flex: 0 0 320px;
+      flex: 0 0 310px;
       scroll-snap-align: start;
       background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 1.4rem;
       box-shadow: 0 4px 12px rgba(119, 136, 115, 0.08);
       display: flex;
       flex-direction: column;
@@ -349,18 +367,18 @@
 
     .feature-card h3 {
       font-family: 'Newsreader', serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--text);
       line-height: 1.35;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .feature-card p {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
+      line-height: 1.55;
+      margin-bottom: 1.15rem;
     }
 
     .feature-link {
@@ -609,7 +627,7 @@
       }
 
       .feature-card {
-        flex: 0 0 280px;
+        flex: 0 0 270px;
       }
 
       .folder-widget-container {
@@ -688,7 +706,7 @@
 </head>
 <body>
 
-  <!-- Floating Island Dock -->
+  <!-- Floating Island Dock (Clean 3-Icon Navigation) -->
   <aside class="island-dock">
     <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
@@ -705,18 +723,8 @@
       </svg>
     </a>
 
-    <!-- Newspaper / Featured In Icon -->
-    <a href="#features" class="dock-link" data-tooltip="Featured & Press">
-      <svg viewBox="0 0 24 24">
-        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
-        <path d="M18 14h-8"/>
-        <path d="M15 18h-5"/>
-        <path d="M10 6h8v4h-8z"/>
-      </svg>
-    </a>
-
     <!-- Notes & Essays Icon -->
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
+    <a href="#posts" class="dock-link" data-tooltip="Notes, Essays & Press">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
@@ -747,7 +755,7 @@
           and forensic behavioral research.
         </p>
         <p>
-          Scroll through to explore my background, media features, leadership history, and notes.
+          Scroll through to explore my background, leadership history, written works, and media coverage.
         </p>
       </div>
     </section>
@@ -820,6 +828,7 @@
             <span class="role-date">2024 – 2025</span>
           </div>
           <div class="role-company">SkillsUSA Michigan</div>
+          <div class="role-company">Vice President</div>
           <ul>
             <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
             <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
@@ -828,11 +837,13 @@
       </div>
     </section>
 
-    <!-- SECTION 3: FEATURED IN & PRESS (HORIZONTAL ROLLING CAROUSEL) -->
-    <section id="features" class="page-section">
-      <h2 class="page-title">Featured In & Press</h2>
-      <p class="page-subtitle">News coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
+    <!-- SECTION 3: NOTES & ESSAYS (CONTAINS FEATURED IN SUBSECTION) -->
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Notes, Essays & Media</h2>
+      <p class="page-subtitle">Academic papers, published writings, media coverage, and observations.</p>
 
+      <!-- Subsection 1: Featured In & Press (Rolling Bar Carousel) -->
+      <div class="subsection-title">Featured In & Press</div>
       <div class="features-carousel">
         <!-- Article Card 1 -->
         <div class="feature-card">
@@ -879,17 +890,13 @@
           </a>
         </div>
       </div>
-    </section>
 
-    <!-- SECTION 4: NOTES & ESSAYS -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Academic Papers, volunteer reflections, and observations.</p>
-
+      <!-- Subsection 2: Essays & Dispatches -->
+      <div class="subsection-title" style="margin-top: 3rem;">Academic Papers & Essays</div>
       <div id="posts-list">
         <div class="empty-state">
           <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups, case briefs, and essays will appear here.</p>
         </div>
       </div>
     </section>
@@ -978,6 +985,7 @@
 
     folderWidget.addEventListener('click', (e) => {
       markFolderSeen();
+      // Only toggle if not clicking a link
       if (e.target.tagName !== 'A') {
         folderWidget.classList.toggle('is-open');
       }
