@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Primary Meta Tags -->
   <title>Brooklyn Rupert | Portfolio</title>
   <meta name="title" content="Brooklyn Rupert | Portfolio" />
   <meta name="description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
 
-  <!-- OpenGraph / LinkedIn / iMessage / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta property="og:title" content="Brooklyn Rupert | Portfolio" />
   <meta property="og:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
   <meta property="og:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
 
-  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta name="twitter:title" content="Brooklyn Rupert | Portfolio" />
@@ -25,7 +22,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23778873'/><rect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23DCCFC0' stroke-width='2'/><text x='50%25' y='54%25' font-family='Cinzel, serif' font-size='30' font-weight='700' fill='%23FDF6ED' text-anchor='middle' dominant-baseline='central' letter-spacing='1'>BR</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -218,7 +215,7 @@
       padding: 5rem 2rem 14rem;
     }
 
-    /* Header Profile Badge */
+    /* Header Profile Badge (Centered & Scaled Up) */
     .header-intro {
       margin-bottom: 3.5rem;
       text-align: center;
@@ -286,124 +283,162 @@
     }
 
     /* =========================================================
-       SKILLS & ABOUT ME MATRIX (KARTAVYA-STYLE)
+       EXPANDABLE DROPDOWN ABOUT & LANGUAGE DRAWER (KARTAVYA STYLE)
        ========================================================= */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1rem;
-    }
-
-    .skill-card {
-      background: #FFFFFF;
+    .profile-drawer-toggle {
+      margin-top: 1.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(119, 136, 115, 0.16);
-      border-color: var(--accent);
-    }
-
-    .skill-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .skill-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: var(--bg);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0.6rem 1.15rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
       color: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .skill-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 1.8;
+    .profile-drawer-toggle:hover {
+      border-color: var(--accent);
+      background: #FFFFFF;
+      color: var(--text);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(119, 136, 115, 0.15);
+    }
+
+    .profile-drawer-toggle svg {
+      width: 16px;
+      height: 16px;
       stroke: currentColor;
       fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .skill-card-header h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
+    .profile-drawer-toggle.is-active svg {
+      transform: rotate(180deg);
+    }
+
+    .profile-drawer-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 1.25rem;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 0.35s ease,
+                  transform 0.4s ease;
+      transform: translateY(-8px);
+    }
+
+    .profile-drawer-content.is-open {
+      max-height: 1200px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .drawer-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: 0 8px 24px rgba(119, 136, 115, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .drawer-block h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Language Proficiency Display */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .lang-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .lang-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+
+    .lang-name {
       font-weight: 600;
       color: var(--text);
+      font-size: 0.95rem;
     }
 
-    .skill-card p.skill-desc {
-      font-size: 0.88rem;
+    .lang-level {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--bg);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .lang-desc {
+      font-size: 0.84rem;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
 
-    /* Tag Pills within Cards */
-    .skill-tags {
+    /* Skill & Research Badges */
+    .skills-pill-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
+      gap: 0.5rem;
     }
 
-    .skill-tag {
-      font-size: 0.76rem;
-      font-weight: 500;
+    .skill-pill {
+      font-size: 0.8rem;
+      background: #FFFFFF;
       color: var(--text-secondary);
-      background: var(--bg);
       border: 1px solid var(--border);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 500;
       transition: all 0.2s ease;
     }
 
-    .skill-tag.highlight {
-      background: rgba(161, 188, 152, 0.3);
-      border-color: var(--accent);
+    .skill-pill:hover {
+      background: var(--bg);
       color: var(--text);
-      font-weight: 600;
-    }
-
-    .skill-tag:hover {
-      background: var(--accent);
-      color: #FDF6ED;
       border-color: var(--accent);
-    }
-
-    /* Subsection Header (Inside Notes & Essays) */
-    .subsection-container {
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    h3.subsection-title {
-      font-family: 'Newsreader', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    p.subsection-subtitle {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
     }
 
     /* Experience Timeline */
@@ -476,6 +511,27 @@
 
     .resume-item li {
       margin-bottom: 0.25rem;
+    }
+
+    /* Subsection Header (Inside Notes & Essays) */
+    .subsection-container {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    h3.subsection-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    p.subsection-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
     }
 
     /* =========================================================
@@ -626,784 +682,4 @@
     }
 
     /* =========================================================
-       CUSTOM MULTI-LAYER FOLDER WIDGET
-       ========================================================= */
-    .folder-widget-container {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 3rem;
-      z-index: 1000;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .folder {
-      position: relative;
-      width: 105px;
-      height: 72px;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-    }
-
-    .folder:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Attention Glow before first interaction */
-    .folder-widget-container.unseen .folder {
-      animation: sageGlowPulse 2.4s infinite ease-in-out;
-    }
-
-    @keyframes sageGlowPulse {
-      0% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-      50% {
-        filter: drop-shadow(0 8px 20px rgba(161, 188, 152, 0.75));
-        opacity: 1;
-      }
-      100% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-    }
-
-    .folder__back {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: var(--folder-back-color);
-      border-radius: 0px 5px 5px 5px;
-      box-shadow: 0 8px 20px -3px rgba(119, 136, 115, 0.25);
-    }
-
-    .folder__back::after {
-      content: "";
-      position: absolute;
-      bottom: 98%;
-      left: 0;
-      width: 32px;
-      height: 9px;
-      background: var(--folder-back-color);
-      border-radius: 4px 4px 0 0;
-    }
-
-    /* Layered Papers */
-    .paper {
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 86%;
-      height: 78%;
-      background: var(--paper-color);
-      border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 2;
-    }
-
-    .paper:nth-child(1) {
-      width: 78%;
-      height: 72%;
-      bottom: 9px;
-      background: #fdfaf5;
-    }
-
-    .paper:nth-child(2) {
-      width: 82%;
-      height: 75%;
-      bottom: 7px;
-      background: #faf7f0;
-    }
-
-    /* Contact Document */
-    .paper.contact-paper {
-      width: 240px;
-      height: auto;
-      right: 0;
-      left: auto;
-      transform: translateY(10px) scale(0.9);
-      transform-origin: bottom right;
-      opacity: 0;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .paper.contact-paper h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 8px;
-    }
-
-    .doc-row {
-      margin-bottom: 7px;
-    }
-
-    .doc-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .doc-label {
-      display: block;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .doc-value, .doc-value a {
-      font-size: 0.84rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .doc-value a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* Front Flap Elements */
-    .folder__front {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 88%;
-      background: var(--folder-color);
-      border-radius: 4px 4px 5px 5px;
-      transform-origin: bottom center;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 4;
-    }
-
-    .folder__front.right {
-      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
-      pointer-events: none;
-    }
-
-    /* Desktop Hover / Click Open */
-    .folder-widget-container:hover .folder__front,
-    .folder-widget-container.is-open .folder__front {
-      transform: rotateX(-32deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(1),
-    .folder-widget-container.is-open .paper:nth-child(1) {
-      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(2),
-    .folder-widget-container.is-open .paper:nth-child(2) {
-      transform: translateX(-50%) translateY(-24px) rotate(2deg);
-    }
-
-    .folder-widget-container:hover .paper.contact-paper,
-    .folder-widget-container.is-open .paper.contact-paper {
-      opacity: 1;
-      transform: translateY(-88px) scale(1);
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       MOBILE RESPONSIVE
-       ========================================================= */
-    @media (max-width: 860px) {
-      aside.island-dock {
-        left: 50%;
-        top: auto;
-        bottom: 1.25rem;
-        transform: translateX(-50%);
-        flex-direction: row;
-        padding: 0.35rem 0.5rem;
-        background: rgba(220, 207, 192, 0.85);
-      }
-      .dock-link::after { display: none; }
-      
-      main.content-area {
-        padding: 3rem 1.25rem 8.5rem;
-      }
-
-      .header-intro h1 {
-        font-size: 2.1rem;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-card {
-        flex: 0 0 280px;
-      }
-
-      .folder-widget-container {
-        bottom: 5.8rem;
-        right: 1.25rem;
-      }
-
-      .folder {
-        width: 80px;
-        height: 54px;
-      }
-
-      .folder__back::after {
-        width: 24px;
-        height: 7px;
-      }
-
-      .folder-widget-container:hover .folder__front,
-      .folder-widget-container:hover .paper.contact-paper,
-      .folder-widget-container:hover .paper:nth-child(1),
-      .folder-widget-container:hover .paper:nth-child(2) {
-        transform: none;
-        opacity: 0;
-      }
-
-      .folder-widget-container.is-open {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(28, 25, 23, 0.45);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-        cursor: default;
-      }
-
-      .folder-widget-container.is-open .folder {
-        display: none;
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper {
-        position: relative;
-        opacity: 1;
-        width: 88%;
-        max-width: 320px;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-        padding: 1.5rem;
-        background: #FFFFFF;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        border: 2px solid var(--accent);
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper h4 {
-        font-size: 1.35rem;
-        margin-bottom: 12px;
-      }
-
-      .folder-widget-container.is-open .doc-label {
-        font-size: 0.72rem;
-      }
-
-      .folder-widget-container.is-open .doc-value,
-      .folder-widget-container.is-open .doc-value a {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Floating Island Dock (4 Navigation Targets) -->
-  <aside class="island-dock">
-    <a href="#home" class="dock-link active" data-tooltip="Home">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
-      </svg>
-    </a>
-
-    <!-- Skills & Focus Icon -->
-    <a href="#skills" class="dock-link" data-tooltip="Skills & Languages">
-      <svg viewBox="0 0 24 24">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-    </a>
-
-    <a href="#about" class="dock-link" data-tooltip="About & Experience">
-      <svg viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-    </a>
-
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
-      <svg viewBox="0 0 24 24">
-        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
-        <polyline points="15 3 21 9 15 9"/>
-        <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="17" x2="13" y2="17"/>
-      </svg>
-    </a>
-  </aside>
-
-  <!-- Scrollable Canvas -->
-  <main class="content-area">
-
-    <!-- Top Identity Header -->
-    <div class="header-intro">
-      <h1>Brooklyn R. Rupert</h1>
-      <p>Detroit, MI • Digital Portfolio</p>
-    </div>
-
-    <!-- SECTION 1: HOME -->
-    <section id="home" class="page-section in-focus">
-      <h2 class="page-title">Hello, Welcome</h2>
-      <p class="page-subtitle">A little about me, my studies, and what I’m working on.</p>
-
-      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
-        <p style="margin-bottom: 1.25rem;">
-          I am an honors undergraduate studying Criminal Justice, Criminology, and Psychology at the University of Michigan-Dearborn. 
-          This digital portfolio serves as a hub for my academic work, investigative writing, and civic involvement. 
-          If you'd like to reach me, my contact information can be found in the folder at the bottom corner of the page.
-        </p>
-        <p>
-          Scroll through to explore my competencies, background, leadership history, media features, and field notes.
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION 2: SKILLS, LANGUAGES & CORE FOCUS (KARTAVYA-STYLE) -->
-    <section id="skills" class="page-section">
-      <h2 class="page-title">Skills & Competencies</h2>
-      <p class="page-subtitle">Languages, behavioral analysis tools, research proficiencies, and civic administration.</p>
-
-      <div class="skills-grid">
-        <!-- 1. Languages & Global Communication -->
-        <div class="skill-card">
-          <div>
-            <div class="skill-card-header">
-              <div class="skill-icon">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="2" y1="12" x2="22" y2="12"/>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-              </div>
-              <h3>Languages & Global Studies</h3>
-            </div>
-            <p class="skill-desc">
-              Dedicated to cross-cultural legal research and international policy communication, with active study in East Asian linguistics and stroke character mnemonics.
-            </p>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag highlight">English (Native)</span>
-            <span class="skill-tag highlight">Mandarin Chinese (普通話 / 漢字)</span>
-            <span class="skill-tag">Cross-Cultural Rhetoric</span>
-            <span class="skill-tag">Global Geopolitics</span>
-          </div>
-        </div>
-
-        <!-- 2. Legal & Behavioral Analysis -->
-        <div class="skill-card">
-          <div>
-            <div class="skill-card-header">
-              <div class="skill-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
-                </svg>
-              </div>
-              <h3>Legal & Behavioral Science</h3>
-            </div>
-            <p class="skill-desc">
-              Rigorous analytical foundations in criminal jurisprudence, case law statutory interpretation, and cognitive psychological assessment models.
-            </p>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag highlight">Case Law Briefing</span>
-            <span class="skill-tag highlight">Procedural Due Process</span>
-            <span class="skill-tag">Forensic Psychology</span>
-            <span class="skill-tag">Constitutional Analysis</span>
-            <span class="skill-tag">Behavioral Science</span>
-          </div>
-        </div>
-
-        <!-- 3. Civic Leadership & Public Administration -->
-        <div class="skill-card">
-          <div>
-            <div class="skill-card-header">
-              <div class="skill-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <h3>Civic Leadership & Governance</h3>
-            </div>
-            <p class="skill-desc">
-              Experience representing constituency bodies at the municipal, statewide, and federal levels, from Capitol Hill advocacy to precinct organizing.
-            </p>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag highlight">Legislative Advocacy</span>
-            <span class="skill-tag highlight">Constituent Relations</span>
-            <span class="skill-tag">Grassroots Organizing</span>
-            <span class="skill-tag">Meeting Governance</span>
-            <span class="skill-tag">Public Speaking</span>
-          </div>
-        </div>
-
-        <!-- 4. Journalism & Investigative Research -->
-        <div class="skill-card">
-          <div>
-            <div class="skill-card-header">
-              <div class="skill-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                </svg>
-              </div>
-              <h3>Investigative Research & Writing</h3>
-            </div>
-            <p class="skill-desc">
-              Synthesizing complex international policy shifts and statutory records into verifiable, ethical journalism and structured scholarly rhetoric.
-            </p>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag highlight">Source Verification</span>
-            <span class="skill-tag highlight">Investigative Reporting</span>
-            <span class="skill-tag">AP Style & Editorial Review</span>
-            <span class="skill-tag">Scholarly Rhetoric</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: ABOUT / EXPERIENCE -->
-    <section id="about" class="page-section">
-      <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Academics, leadership experience, and public service.</p>
-
-      <!-- Education -->
-      <div class="resume-block">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">University of Michigan–Dearborn</span>
-            <span class="role-date">Expected 2029</span>
-          </div>
-          <div class="role-company">Bachelor of Arts • Honors Student</div>
-          <ul>
-            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
-            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Professional Experience -->
-      <div class="resume-block">
-        <h3>Professional & Legal Experience</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Staff Writer</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">The Michigan Journal</div>
-          <ul>
-            <li>Research and report on global geopolitical developments and policy shifts.</li>
-            <li>Conduct analysis and source verification for weekly news editions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Leadership & Public Service -->
-      <div class="resume-block">
-        <h3>Leadership & Civic Engagement</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Secretary</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">Criminology and Criminal Justice Collective</div>
-          <ul>
-            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026 – 2028</span>
-          </div>
-          <div class="role-company">Wayne County, Michigan</div>
-          <ul>
-            <li>Elected in the August 4 primary to represent, advocate on behalf of, and inform a Detroit precinct home to over 1,700 residents.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">State Vice President</span>
-            <span class="role-date">2024 – 2025</span>
-          </div>
-          <div class="role-company">SkillsUSA Michigan</div>
-          <ul>
-            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: NOTES & ESSAYS -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
-        </div>
-      </div>
-
-      <!-- Subsection: Featured In & Media Coverage -->
-      <div class="subsection-container">
-        <h3 class="subsection-title">Featured In & Press</h3>
-        <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
-
-        <div class="features-carousel">
-          <!-- 1. WXYZ Channel 7 / ABC News -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">
-                  <span class="outlet-badge-circle"></span>
-                  WXYZ Channel 7 (ABC)
-                </span>
-                <span class="feature-date">2025</span>
-              </div>
-              <h4>Ypsilanti High School Students to Compete in NASA Global Culinary Competition</h4>
-              <p>Special feature highlighting our top 10 national ranking, culinary innovation, and competitive achievements, as covered by ABC 7 News Detroit.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Watch & Read Full Story ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- 2. WDIV Local 4 / ClickOnDetroit Feature -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">
-                  <span class="outlet-badge-circle" style="background: #e31b23;"></span>
-                  WDIV Local 4 (NBC)
-                </span>
-                <span class="feature-date">2025</span>
-              </div>
-              <h4>Metro Detroit Students in NASA Culinary Contest</h4>
-              <p>In-studio broadcast segment covering our team's achievement as top 10 global finalists, where we joined the newsroom live to demonstrate and create our dish.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://www.clickondetroit.com/video/news/2025/03/09/metro-detroit-students-in-nasa-culinary-contest/" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Watch Broadcast Segment ↗
-              </a>
-            </div>
-          </div>
-          
-          <!-- 3. SkillsUSA WLTI -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">SkillsUSA</span>
-                <span class="feature-date">2024</span>
-              </div>
-              <h4>Advocacy & Leadership Spotlight</h4>
-              <p>Coverage regarding statewide representation, student leadership, and career & technical education advocacy in Washington, D.C.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://skillsusachampions.org/2024/09/wlti-ignites-passion-for-advocacy-in-members/" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Read Story ↗
-              </a>
-              <a href="https://youtu.be/cfe0maw1bhs?si=et-FAmcQEuSiqLDp" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Watch Recap ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- 4. The Michigan Journal -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">The Michigan Journal</span>
-                <span class="feature-date">2026</span>
-              </div>
-              <h4>Upcoming International Analysis...</h4>
-              <p>Providing investigative analysis of the past, present, and escalating diplomatic relations between the People's Republic of China and the United States.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://www.wolverinemedianetwork.com/michiganjournal" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Get Prepared to Read ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
-  <div class="folder-widget-container unseen" id="contactFolder">
-    <div class="folder">
-      <div class="folder__back">
-        <div class="paper"></div>
-        <div class="paper"></div>
-        <div class="folder__front"></div>
-        <div class="folder__front right"></div>
-      </div>
-    </div>
-    
-    <!-- Contact Paper -->
-    <div class="paper contact-paper" id="contactPaper">
-      <h4>Contact Me</h4>
-      <div class="doc-row">
-        <span class="doc-label">Email</span>
-        <div class="doc-value">
-          <a href="mailto:brooklynrupert7@Gmail.com">brooklynrupert7@Gmail.com</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">Business Number</span>
-        <div class="doc-value">
-          <a href="tel:+13133064638">(313) 306-4638</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">LinkedIn</span>
-        <div class="doc-value">
-          <a href="https://www.linkedin.com/in/brooklyn-r-rupert-8497423a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklyn-r-rupert</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lenis Smooth Scroll Library -->
-  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
-
-  <!-- Scripts -->
-  <script>
-    // 1. Initialize Lenis Smooth Scroll Engine
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.5,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // 2. Smooth Scrolling on Island Dock Click
-    document.querySelectorAll('.dock-link').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-          lenis.scrollTo(targetSection, { offset: -20, duration: 1.4 });
-        }
-      });
-    });
-
-    // 3. Session-aware First Load Trigger
-    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-    if (!hasSeenIntro) {
-      document.body.classList.add('first-load');
-      lenis.stop(); // Pause smooth scrolling during intro animation
-      setTimeout(() => {
-        document.body.classList.remove('first-load');
-        lenis.start(); // Resume scrolling
-        sessionStorage.setItem('hasSeenIntro', 'true');
-      }, 3400);
-    }
-
-    // 4. Scroll & Island Dock Synchronizer
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncDockState() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    lenis.on('scroll', syncDockState);
-    window.addEventListener('load', syncDockState);
-    syncDockState();
-
-    // 5. Folder Interactions & Toggle
-    const folderWidget = document.getElementById('contactFolder');
-
-    function markFolderSeen() {
-      if (folderWidget.classList.contains('unseen')) {
-        folderWidget.classList.remove('unseen');
-      }
-    }
-
-    folderWidget.addEventListener('mouseenter', markFolderSeen);
-
-    folderWidget.addEventListener('click', (e) => {
-      markFolderSeen();
-      if (e.target.tagName !== 'A') {
-        folderWidget.classList.toggle('is-open');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!folderWidget.contains(e.target)) {
-        folderWidget.classList.remove('is-open');
-      }
-    });
-  </script>
-
-</body>
-</html>
+       CUSTOM MULTI-
