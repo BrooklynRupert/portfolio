@@ -11,13 +11,15 @@
   
   <style>
     :root {
-      --bg: #FDF6ED;              /* Warm Cream Base */
-      --card-bg: #DCCFC0;         /* Soft Tan Card */
-      --accent: #778873;          /* Deep Sage Green */
-      --accent-light: #A1BC98;    /* Soft Muted Leaf Green */
-      --text: #241a15;            /* Very Dark Brown */
-      --muted: #5c4d44;           /* Medium Dark Warm Brown */
+      --bg: #FDF6ED;
+      --card-bg: #FAF3EA;
+      --dock-bg: rgba(220, 207, 192, 0.7);
+      --text: #231b15;
+      --text-muted: #574e46;
+      --accent: #778873;
+      --accent-light: #A1BC98;
       --border: #DCCFC0;
+      --border-dark: #778873;
       --radius: 12px;
     }
 
@@ -25,12 +27,16 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Arvo', serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.7;
       font-size: 15px;
       min-height: 100vh;
+    }
+
+    h1, h2, h3, .heading-font {
+      font-family: 'Arvo', serif;
     }
 
     /* Floating Island Dock */
@@ -39,11 +45,11 @@
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(253, 246, 237, 0.85);
+      background: var(--dock-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-bg);
-      box-shadow: 0 10px 30px -5px rgba(36, 26, 21, 0.08);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -5px rgba(35, 27, 21, 0.08);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -61,7 +67,7 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: var(--muted);
+      color: var(--text-muted);
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -69,7 +75,7 @@
     .dock-link svg {
       width: 22px;
       height: 22px;
-      stroke-width: 1.75;
+      stroke-width: 1.8;
       stroke: currentColor;
       fill: none;
       stroke-linecap: round;
@@ -79,7 +85,7 @@
 
     .dock-link:hover {
       color: var(--text);
-      background: rgba(161, 188, 152, 0.25);
+      background: rgba(119, 136, 115, 0.15);
     }
 
     .dock-link:hover svg {
@@ -87,9 +93,10 @@
     }
 
     .dock-link.active {
-      background: var(--accent-light);
-      color: var(--text);
+      background: #ffffff;
+      color: var(--accent);
       border-radius: 18px;
+      box-shadow: 0 2px 8px rgba(35, 27, 21, 0.08);
     }
 
     .dock-link::after {
@@ -100,7 +107,6 @@
       color: var(--bg);
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
-      font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       font-weight: 500;
       white-space: nowrap;
@@ -108,7 +114,7 @@
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
     }
 
     .dock-link:hover::after {
@@ -116,11 +122,11 @@
       transform: translateX(0);
     }
 
-    /* Main Centered Content Canvas */
+    /* Main Content */
     main.content-area {
-      max-width: 780px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 5rem 2rem 8rem;
+      padding: 5rem 2rem 6rem;
     }
 
     .header-intro {
@@ -130,37 +136,31 @@
     .header-intro h1 {
       font-size: 2rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
       color: var(--text);
+      letter-spacing: -0.01em;
     }
 
     .header-intro p {
       font-size: 0.88rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-      font-family: 'Inter', sans-serif;
+      color: var(--accent);
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-top: 0.3rem;
     }
 
-    /* Seamless Stacked Sections with Focus Transitions */
+    /* Stacked Sections & Soft Focus Transitions */
     .page-section {
-      padding: 4rem 0;
-      border-bottom: 2px solid rgba(220, 207, 192, 0.6);
-      opacity: 0.35;
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.3;
       filter: blur(1.5px);
       transform: translateY(8px);
       transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
     }
 
-    .page-section:first-of-type {
-      padding-top: 0;
-    }
-
-    .page-section:last-of-type {
-      border-bottom: none;
-      min-height: 85vh;
-    }
+    .page-section:first-of-type { padding-top: 0; }
+    .page-section:last-of-type { border-bottom: none; }
 
     .page-section.in-focus {
       opacity: 1;
@@ -176,14 +176,14 @@
     }
 
     p.page-subtitle {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 1rem;
       margin-bottom: 2.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed var(--border);
     }
 
-    /* Experience Timeline */
+    /* Resume Timeline Styling */
     .resume-block {
       margin-bottom: 2.75rem;
     }
@@ -203,14 +203,14 @@
     .resume-block h3::after {
       content: "";
       flex: 1;
-      height: 2px;
-      background: var(--card-bg);
+      height: 1px;
+      background: var(--border);
     }
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 1rem;
-      border-left: 2px solid var(--card-bg);
+      padding-left: 0.85rem;
+      border-left: 2px solid var(--border);
       transition: border-color 0.2s ease;
     }
 
@@ -226,114 +226,471 @@
     }
 
     .role-title {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1.05rem;
       color: var(--text);
     }
 
     .role-date {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .role-company {
-      font-size: 0.92rem;
-      color: var(--muted);
+      font-size: 0.9rem;
+      color: var(--text-muted);
       margin-bottom: 0.4rem;
       font-style: italic;
     }
 
     .resume-item ul {
-      margin-left: 1.2rem;
+      margin-left: 1.1rem;
       color: var(--text);
       font-size: 0.92rem;
-      line-height: 1.65;
     }
 
     .resume-item li {
       margin-bottom: 0.25rem;
     }
 
-    /* Empty State for Notes */
+    /* Notes Empty State */
     .empty-state {
-      background: rgba(220, 207, 192, 0.35);
-      border: 2px dashed var(--accent-light);
+      background: var(--card-bg);
+      border: 1px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
       text-align: center;
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
     .empty-state strong {
       display: block;
+      font-family: 'Arvo', serif;
       color: var(--text);
       font-size: 1.1rem;
       margin-bottom: 0.35rem;
     }
 
-    /* --- Interactive Packing Box & Letter Animation --- */
-    .package-contact-section {
+    /* ========================================================
+       LINE ART PACKING BOX & CONTACT UNBOXING ANIMATION
+    ======================================================== */
+    .unboxing-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 3rem 0;
-      text-align: center;
+      margin-top: 1rem;
+      perspective: 1000px;
     }
 
-    .box-container {
+    .box-interactive {
       position: relative;
-      width: 260px;
-      height: 240px;
-      margin: 2rem auto 1rem;
+      width: 170px;
+      height: 140px;
       cursor: pointer;
-      perspective: 800px;
+      margin: 1.5rem auto;
+      transition: transform 0.25s ease;
     }
 
-    .box-svg {
+    .box-interactive:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .box-interactive svg {
       width: 100%;
       height: 100%;
-      transition: transform 0.4s ease;
+      stroke: var(--text);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
     }
 
-    .box-container:hover .box-svg {
-      transform: translateY(-4px);
-    }
-
-    /* Flap & Tape Animation Styles */
-    .box-flap-left, .box-flap-right {
-      transform-origin: 50% 65px;
+    /* Box Flaps & Tape Elements */
+    .flap-left, .flap-right {
+      transform-origin: center bottom;
       transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .box-tape {
-      transition: opacity 0.3s ease, transform 0.4s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      stroke: var(--accent);
+      stroke-width: 3.5;
     }
 
-    /* Contact Letter Card (Hidden inside the box initially) */
+    .click-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Hidden Contact Container */
     .contact-card {
-      position: absolute;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%, 0) scale(0.7);
-      width: 320px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      width: 100%;
+      max-width: 540px;
       background: #ffffff;
-      border: 2px solid var(--text);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      box-shadow: 0 15px 30px rgba(36, 26, 21, 0.15);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0 2rem;
+      box-shadow: 0 16px 35px -8px rgba(35, 27, 21, 0.08);
+      transform: translateY(20px);
+      transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.5s ease 0.2s,
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                  padding 0.5s ease;
+    }
+
+    /* OPENED STATE: Stays permanently opened */
+    .unboxing-container.is-opened .box-tape {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .unboxing-container.is-opened .flap-left {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+
+    .unboxing-container.is-opened .flap-right {
+      transform: rotate(45deg) translateY(-8px);
+    }
+
+    .unboxing-container.is-opened .click-hint {
       opacity: 0;
       pointer-events: none;
-      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 20;
+      height: 0;
+      margin: 0;
+    }
+
+    .unboxing-container.is-opened .contact-card {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0);
+      padding: 2.2rem 2rem;
+      margin-top: 1.5rem;
     }
 
     .contact-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--text);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
+      text-align: center;
     }
 
-    .contact-card p {
-      font-size
+    .contact-card p.contact-desc {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      background: var(--card-bg);
+      transform: translateX(4px);
+    }
+
+    .contact-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .contact-item-info span {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contact-item-info strong {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* Mobile Adaptability */
+    @media (max-width: 860px) {
+      aside.island-dock {
+        left: 50%;
+        top: auto;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        flex-direction: row;
+        padding: 0.4rem 0.6rem;
+      }
+      .dock-link::after { display: none; }
+      main.content-area { padding: 3rem 1.5rem 8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="island-dock">
+    <a href="#home" class="dock-link active" data-tooltip="Home">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
+      </svg>
+    </a>
+
+    <a href="#about" class="dock-link" data-tooltip="About & Experience">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </a>
+
+    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
+      <svg viewBox="0 0 24 24">
+        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
+        <polyline points="15 3 21 9 15 9"/>
+        <line x1="9" y1="13" x2="15" y2="13"/>
+        <line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+    </a>
+
+    <a href="#contact-section" class="dock-link" data-tooltip="Unbox Contact">
+      <svg viewBox="0 0 24 24">
+        <polyline points="21 8 21 21 3 21 3 8" />
+        <rect x="1" y="3" width="22" height="5" />
+        <line x1="10" y1="12" x2="14" y2="12" />
+      </svg>
+    </a>
+  </aside>
+
+  <main class="content-area">
+
+    <div class="header-intro">
+      <h1>Brooklyn Rupert</h1>
+      <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
+    </div>
+
+    <section id="home" class="page-section in-focus">
+      <h2 class="page-title">Hello, Welcome</h2>
+      <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
+
+      <div style="font-size: 1.02rem; color: var(--text-muted); line-height: 1.85;">
+        <p style="margin-bottom: 1.25rem;">
+          I am an honors undergraduate studying criminal justice, criminology, and psychology. 
+          My academic work and independent writing center on procedural due process, institutional policy, 
+          and forensic behavioral research.
+        </p>
+        <p>
+          Scroll through to explore my background, leadership history, and field notes.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="page-section">
+      <h2 class="page-title">Background & Experience</h2>
+      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
+
+      <div class="resume-block">
+        <h3>Education</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">University of Michigan–Dearborn</span>
+            <span class="role-date">Expected 2029</span>
+          </div>
+          <div class="role-company">Bachelor of Arts • Honors Student</div>
+          <ul>
+            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
+            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <h3>Professional & Legal Experience</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Staff Writer</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">The Michigan Journal</div>
+          <ul>
+            <li>Research and report on global geopolitical developments and policy shifts.</li>
+            <li>Conduct analysis and source verification for weekly news editions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <h3>Leadership & Civic Engagement</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Secretary</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">Criminology and Criminal Justice Collective</div>
+          <ul>
+            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Precinct Delegate Candidate</span>
+            <span class="role-date">2026</span>
+          </div>
+          <div class="role-company">Wayne County, Michigan</div>
+          <ul>
+            <li>Engaged in grassroots civic administration and community voter representation.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">State Vice President</span>
+            <span class="role-date">2024 – 2025</span>
+          </div>
+          <div class="role-company">SkillsUSA Michigan</div>
+          <ul>
+            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal CTE education funding.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Notes & Essays</h2>
+      <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
+
+      <div id="posts-list">
+        <div class="empty-state">
+          <strong>No posts published yet</strong>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections on volunteering, legal studies, and campus work will appear here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact-section" class="page-section">
+      <h2 class="page-title" style="text-align: center;">Get In Touch</h2>
+      <p class="page-subtitle" style="text-align: center;">Click the package below to open and connect.</p>
+
+      <div class="unboxing-container" id="unboxing-box">
+        
+        <div class="box-interactive" id="box-trigger" title="Click to open">
+          <svg viewBox="0 0 100 80">
+            <polygon points="15,35 50,52 85,35 85,70 50,85 15,70" />
+            <line x1="50" y1="52" x2="50" y2="85" />
+            
+            <polygon class="flap-left" points="15,35 50,18 50,52 15,35" />
+            
+            <polygon class="flap-right" points="50,18 85,35 50,52 50,18" />
+            
+            <line class="box-tape" x1="49" y1="20" x2="51" y2="50" />
+          </svg>
+        </div>
+        
+        <p class="click-hint" id="click-hint">Click package to unbox</p>
+
+        <div class="contact-card">
+          <h3>Let's Connect</h3>
+          <p class="contact-desc">Feel free to reach out regarding research, writing, or academic inquiries.</p>
+
+          <div class="contact-grid">
+            <a href="mailto:your-email@umich.edu" class="contact-item">
+              <svg viewBox="0 0 24 24">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <div class="contact-item-info">
+                <span>Email Address</span>
+                <strong>your-email@umich.edu</strong>
+              </div>
+            </a>
+
+            <a href="tel:+10000000000" class="contact-item">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <div class="contact-item-info">
+                <span>Phone / Direct</span>
+                <strong>(000) 000-0000</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // 1. Unboxing Animation Trigger (Permanent Open State)
+    const boxTrigger = document.getElementById('box-trigger');
+    const unboxingBox = document.getElementById('unboxing-box');
+
+    boxTrigger.addEventListener('click', () => {
+      unboxingBox.classList.add('is-opened');
+    });
+
+    // 2. Continuous Scroll Focus & Dock Observer
+    const sections = document.querySelectorAll('.page-section');
+    const dockLinks = document.querySelectorAll('.dock-link');
+
+    function syncDockState() {
+      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          section.classList.add('in-focus');
+          
+          dockLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        } else {
+          section.classList.remove('in-focus');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', syncDockState, { passive: true });
+    window.addEventListener('load', syncDockState);
+    syncDockState();
+  </script>
+
+</body>
+</html>
