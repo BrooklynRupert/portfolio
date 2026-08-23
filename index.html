@@ -7,19 +7,18 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg: #FDF6ED;
-      --card-bg: #FAF3EA;
-      --dock-bg: rgba(220, 207, 192, 0.7);
-      --text: #231b15;
-      --text-muted: #574e46;
+      --card-bg: #DCCFC0;
+      --accent-soft: #A1BC98;
       --accent: #778873;
-      --accent-light: #A1BC98;
-      --border: #DCCFC0;
-      --border-dark: #778873;
+      --text: #2B1E16;
+      --text-muted: #5c4d44;
+      --border: #c8b9a6;
+      --border-subtle: #ebdcd0;
       --radius: 12px;
     }
 
@@ -27,16 +26,12 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Arvo', serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.7;
       font-size: 15px;
       min-height: 100vh;
-    }
-
-    h1, h2, h3, .heading-font {
-      font-family: 'Arvo', serif;
     }
 
     /* Floating Island Dock */
@@ -45,11 +40,11 @@
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--dock-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(253, 246, 237, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      box-shadow: 0 10px 30px -5px rgba(35, 27, 21, 0.08);
+      box-shadow: 0 10px 30px -5px rgba(43, 30, 22, 0.1);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -69,13 +64,13 @@
       border-radius: 24px;
       color: var(--text-muted);
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s ease;
     }
 
     .dock-link svg {
       width: 22px;
       height: 22px;
-      stroke-width: 1.8;
+      stroke-width: 2;
       stroke: currentColor;
       fill: none;
       stroke-linecap: round;
@@ -85,36 +80,29 @@
 
     .dock-link:hover {
       color: var(--text);
-      background: rgba(119, 136, 115, 0.15);
-    }
-
-    .dock-link:hover svg {
-      transform: scale(1.1);
+      background: rgba(161, 188, 152, 0.35);
     }
 
     .dock-link.active {
-      background: #ffffff;
-      color: var(--accent);
+      background: var(--accent);
+      color: #FDF6ED;
       border-radius: 18px;
-      box-shadow: 0 2px 8px rgba(35, 27, 21, 0.08);
     }
 
     .dock-link::after {
       content: attr(data-tooltip);
       position: absolute;
-      left: 60px;
+      left: 58px;
       background: var(--text);
       color: var(--bg);
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
       font-size: 0.75rem;
-      font-weight: 500;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
     }
 
     .dock-link:hover::after {
@@ -122,11 +110,11 @@
       transform: translateX(0);
     }
 
-    /* Main Content */
+    /* Main Content Area */
     main.content-area {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 5rem 2rem 6rem;
+      padding: 5rem 2rem 10rem;
     }
 
     .header-intro {
@@ -134,26 +122,23 @@
     }
 
     .header-intro h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
     }
 
     .header-intro p {
-      font-size: 0.88rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      color: var(--text-muted);
       margin-top: 0.3rem;
     }
 
-    /* Stacked Sections & Soft Focus Transitions */
+    /* Page Sections */
     .page-section {
-      padding: 4.5rem 0;
+      padding: 4rem 0;
       border-bottom: 1px solid var(--border);
-      opacity: 0.3;
+      opacity: 0.35;
       filter: blur(1.5px);
       transform: translateY(8px);
       transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
@@ -169,7 +154,7 @@
     }
 
     h2.page-title {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 0.35rem;
@@ -179,11 +164,11 @@
       color: var(--text-muted);
       font-size: 1rem;
       margin-bottom: 2.2rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px dashed var(--border);
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    /* Resume Timeline Styling */
+    /* Resume / Experience */
     .resume-block {
       margin-bottom: 2.75rem;
     }
@@ -209,8 +194,8 @@
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 0.85rem;
-      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent-soft);
       transition: border-color 0.2s ease;
     }
 
@@ -226,38 +211,32 @@
     }
 
     .role-title {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1.05rem;
       color: var(--text);
     }
 
     .role-date {
-      font-size: 0.82rem;
-      color: var(--accent);
-      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
 
     .role-company {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      font-size: 0.92rem;
+      color: var(--accent);
       margin-bottom: 0.4rem;
       font-style: italic;
     }
 
     .resume-item ul {
-      margin-left: 1.1rem;
-      color: var(--text);
-      font-size: 0.92rem;
+      margin-left: 1.2rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
     }
 
-    .resume-item li {
-      margin-bottom: 0.25rem;
-    }
-
-    /* Notes Empty State */
     .empty-state {
       background: var(--card-bg);
-      border: 1px dashed var(--border);
+      border: 2px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
       text-align: center;
@@ -266,181 +245,144 @@
 
     .empty-state strong {
       display: block;
-      font-family: 'Arvo', serif;
       color: var(--text);
       font-size: 1.1rem;
       margin-bottom: 0.35rem;
     }
 
     /* ========================================================
-       LINE ART PACKING BOX & CONTACT UNBOXING ANIMATION
+       LINE-ART PACKING BOX & CONTACT LETTER ANIMATION
     ======================================================== */
-    .unboxing-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1rem;
+    .box-section {
+      padding: 5rem 0 8rem;
+      text-align: center;
       perspective: 1000px;
     }
 
-    .box-interactive {
+    .box-container {
       position: relative;
-      width: 170px;
-      height: 140px;
+      width: 280px;
+      height: 240px;
+      margin: 2rem auto 0;
       cursor: pointer;
-      margin: 1.5rem auto;
-      transition: transform 0.25s ease;
     }
 
-    .box-interactive:hover {
-      transform: translateY(-4px) scale(1.02);
-    }
-
-    .box-interactive svg {
-      width: 100%;
-      height: 100%;
-      stroke: var(--text);
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-
-    /* Box Flaps & Tape Elements */
-    .flap-left, .flap-right {
-      transform-origin: center bottom;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .box-tape {
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      stroke: var(--accent);
-      stroke-width: 3.5;
-    }
-
-    .click-hint {
-      text-align: center;
-      font-size: 0.85rem;
+    .box-instruction {
+      font-size: 0.9rem;
       color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
       transition: opacity 0.3s ease;
     }
 
-    /* Hidden Contact Container */
-    .contact-card {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
+    /* SVG Isometric Box */
+    .box-svg {
       width: 100%;
-      max-width: 540px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 0 2rem;
-      box-shadow: 0 16px 35px -8px rgba(35, 27, 21, 0.08);
-      transform: translateY(20px);
-      transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.5s ease 0.2s,
-                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
-                  padding 0.5s ease;
+      height: 100%;
+      overflow: visible;
     }
 
-    /* OPENED STATE: Stays permanently opened */
-    .unboxing-container.is-opened .box-tape {
+    .box-stroke {
+      stroke: var(--text);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: var(--bg);
+    }
+
+    .tape-stroke {
+      stroke: var(--accent);
+      stroke-width: 7;
+      stroke-linecap: square;
+      stroke-linejoin: round;
+      fill: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* Flaps */
+    .flap-left, .flap-right {
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center;
+    }
+
+    /* Contact Letter Card that Pops Out */
+    .letter-card {
+      position: absolute;
+      top: 15px;
+      left: 10px;
+      right: 10px;
+      background: var(--card-bg);
+      border: 2px solid var(--text);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(43, 30, 22, 0.15);
+      z-index: 10;
       opacity: 0;
-      transform: scaleX(0);
-    }
-
-    .unboxing-container.is-opened .flap-left {
-      transform: rotate(-45deg) translateY(-8px);
-    }
-
-    .unboxing-container.is-opened .flap-right {
-      transform: rotate(45deg) translateY(-8px);
-    }
-
-    .unboxing-container.is-opened .click-hint {
-      opacity: 0;
+      transform: translateY(20px) scale(0.85);
       pointer-events: none;
-      height: 0;
-      margin: 0;
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
     }
 
-    .unboxing-container.is-opened .contact-card {
-      max-height: 500px;
-      opacity: 1;
-      transform: translateY(0);
-      padding: 2.2rem 2rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-card h3 {
-      font-size: 1.3rem;
+    .letter-card h3 {
+      font-size: 1.35rem;
       color: var(--text);
-      margin-bottom: 0.35rem;
-      text-align: center;
-    }
-
-    .contact-card p.contact-desc {
-      text-align: center;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 1.75rem;
-    }
-
-    .contact-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.9rem 1.1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.2s ease;
-    }
-
-    .contact-item:hover {
-      border-color: var(--accent);
-      background: var(--card-bg);
-      transform: translateX(4px);
-    }
-
-    .contact-item svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--accent);
-      stroke-width: 2;
-      fill: none;
-      flex-shrink: 0;
-    }
-
-    .contact-item-info span {
-      display: block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .contact-item-info strong {
+      margin-top: 1rem;
+      text-align: left;
       font-size: 0.95rem;
-      color: var(--text);
     }
 
-    /* Mobile Adaptability */
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .contact-value a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent-soft);
+      transition: border-color 0.2s ease;
+    }
+
+    .contact-value a:hover {
+      border-color: var(--accent);
+    }
+
+    /* OPENED STATE (Locked) */
+    .box-container.opened {
+      cursor: default;
+    }
+
+    .box-container.opened .tape-stroke {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    .box-container.opened .flap-left {
+      transform: translateY(-28px) rotate(-18deg);
+    }
+
+    .box-container.opened .flap-right {
+      transform: translateY(-28px) rotate(18deg);
+    }
+
+    .box-container.opened .letter-card {
+      opacity: 1;
+      transform: translateY(-130px) scale(1);
+      pointer-events: auto;
+    }
+
+    .box-container.opened + .box-instruction {
+      opacity: 0;
+    }
+
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
@@ -451,12 +393,15 @@
         padding: 0.4rem 0.6rem;
       }
       .dock-link::after { display: none; }
-      main.content-area { padding: 3rem 1.5rem 8rem; }
+      main.content-area {
+        padding: 3rem 1.5rem 8rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Floating Island Dock -->
   <aside class="island-dock">
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
@@ -480,15 +425,16 @@
       </svg>
     </a>
 
-    <a href="#contact-section" class="dock-link" data-tooltip="Unbox Contact">
+    <a href="#contact" class="dock-link" data-tooltip="Contact Box">
       <svg viewBox="0 0 24 24">
-        <polyline points="21 8 21 21 3 21 3 8" />
-        <rect x="1" y="3" width="22" height="5" />
-        <line x1="10" y1="12" x2="14" y2="12" />
+        <polyline points="21 8 21 21 3 21 3 8"/>
+        <rect x="1" y="3" width="22" height="5"/>
+        <line x1="10" y1="12" x2="14" y2="12"/>
       </svg>
     </a>
   </aside>
 
+  <!-- Scrollable Canvas -->
   <main class="content-area">
 
     <div class="header-intro">
@@ -496,26 +442,29 @@
       <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
     </div>
 
+    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.02rem; color: var(--text-muted); line-height: 1.85;">
+      <div style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
           and forensic behavioral research.
         </p>
         <p>
-          Scroll through to explore my background, leadership history, and field notes.
+          Scroll through to explore my background, leadership history, field notes, or unbox my contact details below.
         </p>
       </div>
     </section>
 
+    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
 
+      <!-- Education -->
       <div class="resume-block">
         <h3>Education</h3>
         <div class="resume-item">
@@ -531,6 +480,7 @@
         </div>
       </div>
 
+      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
@@ -546,6 +496,7 @@
         </div>
       </div>
 
+      <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
         <div class="resume-item">
@@ -584,6 +535,7 @@
       </div>
     </section>
 
+    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
@@ -591,75 +543,87 @@
       <div id="posts-list">
         <div class="empty-state">
           <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections on volunteering, legal studies, and campus work will appear here.</p>
+          <p style="font-size: 0.9rem; margin-top: 0.25rem;">New write-ups and reflections on volunteering, legal studies, and campus work will appear here.</p>
         </div>
       </div>
     </section>
 
-    <section id="contact-section" class="page-section">
-      <h2 class="page-title" style="text-align: center;">Get In Touch</h2>
-      <p class="page-subtitle" style="text-align: center;">Click the package below to open and connect.</p>
+    <!-- SECTION 4: UNBOXING CONTACT SECTION -->
+    <section id="contact" class="page-section box-section">
+      <h2 class="page-title">Get In Touch</h2>
+      <p class="page-subtitle">Open the package to view my contact details.</p>
 
-      <div class="unboxing-container" id="unboxing-box">
+      <div class="box-container" id="packingBox" onclick="openPackage()">
         
-        <div class="box-interactive" id="box-trigger" title="Click to open">
-          <svg viewBox="0 0 100 80">
-            <polygon points="15,35 50,52 85,35 85,70 50,85 15,70" />
-            <line x1="50" y1="52" x2="50" y2="85" />
-            
-            <polygon class="flap-left" points="15,35 50,18 50,52 15,35" />
-            
-            <polygon class="flap-right" points="50,18 85,35 50,52 50,18" />
-            
-            <line class="box-tape" x1="49" y1="20" x2="51" y2="50" />
-          </svg>
-        </div>
-        
-        <p class="click-hint" id="click-hint">Click package to unbox</p>
+        <!-- Sliding Contact Letter -->
+        <div class="letter-card">
+          <h3>Contact Me</h3>
+          
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:your.email@umich.edu">your.email@umich.edu</a>
+            </div>
+          </div>
 
-        <div class="contact-card">
-          <h3>Let's Connect</h3>
-          <p class="contact-desc">Feel free to reach out regarding research, writing, or academic inquiries.</p>
+          <div class="contact-item">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">
+              <a href="tel:+13130000000">(313) 000-0000</a>
+            </div>
+          </div>
 
-          <div class="contact-grid">
-            <a href="mailto:your-email@umich.edu" class="contact-item">
-              <svg viewBox="0 0 24 24">
-                <rect width="20" height="16" x="2" y="4" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-              <div class="contact-item-info">
-                <span>Email Address</span>
-                <strong>your-email@umich.edu</strong>
-              </div>
-            </a>
-
-            <a href="tel:+10000000000" class="contact-item">
-              <svg viewBox="0 0 24 24">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              <div class="contact-item-info">
-                <span>Phone / Direct</span>
-                <strong>(000) 000-0000</strong>
-              </div>
-            </a>
+          <div class="contact-item">
+            <div class="contact-label">Location</div>
+            <div class="contact-value" style="font-weight: 700; color: var(--text);">
+              Detroit / Ypsilanti, Michigan
+            </div>
           </div>
         </div>
 
+        <!-- Line-Art Isometric Packing Box SVG -->
+        <svg class="box-svg" viewBox="0 0 200 200">
+          <!-- Box Left Face -->
+          <polygon points="30,80 100,120 100,190 30,150" class="box-stroke" />
+          
+          <!-- Box Right Face -->
+          <polygon points="100,120 170,80 170,150 100,190" class="box-stroke" />
+          
+          <!-- Top Left Flap -->
+          <g class="flap-left">
+            <polygon points="30,80 100,40 100,120" class="box-stroke" />
+          </g>
+
+          <!-- Top Right Flap -->
+          <g class="flap-right">
+            <polygon points="100,40 170,80 100,120" class="box-stroke" />
+          </g>
+
+          <!-- Packaging Tape Line -->
+          <path d="M 65,60 L 135,100 L 135,120" class="tape-stroke" />
+        </svg>
+
       </div>
+
+      <p class="box-instruction" id="boxHint">✦ Click the box to open ✦</p>
     </section>
 
   </main>
 
+  <!-- Script for Scroll Sync & One-Way Box Open -->
   <script>
-    // 1. Unboxing Animation Trigger (Permanent Open State)
-    const boxTrigger = document.getElementById('box-trigger');
-    const unboxingBox = document.getElementById('unboxing-box');
+    // 1. One-Way Box Opening Logic
+    function openPackage() {
+      const box = document.getElementById('packingBox');
+      const hint = document.getElementById('boxHint');
+      
+      if (!box.classList.contains('opened')) {
+        box.classList.add('opened');
+        if (hint) hint.style.display = 'none';
+      }
+    }
 
-    boxTrigger.addEventListener('click', () => {
-      unboxingBox.classList.add('is-opened');
-    });
-
-    // 2. Continuous Scroll Focus & Dock Observer
+    // 2. Scroll Focus & Dock Tracking
     const sections = document.querySelectorAll('.page-section');
     const dockLinks = document.querySelectorAll('.dock-link');
 
