@@ -1,1 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brooklyn Rupert | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #fdfdfc;
+      --sidebar-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #1e3a8a;
+      --accent-soft: #eff6ff;
+      --border: #e2e8f0;
+      --radius: 10px;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Fixed Left Sidebar */
+    aside.sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 2.5rem 1.75rem;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 10;
+    }
+
+    .sidebar-header h1 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .sidebar-header p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    nav.sidebar-nav {
+      margin-top: 2.5rem;
+    }
+
+    .sidebar-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-nav button:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .sidebar-nav button.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    /* Main Content Area */
+    main.content-area {
+      margin-left: 280px;
+      flex: 1;
+      padding: 4rem 3.5rem;
+      max-width: 900px;
+    }
+
+    /* Page Visibility Controls */
+    .page-section {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography & Layouts */
+    h2.page-title {
+      font-family: 'Newsreader', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    p.page-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Resume / CV Section Styling */
+    .resume-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .resume-block h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+
+    .resume-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25rem;
+    }
+
+    .role-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #0f172a;
+    }
+
+    .role-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .role-company {
+      font-size: 0.92rem;
+      color: #475569;
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+
+    .resume-item ul {
+      margin-left: 1.2rem;
+      color: #475569;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Posts Container & Cards */
+    .post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-card .post-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .post-card h3 {
+      font-size: 1.3rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-card p {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    .empty-state {
+      background: var(--accent-soft);
+      border: 1px dashed var(--accent);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      aside.sidebar {
+        width: 100%;
+        position: relative;
+        padding: 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      main.content-area {
+        margin-left: 0;
+        padding: 2rem 1.5rem;
+      }
+      .sidebar-nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+      }
+      .sidebar-nav button {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <h1>Brooklyn Rupert</h1>
+        <p>Honors Student • Researcher • Writer</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="active" onclick="showPage('home', this)">Home</button></li>
+          <li><button onclick="showPage('about', this)">About & Experience</button></li>
+          <li><button onclick="showPage('posts', this)">Field Notes & Essays</button></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <p>© 2026 Brooklyn Rupert</p>
+      <p>Hosted on GitHub</p>
+    </div>
+  </aside>
+
+  <!-- Main View Area -->
+  <main class="content-area">
+
+    <!-- PAGE 1: HOME -->
+    <section id="home" class="page-section active">
+      <h2 class="page-title">Welcome</h2>
+      <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
+
+      <div style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin-bottom: 2rem;">
+        <p style="margin-bottom: 1.25rem;">
+          I am an honors undergraduate studying criminal justice, criminology, and psychology. 
+          My academic work and independent writing center on procedural due process, institutional policy, 
+          and forensic behavioral research.
+        </p>
+        <p>
+          Use the navigation on the left to explore my full background and experience, or browse my field dispatches and essays.
+        </p>
+      </div>
+    </section>
+
+    <!-- PAGE 2: ABOUT / LINKEDIN EXPERIENCE -->
+    <section id="about" class="page-section">
+      <h2 class="page-title">Background & Experience</h2>
+      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
+
+      <!-- Education -->
+      <div class="resume-block">
+        <h3>Education</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">University of Michigan–Dearborn</span>
+            <span class="role-date">Expected 2029</span>
+          </div>
+          <div class="role-company">Bachelor of Arts • Honors Program</div>
+          <ul>
+            <li><strong>Double Major:</strong> Psychology and Criminology & Criminal Justice</li>
+            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience & Internships -->
+      <div class="resume-block">
+        <h3>Professional & Legal Experience</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Staff Writer (China & International Coverage)</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company"><em>The Michigan Journal</em></div>
+          <ul>
+            <li>Research and report on global geopolitical developments and policy shifts.</li>
+            <li>Conduct background analysis and source verification for weekly news editions.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Customer Service & Operations</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">Menards</div>
+          <ul>
+            <li>Manage front-desk customer inquiries, transaction processing, and store communications.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Leadership & Public Service -->
+      <div class="resume-block">
+        <h3>Leadership & Civic Engagement</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Secretary</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">Criminology and Criminal Justice Collective</div>
+          <ul>
+            <li>Coordinate administrative records, organizational scheduling, and student engagement events.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Precinct Delegate Candidate</span>
+            <span class="role-date">2026</span>
+          </div>
+          <div class="role-company">Wayne County, Michigan</div>
+          <ul>
+            <li>Engaged in grassroots civic administration and community voter representation.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">State Vice President</span>
+            <span class="role-date">Past Leadership</span>
+          </div>
+          <div class="role-company">SkillsUSA Michigan</div>
+          <ul>
+            <li>Represented thousands of career and technical education students across Michigan.</li>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal CTE education funding.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: POSTS / FIELD NOTES (NO SAMPLE POSTS) -->
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Field Notes & Essays</h2>
+      <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
+
+      <!-- Empty Container Ready For Your Entries -->
+      <div id="posts-list">
+        <div class="empty-state">
+          <p><strong>No posts published yet.</strong></p>
+          <p style="margin-top: 0.25rem; font-size: 0.88rem; opacity: 0.9;">New write-ups and reflections on volunteering, legal studies, and campus work will be added here.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Section Switching Script -->
+  <script>
+    function showPage(pageId, buttonElement) {
+      // Hide all pages
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Remove active state from all buttons
+      document.querySelectorAll('.sidebar-nav button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Show selected page & highlight button
+      document.getElementById(pageId).classList.add('active');
+      buttonElement.classList.add('active');
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+</body>
+</html>
