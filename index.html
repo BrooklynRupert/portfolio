@@ -11,20 +11,16 @@
   
   <style>
     :root {
-      /* Custom Earth-Tone Palette */
       --bg: #FDF6ED;
-      --card-bg: #FFFFFF;
-      --sand: #DCCFC0;
-      --sage-light: #A1BC98;
-      --sage-dark: #778873;
-      
-      --text: #2d372e;
-      --text-secondary: #4a5747;
-      --muted: #6e7d6a;
+      --card-bg: #ffffff;
+      --sidebar-bg: rgba(220, 207, 192, 0.65);
+      --text: #1a1a1a;
+      --text-secondary: #333333;
+      --muted: #555555;
       --accent: #778873;
-      --accent-soft: rgba(161, 188, 152, 0.25);
+      --accent-light: #A1BC98;
+      --neutral-sand: #DCCFC0;
       --border: #DCCFC0;
-      --border-subtle: rgba(220, 207, 192, 0.6);
       --radius: 12px;
     }
 
@@ -40,18 +36,17 @@
       min-height: 100vh;
     }
 
-    /* Floating Island / Pill Dock */
+    /* Floating Island Dock */
     aside.island-dock {
       position: fixed;
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(253, 246, 237, 0.8);
+      background: var(--sidebar-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid var(--sand);
-      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.12), 
-                  0 0 0 1px rgba(119, 136, 115, 0.05);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -69,7 +64,7 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -86,8 +81,7 @@
     }
 
     .dock-link:hover {
-      color: var(--sage-dark);
-      background: var(--accent-soft);
+      background: rgba(255, 255, 255, 0.6);
     }
 
     .dock-link:hover svg {
@@ -95,17 +89,18 @@
     }
 
     .dock-link.active {
-      background: var(--sage-light);
-      color: #2d372e;
+      background: #ffffff;
+      color: var(--accent);
       border-radius: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
     .dock-link::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
-      background: var(--sage-dark);
-      color: #FDF6ED;
+      background: #1a1a1a;
+      color: #ffffff;
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
       font-size: 0.75rem;
@@ -115,7 +110,7 @@
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .dock-link:hover::after {
@@ -139,7 +134,7 @@
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--sage-dark);
+      color: var(--text);
     }
 
     .header-intro p {
@@ -150,17 +145,19 @@
       margin-top: 0.2rem;
     }
 
-    /* Seamless Stacked Sections with Focus Transitions */
+    /* Page Sections & Soft Focus */
     .page-section {
       padding: 4rem 0;
-      border-bottom: 1.5px solid var(--border);
-      opacity: 0.35;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.3;
       filter: blur(1.5px);
       transform: translateY(8px);
       transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
     }
 
-    .page-section:first-of-type { padding-top: 0; }
+    .page-section:first-of-type {
+      padding-top: 0;
+    }
 
     .page-section.in-focus {
       opacity: 1;
@@ -172,7 +169,7 @@
       font-family: 'Newsreader', serif;
       font-size: 2.3rem;
       font-weight: 600;
-      color: var(--sage-dark);
+      color: var(--text);
       margin-bottom: 0.35rem;
     }
 
@@ -181,7 +178,7 @@
       font-size: 0.98rem;
       margin-bottom: 2.2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border);
     }
 
     /* Experience Timeline */
@@ -194,7 +191,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--sage-dark);
+      color: var(--accent);
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
@@ -204,19 +201,19 @@
     .resume-block h3::after {
       content: "";
       flex: 1;
-      height: 1.5px;
-      background: var(--border-subtle);
+      height: 1px;
+      background: var(--border);
     }
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 0.85rem;
-      border-left: 2px solid var(--sage-light);
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
       transition: border-color 0.2s ease;
     }
 
     .resume-item:hover {
-      border-left-color: var(--sage-dark);
+      border-left-color: var(--accent);
     }
 
     .resume-header {
@@ -252,12 +249,14 @@
       line-height: 1.65;
     }
 
-    .resume-item li { margin-bottom: 0.25rem; }
+    .resume-item li {
+      margin-bottom: 0.25rem;
+    }
 
     /* Empty State for Notes */
     .empty-state {
-      background: var(--card-bg);
-      border: 1.5px dashed var(--sand);
+      background: #ffffff;
+      border: 1px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
       text-align: center;
@@ -266,115 +265,134 @@
 
     .empty-state strong {
       display: block;
-      color: var(--sage-dark);
+      color: var(--text);
       font-size: 1.05rem;
       margin-bottom: 0.35rem;
     }
 
-    /* ===================================================
-       BOTTOM INTERACTIVE FILING BOX & CONTACT ME
-    =================================================== */
-    .contact-interactive-section {
-      padding: 5rem 0 4rem;
+    /* =========================================
+       LINE-ART BOX & CONTACT CARD ANIMATION
+       ========================================= */
+    .contact-section {
+      padding: 5rem 0 2rem;
+      text-align: center;
+      border-bottom: none;
+    }
+
+    .box-interactive-wrapper {
+      position: relative;
+      width: 320px;
+      margin: 2.5rem auto 0;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
     }
 
-    .box-prompt-text {
-      font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 2rem;
+    .hint-label {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      transition: opacity 0.3s ease;
     }
 
     .box-stage {
       position: relative;
-      width: 220px;
-      height: 220px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 180px;
+      height: 180px;
     }
 
-    /* SVG Isometric Box Elements */
+    /* Line Art Box Graphic (Black lines on clean aesthetic) */
     .box-svg {
-      width: 170px;
-      height: 170px;
-      stroke: var(--sage-dark);
-      stroke-width: 4.5;
+      width: 100%;
+      height: 100%;
+      stroke: #1a1a1a;
+      stroke-width: 3;
+      fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
-      fill: none;
-      position: absolute;
-      bottom: 10px;
-      z-index: 2;
     }
 
     .box-lid-group {
-      transform-origin: 85px 40px;
-      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+      transform-origin: center top;
     }
 
-    /* Contact Card Emerging from Box */
-    .emerging-card {
-      position: absolute;
-      bottom: 45px;
-      width: 280px;
-      background: var(--card-bg);
-      border: 2px solid var(--sage-dark);
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 15px 30px rgba(119, 136, 115, 0.15);
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px) scale(0.85);
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .emerging-card h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.35rem;
-      color: var(--sage-dark);
-      margin-bottom: 0.75rem;
-      border-bottom: 1px solid var(--sand);
-      padding-bottom: 0.4rem;
-    }
-
-    .contact-info-row {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
+    /* Emerged Contact Card */
+    .contact-card-content {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #1a1a1a;
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
       text-align: left;
-    }
-
-    .contact-info-row a {
-      color: var(--sage-dark);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .contact-info-row a:hover {
-      text-decoration: underline;
-    }
-
-    /* OPEN STATE TRIGGER (Persists once clicked) */
-    .box-stage.is-open {
+      margin-top: 1.5rem;
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
       cursor: default;
     }
 
-    .box-stage.is-open .box-lid-group {
-      transform: translateY(-55px) rotate(-18deg) scale(0.95);
+    .contact-card-content h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
     }
 
-    .box-stage.is-open .emerging-card {
+    .contact-field {
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-field label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-field a, .contact-field span {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .contact-field a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Triggered Opened State */
+    .box-interactive-wrapper.is-open {
+      cursor: default;
+    }
+
+    .box-interactive-wrapper.is-open .hint-label {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .box-interactive-wrapper.is-open .box-lid-group {
+      transform: translateY(-80px) rotate(-15deg) scale(0.7);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .box-interactive-wrapper.is-open .contact-card-content {
+      display: block;
       opacity: 1;
-      transform: translateY(-120px) scale(1);
-      pointer-events: auto;
+      transform: translateY(0);
     }
 
     /* Mobile Adaptability */
@@ -389,10 +407,7 @@
       }
       .dock-link::after { display: none; }
       main.content-area {
-        padding: 3rem 1.5rem 6rem;
-      }
-      .box-stage.is-open .emerging-card {
-        transform: translateY(-110px) scale(0.95);
+        padding: 3rem 1.5rem 7rem;
       }
     }
   </style>
@@ -425,9 +440,18 @@
         <line x1="9" y1="17" x2="13" y2="17"/>
       </svg>
     </a>
+
+    <!-- Box Contact Icon -->
+    <a href="#contact" class="dock-link" data-tooltip="Get in Touch">
+      <svg viewBox="0 0 24 24">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+        <line x1="12" y1="22.08" x2="12" y2="12"/>
+      </svg>
+    </a>
   </aside>
 
-  <!-- Scrollable Canvas -->
+  <!-- Scrollable Main Canvas -->
   <main class="content-area">
 
     <!-- Top Identity Header -->
@@ -448,7 +472,7 @@
           and forensic behavioral research.
         </p>
         <p>
-          Scroll through to explore my background, leadership history, and field notes.
+          Scroll through to explore my background, leadership history, field notes, or reach out directly at the bottom.
         </p>
       </div>
     </section>
@@ -542,55 +566,107 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE LINE-ART BOX CONTACT SECTION -->
-    <div class="contact-interactive-section">
-      <p class="box-prompt-text" id="boxPrompt">Click the box to open contact details</p>
-      
-      <div class="box-stage" id="contactBox" onclick="openBox()">
-        
-        <!-- Emerging Contact Card -->
-        <div class="emerging-card">
-          <h3>Get in Touch</h3>
-          <div class="contact-info-row">
-            <strong>Email:</strong> <a href="mailto:your-email@umich.edu">your-email@umich.edu</a>
+    <!-- SECTION 4: CONTACT ARCHIVE BOX -->
+    <section id="contact" class="page-section contact-section">
+      <h2 class="page-title">Get In Touch</h2>
+      <p class="page-subtitle" style="margin-bottom: 1rem; border-bottom: none;">Open the filing box to retrieve contact details.</p>
+
+      <div class="box-interactive-wrapper" id="archiveBox" onclick="openArchiveBox()">
+        <span class="hint-label">✦ Click box to open ✦</span>
+
+        <div class="box-stage">
+          <svg class="box-svg" viewBox="0 0 200 200">
+            <!-- Box Body Container -->
+            <path d="M30 75 L100 115 L170 75 L170 145 L100 185 L30 145 Z" fill="#FDF6ED"/>
+            <path d="M100 115 L100 185" />
+            
+            <!-- Box Lid Assembly (Detaches on Click) -->
+            <g class="box-lid-group" id="boxLid">
+              <polygon points="30,75 100,35 170,75 100,115" fill="#FDF6ED"/>
+              <path d="M30 75 L30 85 L100 125 L170 85 L170 75" />
+              <!-- Center Tape Strip -->
+              <path d="M65 55 L85 43 L135 72 L115 84 Z" fill="#DCCFC0" />
+              <path d="M115 84 L115 102 L100 110 L100 92 Z" fill="#DCCFC0" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Emerged Contact Information Sheet -->
+        <div class="contact-card-content" id="contactCard">
+          <h3>Contact Details</h3>
+          
+          <div class="contact-field">
+            <label>Email Address</label>
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
           </div>
-          <div class="contact-info-row">
-            <strong>Phone:</strong> (313) 000-0000
+
+          <div class="contact-field">
+            <label>Phone Number</label>
+            <a href="tel:+10000000000">(000) 000-0000</a>
           </div>
-          <div class="contact-info-row">
-            <strong>Location:</strong> Detroit / Ypsilanti, MI
+
+          <div class="contact-field">
+            <label>Location</label>
+            <span>Detroit / Ypsilanti, Michigan</span>
+          </div>
+
+          <div class="contact-field" style="margin-bottom: 0;">
+            <label>Profiles</label>
+            <span><a href="https://github.com" target="_blank">GitHub</a> • <a href="https://linkedin.com" target="_blank">LinkedIn</a></span>
           </div>
         </div>
 
-        <!-- Line-Art Isometric Box SVG -->
-        <svg class="box-svg" viewBox="0 0 170 170">
-          <!-- Box Base (Front Left, Front Right, Bottom Edges) -->
-          <g class="box-base-group">
-            <!-- Front Left Face -->
-            <polygon points="15,65 85,105 85,155 15,115" fill="#FDF6ED" />
-            <!-- Front Right Face -->
-            <polygon points="85,105 155,65 155,115 85,155" fill="#FDF6ED" />
-            <!-- Outline Strokes -->
-            <polyline points="15,65 85,105 155,65" />
-            <polyline points="15,115 85,155 155,115" />
-            <line x1="15" y1="65" x2="15" y2="115" />
-            <line x1="85" y1="105" x2="85" y2="155" />
-            <line x1="155" y1="65" x2="155" y2="115" />
-          </g>
+      </div>
+    </section>
 
-          <!-- Box Lid Group (Animates Upward and Out) -->
-          <g class="box-lid-group">
-            <!-- Top Lid Rhombus -->
-            <polygon points="85,15 155,55 85,95 15,55" fill="#FDF6ED" />
-            <!-- Lid Tape / Band Center Line -->
-            <line x1="50" y1="35" x2="120" y2="75" />
-            <line x1="60" y1="30" x2="130" y2="70" />
-            <!-- Overhang Lip Flap -->
-            <polyline points="15,55 85,95 155,55" />
-            <polyline points="15,65 85,105 155,65" />
-            <line x1="15" y1="55" x2="15" y2="65" />
-            <line x1="85" y1="95" x2="85" y2="105" />
-            <line x1="155" y1="55" x2="155" y2="65" />
+  </main>
+
+  <!-- Interactive Logic & Scroll Tracking -->
+  <script>
+    // Open Box Logic
+    let isBoxOpened = false;
+    function openArchiveBox() {
+      if (!isBoxOpened) {
+        document.getElementById('archiveBox').classList.add('is-open');
+        isBoxOpened = true;
+      }
+    }
+
+    // Scroll & Floating Dock Sync
+    const sections = document.querySelectorAll('.page-section');
+    const dockLinks = document.querySelectorAll('.dock-link');
+
+    function syncSectionFocus() {
+      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          section.classList.add('in-focus');
+          
+          dockLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        } else {
+          section.classList.remove('in-focus');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', syncSectionFocus, { passive: true });
+    window.addEventListener('load', syncSectionFocus);
+    syncSectionFocus();
+  </script>
+
+</body>
+</html>            <line x1="155" y1="55" x2="155" y2="65" />
             <!-- Tape Flap tab -->
             <rect x="79" y="95" width="12" height="15" fill="#FDF6ED" />
           </g>
