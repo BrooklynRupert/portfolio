@@ -403,6 +403,375 @@
     /* Empty State for Notes */
     .empty-state {
       background: rgba(255, 255, 255, 0.75);
+      border: 1px dashed var(--border);      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+      min-height: 100vh;
+    }
+
+    /* Floating Island / Pill Dock */
+    aside.island-dock {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(220, 207, 192, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.18);
+      padding: 0.6rem;
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    /* Icon Navigation Links */
+    .dock-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 24px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dock-link svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 1.75;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .dock-link:hover {
+      color: var(--text);
+      background: rgba(161, 188, 152, 0.35);
+    }
+
+    .dock-link:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* Active State */
+    .dock-link.active {
+      background: var(--accent);
+      color: #FDF6ED;
+      border-radius: 18px;
+    }
+
+    /* Floating Tooltips */
+    .dock-link::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 60px;
+      background: var(--text);
+      color: #FDF6ED;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-6px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .dock-link:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Main Centered Content Canvas */
+    main.content-area {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 14rem;
+    }
+
+    /* Header Profile Badge */
+    .header-intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .header-intro h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .header-intro p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.2rem;
+    }
+
+    /* Seamless Stacked Sections with Focus Transitions */
+    .page-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.3;
+      filter: blur(1.5px);
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .page-section:first-of-type {
+      padding-top: 0;
+    }
+
+    .page-section:last-of-type {
+      border-bottom: none;
+      min-height: 80vh;
+    }
+
+    /* Section In-Focus */
+    .page-section.in-focus {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0);
+    }
+
+    /* Section Titles */
+    h2.page-title {
+      font-family: 'Newsreader', serif;
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    p.page-subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 2.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Subsection Header (Inside Notes & Essays) */
+    .subsection-divider {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    h3.subsection-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    p.subsection-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Experience Timeline */
+    .resume-block {
+      margin-bottom: 2.75rem;
+    }
+
+    .resume-block h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resume-block h3::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .resume-item {
+      margin-bottom: 1.75rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
+      transition: border-color 0.2s ease;
+    }
+
+    .resume-item:hover {
+      border-left-color: var(--accent);
+    }
+
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.2rem;
+    }
+
+    .role-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .role-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .role-company {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
+    .resume-item ul {
+      margin-left: 1.1rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .resume-item li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* =========================================================
+       HORIZONTAL ROLLING CAROUSEL FOR FEATURED MEDIA SUBSECTION
+       ========================================================= */
+    .features-carousel {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5rem 0.25rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .features-carousel::-webkit-scrollbar {
+      height: 7px;
+    }
+
+    .features-carousel::-webkit-scrollbar-track {
+      background: rgba(220, 207, 192, 0.4);
+      border-radius: 10px;
+    }
+
+    .features-carousel::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+
+    .features-carousel::-webkit-scrollbar-thumb:hover {
+      background: var(--text-secondary);
+    }
+
+    .feature-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(119, 136, 115, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(119, 136, 115, 0.15);
+      border-color: var(--accent);
+    }
+
+    .feature-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-outlet {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--bg);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .feature-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .feature-card h4 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-link {
+      align-self: flex-start;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .feature-link:hover {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    /* Empty State for Notes */
+    .empty-state {
+      background: rgba(255, 255, 255, 0.75);
       border: 1px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
