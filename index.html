@@ -21,7 +21,6 @@
   <meta name="twitter:title" content="Brooklyn Rupert | Portfolio" />
   <meta name="twitter:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice exploring procedural due process, institutional policy, and forensic behavioral analysis." />
   <meta name="twitter:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
-  <title>Brooklyn Rupert | Portfolio</title>
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23778873'/><rect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23DCCFC0' stroke-width='2'/><text x='50%25' y='54%25' font-family='Cinzel, serif' font-size='30' font-weight='700' fill='%23FDF6ED' text-anchor='middle' dominant-baseline='central' letter-spacing='1'>BR</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,7 +149,9 @@
       max-width: 780px;
       margin: 0 auto;
       padding: 5rem 2rem 14rem;
-   /* Header Profile Badge (Centered & Scaled Up) */
+    }
+
+    /* Header Profile Badge (Centered & Scaled Up) */
     .header-intro {
       margin-bottom: 3.5rem;
       text-align: center;
@@ -310,14 +311,14 @@
     }
 
     /* =========================================================
-       HORIZONTAL EXPANDING ROLLING CAROUSEL
+       HORIZONTAL EXPANDING CAROUSEL WITH DOWNWARD HOVER ACTION
        ========================================================= */
     .features-carousel {
       display: flex;
-      gap: 1.25rem;
+      gap: 1.35rem;
       overflow-x: auto;
-      overflow-y: hidden;
-      padding: 0.5rem 0.25rem 1.5rem;
+      overflow-y: visible;
+      padding: 0.5rem 0.5rem 2rem;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
     }
@@ -347,16 +348,19 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(119, 136, 115, 0.08);
+      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+      transform-origin: top center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 0.3s ease, 
+                  border-color 0.3s ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 10px 28px rgba(119, 136, 115, 0.18);
+      transform: translateY(6px) scale(1.03);
+      box-shadow: 0 14px 32px rgba(119, 136, 115, 0.22);
       border-color: var(--accent);
     }
 
@@ -386,7 +390,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #004b97; /* WXYZ ABC blue */
+      background: #004b97;
       display: inline-block;
     }
 
@@ -412,8 +416,14 @@
       margin-bottom: 1.25rem;
     }
 
+    .feature-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
     .feature-link {
-      align-self: flex-start;
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--accent);
@@ -657,6 +667,10 @@
         padding: 3rem 1.25rem 8.5rem;
       }
 
+      .header-intro h1 {
+        font-size: 2.1rem;
+      }
+
       .feature-card {
         flex: 0 0 280px;
       }
@@ -779,8 +793,8 @@
       <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology at the University of Michigan-Dearborn. 
-          This digital webpage serves as a hub for my academic work, investigative writing, and civic involvement. 
-          If you'd like to reach me, my contact information can be found toward the corner of the page.
+          This digital portfolio serves as a hub for my academic work, investigative writing, and civic involvement. 
+          If you'd like to reach me, my contact information can be found in the folder at the bottom corner of the page.
         </p>
         <p>
           Scroll through to explore my background, leadership history, media features, and field notes.
@@ -842,7 +856,7 @@
         <div class="resume-item">
           <div class="resume-header">
             <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026-2028</span>
+            <span class="role-date">2026 – 2028</span>
           </div>
           <div class="role-company">Wayne County, Michigan</div>
           <ul>
@@ -895,9 +909,11 @@
               <h4>Ypsilanti High School Students to Compete in NASA Global Culinary Competition</h4>
               <p>Special feature highlighting our top 10 national ranking, culinary innovation, and competitive achievements, as covered by ABC 7 News Detroit.</p>
             </div>
-            <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Watch & Read Full Story ↗
-            </a>
+            <div class="feature-links-row">
+              <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Watch & Read Full Story ↗
+              </a>
+            </div>
           </div>
 
           <!-- SkillsUSA WLTI -->
@@ -910,14 +926,17 @@
               <h4>Advocacy & Leadership Spotlight</h4>
               <p>Coverage regarding statewide representation, student leadership, and career & technical education advocacy in Washington, D.C.</p>
             </div>
-            <a href="https://skillsusachampions.org/2024/09/wlti-ignites-passion-for-advocacy-in-members/" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Read Story ↗
-               <a href=" <a href="https://youtu.be/cfe0maw1bhs?si=et-FAmcQEuSiqLDp" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Watch Recap ↗
-            </a>
+            <div class="feature-links-row">
+              <a href="https://skillsusachampions.org/2024/09/wlti-ignites-passion-for-advocacy-in-members/" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Read Story ↗
+              </a>
+              <a href="https://youtu.be/cfe0maw1bhs?si=et-FAmcQEuSiqLDp" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Watch Recap ↗
+              </a>
+            </div>
           </div>
 
-          <!-- Sample Media Card 3 -->
+          <!-- The Michigan Journal -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
@@ -927,9 +946,11 @@
               <h4>Upcoming International Analysis...</h4>
               <p>Providing investigative analysis of the past, present, and escalating diplomatic relations between the People's Republic of China and the United States.</p>
             </div>
-            <a href="https://www.wolverinemedianetwork.com/michiganjournal" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Get Prepared to Read ↗
-            </a>
+            <div class="feature-links-row">
+              <a href="https://www.wolverinemedianetwork.com/michiganjournal" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Get Prepared to Read ↗
+              </a>
+            </div>
           </div>
         </div>
       </div>
