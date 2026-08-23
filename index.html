@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta name="twitter:title" content="Brooklyn Rupert | Portfolio" />
-  <meta name="twitter:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
+  <meta name="twitter:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice exploring procedural due process, institutional policy, and forensic behavioral analysis." />
   <meta name="twitter:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23778873'/><rect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23DCCFC0' stroke-width='2'/><text x='50%25' y='54%25' font-family='Cinzel, serif' font-size='30' font-weight='700' fill='%23FDF6ED' text-anchor='middle' dominant-baseline='central' letter-spacing='1'>BR</text></svg>" type="image/svg+xml">
@@ -283,162 +283,158 @@
     }
 
     /* =========================================================
-       EXPANDABLE DROPDOWN ABOUT & LANGUAGE DRAWER (KARTAVYA STYLE)
+       ABOUT ME / SKILLS & LANGUAGES DROPDOWN ACCORDION
        ========================================================= */
-    .profile-drawer-toggle {
-      margin-top: 1.75rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--card-bg);
+    .skills-dropdown {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.65);
       border: 1px solid var(--border);
-      padding: 0.6rem 1.15rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .profile-drawer-toggle:hover {
-      border-color: var(--accent);
+    .skills-dropdown[open] {
       background: #FFFFFF;
-      color: var(--text);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(119, 136, 115, 0.15);
+      box-shadow: 0 6px 20px rgba(119, 136, 115, 0.12);
+      border-color: var(--accent-light);
     }
 
-    .profile-drawer-toggle svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      fill: none;
+    .skills-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: var(--text);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .skills-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .skills-summary:hover {
+      color: var(--accent);
+      background: rgba(161, 188, 152, 0.1);
+    }
+
+    .skills-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .skills-summary-left svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
       stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .skills-chevron {
+      width: 18px;
+      height: 18px;
+      stroke: var(--muted);
+      stroke-width: 2;
+      fill: none;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .profile-drawer-toggle.is-active svg {
+    .skills-dropdown[open] .skills-chevron {
       transform: rotate(180deg);
+      stroke: var(--accent);
     }
 
-    .profile-drawer-content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
+    .skills-content {
+      padding: 0.5rem 1.4rem 1.4rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .skills-group {
       margin-top: 1.25rem;
-      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
-                  opacity 0.35s ease,
-                  transform 0.4s ease;
-      transform: translateY(-8px);
     }
 
-    .profile-drawer-content.is-open {
-      max-height: 1200px;
-      opacity: 1;
-      transform: translateY(0);
+    .skills-group:first-child {
+      margin-top: 0.8rem;
     }
 
-    .drawer-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      box-shadow: 0 8px 24px rgba(119, 136, 115, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .drawer-block h4 {
-      font-size: 0.8rem;
+    .skills-group-title {
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--accent);
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.65rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
-    /* Language Proficiency Display */
-    .lang-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-
-    .lang-item {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 1rem;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .lang-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .lang-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.35rem;
-    }
-
-    .lang-name {
-      font-weight: 600;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    .lang-level {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--bg);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .lang-desc {
-      font-size: 0.84rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Skill & Research Badges */
-    .skills-pill-wrap {
+    .skills-chips {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
-    .skill-pill {
-      font-size: 0.8rem;
-      background: #FFFFFF;
-      color: var(--text-secondary);
+    .skill-chip {
+      background: var(--bg);
       border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
       padding: 0.35rem 0.75rem;
       border-radius: 20px;
-      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       transition: all 0.2s ease;
     }
 
-    .skill-pill:hover {
-      background: var(--bg);
-      color: var(--text);
+    .skill-chip:hover {
       border-color: var(--accent);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .skill-chip.highlight {
+      background: rgba(161, 188, 152, 0.25);
+      border-color: var(--accent-light);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .lang-subtext {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* Subsection Header (Inside Notes & Essays) */
+    .subsection-container {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    h3.subsection-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    p.subsection-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
     }
 
     /* Experience Timeline */
@@ -513,27 +509,6 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Subsection Header (Inside Notes & Essays) */
-    .subsection-container {
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    h3.subsection-title {
-      font-family: 'Newsreader', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    p.subsection-subtitle {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
-    }
-
     /* =========================================================
        HORIZONTAL EXPANDING CAROUSEL WITH DOWNWARD HOVER ACTION
        ========================================================= */
@@ -573,113 +548,3 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transform-origin: top center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                  box-shadow 0.3s ease, 
-                  border-color 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(6px) scale(1.03);
-      box-shadow: 0 14px 32px rgba(119, 136, 115, 0.22);
-      border-color: var(--accent);
-    }
-
-    .feature-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .outlet-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      background: var(--bg);
-      padding: 0.25rem 0.55rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .outlet-badge-circle {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #004b97;
-      display: inline-block;
-    }
-
-    .feature-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .feature-card h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.35;
-      margin-bottom: 0.6rem;
-    }
-
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-    }
-
-    .feature-links-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      align-items: center;
-    }
-
-    .feature-link {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .feature-link:hover {
-      color: var(--text);
-      border-bottom-color: var(--text);
-    }
-
-    /* Empty State for Notes */
-    .empty-state {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 3.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .empty-state strong {
-      display: block;
-      color: var(--text);
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
-    }
-
-    /* =========================================================
-       CUSTOM MULTI-
