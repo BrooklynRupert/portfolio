@@ -11,16 +11,16 @@
   
   <style>
     :root {
-      --bg: #FDF6ED;
+      --bg: #FDF6ED;              /* Warm cream base */
+      --sidebar-bg: #DCCFC0;      /* Warm taupe dock */
       --card-bg: #ffffff;
-      --sidebar-bg: rgba(220, 207, 192, 0.65);
-      --text: #1a1a1a;
-      --text-secondary: #333333;
+      --text: #111111;            /* Crisp black lettering */
+      --text-secondary: #2b2b2b;
       --muted: #555555;
-      --accent: #778873;
-      --accent-light: #A1BC98;
-      --neutral-sand: #DCCFC0;
+      --accent: #778873;          /* Deep sage */
+      --accent-light: #A1BC98;    /* Soft sage */
       --border: #DCCFC0;
+      --border-subtle: #eae2d6;
       --radius: 12px;
     }
 
@@ -36,17 +36,18 @@
       min-height: 100vh;
     }
 
-    /* Floating Island Dock */
+    /* Floating Island / Pill Dock */
     aside.island-dock {
       position: fixed;
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--sidebar-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+      background: rgba(220, 207, 192, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.15), 
+                  0 0 0 1px rgba(0, 0, 0, 0.04);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -56,6 +57,7 @@
       z-index: 100;
     }
 
+    /* Icon Navigation Links */
     .dock-link {
       position: relative;
       display: flex;
@@ -64,7 +66,7 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: var(--text);
+      color: #333333;
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -81,7 +83,8 @@
     }
 
     .dock-link:hover {
-      background: rgba(255, 255, 255, 0.6);
+      color: #000000;
+      background: rgba(255, 255, 255, 0.4);
     }
 
     .dock-link:hover svg {
@@ -89,18 +92,18 @@
     }
 
     .dock-link.active {
-      background: #ffffff;
-      color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
       border-radius: 18px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
+    /* Tooltips */
     .dock-link::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
-      background: #1a1a1a;
-      color: #ffffff;
+      background: #111111;
+      color: #FDF6ED;
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
       font-size: 0.75rem;
@@ -110,7 +113,7 @@
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .dock-link:hover::after {
@@ -122,9 +125,10 @@
     main.content-area {
       max-width: 780px;
       margin: 0 auto;
-      padding: 5rem 2rem 8rem;
+      padding: 5rem 2rem 14rem;
     }
 
+    /* Header Profile */
     .header-intro {
       margin-bottom: 3.5rem;
     }
@@ -134,7 +138,7 @@
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--text);
+      color: #111111;
     }
 
     .header-intro p {
@@ -145,7 +149,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Page Sections & Soft Focus */
+    /* Stacked Sections & Focus Effect */
     .page-section {
       padding: 4rem 0;
       border-bottom: 1px solid var(--border);
@@ -159,17 +163,23 @@
       padding-top: 0;
     }
 
+    .page-section:last-of-type {
+      border-bottom: none;
+      min-height: 70vh;
+    }
+
     .page-section.in-focus {
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);
     }
 
+    /* Section Typography */
     h2.page-title {
       font-family: 'Newsreader', serif;
       font-size: 2.3rem;
       font-weight: 600;
-      color: var(--text);
+      color: #111111;
       margin-bottom: 0.35rem;
     }
 
@@ -178,7 +188,7 @@
       font-size: 0.98rem;
       margin-bottom: 2.2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     /* Experience Timeline */
@@ -188,7 +198,7 @@
 
     .resume-block h3 {
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--accent);
@@ -202,13 +212,13 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: var(--border);
+      background: var(--border-subtle);
     }
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 0.75rem;
-      border-left: 2px solid var(--border);
+      padding-left: 0.85rem;
+      border-left: 2px solid var(--accent-light);
       transition: border-color 0.2s ease;
     }
 
@@ -226,7 +236,7 @@
     .role-title {
       font-weight: 600;
       font-size: 1rem;
-      color: var(--text);
+      color: #111111;
     }
 
     .role-date {
@@ -244,7 +254,7 @@
 
     .resume-item ul {
       margin-left: 1.1rem;
-      color: var(--text-secondary);
+      color: #2b2b2b;
       font-size: 0.9rem;
       line-height: 1.65;
     }
@@ -253,10 +263,10 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Empty State for Notes */
+    /* Notes / Essays Empty State */
     .empty-state {
-      background: #ffffff;
-      border: 1px dashed var(--border);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px dashed var(--accent);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
       text-align: center;
@@ -265,137 +275,128 @@
 
     .empty-state strong {
       display: block;
-      color: var(--text);
+      color: #111111;
       font-size: 1.05rem;
       margin-bottom: 0.35rem;
     }
 
-    /* =========================================
-       LINE-ART BOX & CONTACT CARD ANIMATION
-       ========================================= */
-    .contact-section {
-      padding: 5rem 0 2rem;
-      text-align: center;
-      border-bottom: none;
-    }
-
-    .box-interactive-wrapper {
-      position: relative;
-      width: 320px;
-      margin: 2.5rem auto 0;
-      cursor: pointer;
+    /* ================================================= */
+    /* LOCKED BOTTOM-RIGHT ANIMATED CLIPBOARD CONTACT */
+    /* ================================================= */
+    .clipboard-widget {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
     }
 
-    .hint-label {
-      font-size: 0.82rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-      transition: opacity 0.3s ease;
-    }
-
-    .box-stage {
-      position: relative;
-      width: 180px;
-      height: 180px;
-    }
-
-    /* Line Art Box Graphic (Black lines on clean aesthetic) */
-    .box-svg {
-      width: 100%;
-      height: 100%;
-      stroke: #1a1a1a;
-      stroke-width: 3;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .box-lid-group {
-      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
-      transform-origin: center top;
-    }
-
-    /* Emerged Contact Card */
-    .contact-card-content {
-      width: 100%;
-      background: #ffffff;
-      border: 1.5px solid #1a1a1a;
-      border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-      text-align: left;
-      margin-top: 1.5rem;
-      display: none;
+    /* Contact Details Card (Expands on Hover) */
+    .clipboard-card {
+      background: rgba(253, 246, 237, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--accent-light);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 12px 32px rgba(119, 136, 115, 0.25);
+      margin-bottom: 0.75rem;
+      width: 270px;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      cursor: default;
+      visibility: hidden;
+      transform: translateY(15px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
     }
 
-    .contact-card-content h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.4rem;
-      color: var(--text);
-      margin-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.4rem;
+    .clipboard-widget:hover .clipboard-card {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
 
-    .contact-field {
-      margin-bottom: 0.85rem;
-    }
-
-    .contact-field label {
-      display: block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .clipboard-card h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.15rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.35rem;
     }
 
-    .contact-field a, .contact-field span {
-      font-size: 0.95rem;
-      color: var(--text);
+    .clipboard-info-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.65rem;
+    }
+
+    .clipboard-info-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .clipboard-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .clipboard-val {
+      font-size: 0.88rem;
+      color: #111111;
       font-weight: 500;
       text-decoration: none;
+      word-break: break-all;
     }
 
-    .contact-field a:hover {
+    .clipboard-val:hover {
       color: var(--accent);
       text-decoration: underline;
     }
 
-    /* Triggered Opened State */
-    .box-interactive-wrapper.is-open {
-      cursor: default;
+    /* Clipboard Button & Line Art */
+    .clipboard-btn {
+      background: var(--sidebar-bg);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(119, 136, 115, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .box-interactive-wrapper.is-open .hint-label {
-      opacity: 0;
-      pointer-events: none;
+    .clipboard-widget:hover .clipboard-btn {
+      background: var(--accent);
+      transform: translateY(-2px);
     }
 
-    .box-interactive-wrapper.is-open .box-lid-group {
-      transform: translateY(-80px) rotate(-15deg) scale(0.7);
-      opacity: 0;
-      pointer-events: none;
+    .clipboard-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: #111111;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.25s ease, transform 0.25s ease;
     }
 
-    .box-interactive-wrapper.is-open .contact-card-content {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
+    .clipboard-widget:hover .clipboard-btn svg {
+      stroke: #ffffff;
+      transform: rotate(-6deg) scale(1.05);
     }
 
-    /* Mobile Adaptability */
+    /* Mobile Responsive Adjustments */
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
@@ -407,23 +408,24 @@
       }
       .dock-link::after { display: none; }
       main.content-area {
-        padding: 3rem 1.5rem 7rem;
+        padding: 3rem 1.5rem 8rem;
+      }
+      .clipboard-widget {
+        bottom: 5.5rem;
+        right: 1.25rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Island Dock -->
   <aside class="island-dock">
-    <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
       </svg>
     </a>
 
-    <!-- Profile / Experience Icon -->
     <a href="#about" class="dock-link" data-tooltip="About & Experience">
       <svg viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -431,7 +433,6 @@
       </svg>
     </a>
 
-    <!-- Notes & Essays Icon -->
     <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
@@ -440,49 +441,35 @@
         <line x1="9" y1="17" x2="13" y2="17"/>
       </svg>
     </a>
-
-    <!-- Box Contact Icon -->
-    <a href="#contact" class="dock-link" data-tooltip="Get in Touch">
-      <svg viewBox="0 0 24 24">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-        <line x1="12" y1="22.08" x2="12" y2="12"/>
-      </svg>
-    </a>
   </aside>
 
-  <!-- Scrollable Main Canvas -->
   <main class="content-area">
 
-    <!-- Top Identity Header -->
     <div class="header-intro">
       <h1>Brooklyn Rupert</h1>
       <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
     </div>
 
-    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
+      <div style="font-size: 1.02rem; color: #111111; line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
           and forensic behavioral research.
         </p>
         <p>
-          Scroll through to explore my background, leadership history, field notes, or reach out directly at the bottom.
+          Scroll through to explore my background, leadership history, and field notes.
         </p>
       </div>
     </section>
 
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
 
-      <!-- Education -->
       <div class="resume-block">
         <h3>Education</h3>
         <div class="resume-item">
@@ -498,7 +485,6 @@
         </div>
       </div>
 
-      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
@@ -514,7 +500,6 @@
         </div>
       </div>
 
-      <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
         <div class="resume-item">
@@ -547,180 +532,5 @@
           <div class="role-company">SkillsUSA Michigan</div>
           <ul>
             <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal CTE education funding.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: NOTES & ESSAYS -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections on volunteering, legal studies, and campus work will appear here.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: CONTACT ARCHIVE BOX -->
-    <section id="contact" class="page-section contact-section">
-      <h2 class="page-title">Get In Touch</h2>
-      <p class="page-subtitle" style="margin-bottom: 1rem; border-bottom: none;">Open the filing box to retrieve contact details.</p>
-
-      <div class="box-interactive-wrapper" id="archiveBox" onclick="openArchiveBox()">
-        <span class="hint-label">✦ Click box to open ✦</span>
-
-        <div class="box-stage">
-          <svg class="box-svg" viewBox="0 0 200 200">
-            <!-- Box Body Container -->
-            <path d="M30 75 L100 115 L170 75 L170 145 L100 185 L30 145 Z" fill="#FDF6ED"/>
-            <path d="M100 115 L100 185" />
-            
-            <!-- Box Lid Assembly (Detaches on Click) -->
-            <g class="box-lid-group" id="boxLid">
-              <polygon points="30,75 100,35 170,75 100,115" fill="#FDF6ED"/>
-              <path d="M30 75 L30 85 L100 125 L170 85 L170 75" />
-              <!-- Center Tape Strip -->
-              <path d="M65 55 L85 43 L135 72 L115 84 Z" fill="#DCCFC0" />
-              <path d="M115 84 L115 102 L100 110 L100 92 Z" fill="#DCCFC0" />
-            </g>
-          </svg>
-        </div>
-
-        <!-- Emerged Contact Information Sheet -->
-        <div class="contact-card-content" id="contactCard">
-          <h3>Contact Details</h3>
-          
-          <div class="contact-field">
-            <label>Email Address</label>
-            <a href="mailto:your.email@example.com">your.email@example.com</a>
-          </div>
-
-          <div class="contact-field">
-            <label>Phone Number</label>
-            <a href="tel:+10000000000">(000) 000-0000</a>
-          </div>
-
-          <div class="contact-field">
-            <label>Location</label>
-            <span>Detroit / Ypsilanti, Michigan</span>
-          </div>
-
-          <div class="contact-field" style="margin-bottom: 0;">
-            <label>Profiles</label>
-            <span><a href="https://github.com" target="_blank">GitHub</a> • <a href="https://linkedin.com" target="_blank">LinkedIn</a></span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Interactive Logic & Scroll Tracking -->
-  <script>
-    // Open Box Logic
-    let isBoxOpened = false;
-    function openArchiveBox() {
-      if (!isBoxOpened) {
-        document.getElementById('archiveBox').classList.add('is-open');
-        isBoxOpened = true;
-      }
-    }
-
-    // Scroll & Floating Dock Sync
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncSectionFocus() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', syncSectionFocus, { passive: true });
-    window.addEventListener('load', syncSectionFocus);
-    syncSectionFocus();
-  </script>
-
-</body>
-</html>            <line x1="155" y1="55" x2="155" y2="65" />
-            <!-- Tape Flap tab -->
-            <rect x="79" y="95" width="12" height="15" fill="#FDF6ED" />
-          </g>
-        </svg>
-
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Interaction & Scroll Script -->
-  <script>
-    // Handle Box Open (One-way interaction, stays open)
-    let boxOpened = false;
-    function openBox() {
-      if (!boxOpened) {
-        document.getElementById('contactBox').classList.add('is-open');
-        document.getElementById('boxPrompt').textContent = "Contact information opened";
-        boxOpened = true;
-      }
-    }
-
-    // Scroll & Floating Dock Focus Controller
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncDockState() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', syncDockState, { passive: true });
-    window.addEventListener('load', syncDockState);
-    syncDockState();
-  </script>
-
-</body>
-</html>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting
+              
