@@ -288,7 +288,7 @@
     }
 
     /* =========================================================
-       MANILA FOLDER CONTACT WIDGET (WITH PINK ATTENTION PULSE)
+       MANILA FOLDER CONTACT WIDGET (WITH #F7F4ED GLOW PULSE)
        ========================================================= */
     .folder-widget-container {
       position: fixed;
@@ -310,22 +310,22 @@
       transform: translateY(-2px);
     }
 
-    /* Soft Pink Pulsing Animation before first view */
+    /* Warm Ivory (#F7F4ED) Breathing Light Animation */
     .folder-widget-container.unseen .manila-folder {
-      animation: pinkGlowPulse 2.4s infinite ease-in-out;
+      animation: warmIvoryPulse 2.4s infinite ease-in-out;
     }
 
-    @keyframes pinkGlowPulse {
+    @keyframes warmIvoryPulse {
       0% {
-        filter: drop-shadow(0 4px 8px rgba(244, 114, 182, 0.25)) saturate(1.15) hue-rotate(-20deg);
+        filter: drop-shadow(0 0 6px rgba(247, 244, 237, 0.6)) brightness(1);
         opacity: 0.92;
       }
       50% {
-        filter: drop-shadow(0 8px 22px rgba(236, 72, 153, 0.55)) saturate(1.5) hue-rotate(-30deg);
+        filter: drop-shadow(0 0 20px #F7F4ED) drop-shadow(0 0 32px rgba(247, 244, 237, 0.8)) brightness(1.08);
         opacity: 1;
       }
       100% {
-        filter: drop-shadow(0 4px 8px rgba(244, 114, 182, 0.25)) saturate(1.15) hue-rotate(-20deg);
+        filter: drop-shadow(0 0 6px rgba(247, 244, 237, 0.6)) brightness(1);
         opacity: 0.92;
       }
     }
@@ -613,7 +613,7 @@
 
   </main>
 
-  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER (Starts with "unseen" pink pulse) -->
+  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER (Starts with "unseen" #F7F4ED pulse) -->
   <div class="folder-widget-container unseen" id="contactFolder">
     <div class="manila-folder">
       <!-- Clean Tab (No Text) -->
@@ -682,7 +682,7 @@
     window.addEventListener('load', syncDockState);
     syncDockState();
 
-    // 2. Folder Interactions & One-Time Pink Pulse Removal
+    // 2. Folder Interactions & One-Time Pulse Removal
     const folderWidget = document.getElementById('contactFolder');
 
     function markFolderSeen() {
