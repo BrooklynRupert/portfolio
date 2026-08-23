@@ -287,7 +287,7 @@
     }
 
     /* =========================================================
-       CUSTOM MULTI-LAYER FOLDER WIDGET
+       CUSTOM MULTI-LAYER FOLDER WIDGET (DESKTOP DEFAULT)
        ========================================================= */
     .folder-widget-container {
       position: fixed;
@@ -300,8 +300,8 @@
 
     .folder {
       position: relative;
-      width: 110px;
-      height: 75px;
+      width: 105px;
+      height: 72px;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
     }
 
@@ -343,13 +343,13 @@
       position: absolute;
       bottom: 98%;
       left: 0;
-      width: 35px;
-      height: 10px;
+      width: 32px;
+      height: 9px;
       background: var(--folder-back-color);
       border-radius: 4px 4px 0 0;
     }
 
-    /* Layered Papers inside the folder */
+    /* Layered Papers */
     .paper {
       position: absolute;
       bottom: 6px;
@@ -378,7 +378,7 @@
       background: #faf7f0;
     }
 
-    /* Main Sliding Contact Document (Paper 3) */
+    /* Contact Document (Desktop) */
     .paper.contact-paper {
       width: 240px;
       height: auto;
@@ -454,7 +454,7 @@
       pointer-events: none;
     }
 
-    /* Interactive Open State */
+    /* Desktop Hover / Click Open */
     .folder-widget-container:hover .folder__front,
     .folder-widget-container.is-open .folder__front {
       transform: rotateX(-32deg);
@@ -477,30 +477,98 @@
       pointer-events: auto;
     }
 
-    /* Mobile Adaptability */
+    /* =========================================================
+       MOBILE RESPONSIVE & HIGH-VISIBILITY TOGGLE
+       ========================================================= */
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
         top: auto;
-        bottom: 1.5rem;
+        bottom: 1.25rem;
         transform: translateX(-50%);
         flex-direction: row;
-        padding: 0.4rem 0.6rem;
+        padding: 0.35rem 0.5rem;
+        background: rgba(220, 207, 192, 0.85);
       }
       .dock-link::after { display: none; }
+      
       main.content-area {
-        padding: 3rem 1.5rem 8rem;
+        padding: 3rem 1.25rem 8.5rem;
       }
+
+      /* Compact closed folder on mobile */
       .folder-widget-container {
-        bottom: 5.5rem;
-        right: 1.5rem;
+        bottom: 5.8rem;
+        right: 1.25rem;
       }
-      .paper.contact-paper {
-        width: 215px;
+
+      .folder {
+        width: 80px;
+        height: 54px;
       }
+
+      .folder__back::after {
+        width: 24px;
+        height: 7px;
+      }
+
+      /* Disable hover triggers on mobile so tap toggle controls everything */
+      .folder-widget-container:hover .folder__front,
       .folder-widget-container:hover .paper.contact-paper,
+      .folder-widget-container:hover .paper:nth-child(1),
+      .folder-widget-container:hover .paper:nth-child(2) {
+        transform: none;
+        opacity: 0;
+      }
+
+      /* When Tapped on Mobile: Expands into High-Visibility Floating Modal */
+      .folder-widget-container.is-open {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(28, 25, 23, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        cursor: default;
+      }
+
+      .folder-widget-container.is-open .folder {
+        display: none; /* Hide miniature folder during modal view */
+      }
+
       .folder-widget-container.is-open .paper.contact-paper {
-        transform: translateY(-90px) scale(1);
+        position: relative;
+        opacity: 1;
+        width: 88%;
+        max-width: 320px;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+        padding: 1.5rem;
+        background: #FFFFFF;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        border: 2px solid var(--accent);
+      }
+
+      .folder-widget-container.is-open .paper.contact-paper h4 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+      }
+
+      .folder-widget-container.is-open .doc-label {
+        font-size: 0.72rem;
+      }
+
+      .folder-widget-container.is-open .doc-value,
+      .folder-widget-container.is-open .doc-value a {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -655,30 +723,31 @@
       <div class="folder__back">
         <div class="paper"></div>
         <div class="paper"></div>
-        <!-- Paper 3: Interactive Contact Sheet -->
-        <div class="paper contact-paper">
-          <h4>Contact Me</h4>
-          <div class="doc-row">
-            <span class="doc-label">Email</span>
-            <div class="doc-value">
-              <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
-            </div>
-          </div>
-          <div class="doc-row">
-            <span class="doc-label">Telephone</span>
-            <div class="doc-value">
-              <a href="tel:+13135550198">(313) 555-0198</a>
-            </div>
-          </div>
-          <div class="doc-row">
-            <span class="doc-label">LinkedIn</span>
-            <div class="doc-value">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklynrupert</a>
-            </div>
-          </div>
-        </div>
         <div class="folder__front"></div>
         <div class="folder__front right"></div>
+      </div>
+    </div>
+    
+    <!-- Contact Paper (Shares parent container for easy mobile modal centering) -->
+    <div class="paper contact-paper" id="contactPaper">
+      <h4>Contact Me</h4>
+      <div class="doc-row">
+        <span class="doc-label">Email</span>
+        <div class="doc-value">
+          <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">Telephone</span>
+        <div class="doc-value">
+          <a href="tel:+13135550198">(313) 555-0198</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">LinkedIn</span>
+        <div class="doc-value">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklynrupert</a>
+        </div>
       </div>
     </div>
   </div>
@@ -717,7 +786,7 @@
     window.addEventListener('load', syncDockState);
     syncDockState();
 
-    // 2. Folder Interactions & One-Time Pink Pulse Removal
+    // 2. Folder Interactions & Toggle
     const folderWidget = document.getElementById('contactFolder');
 
     function markFolderSeen() {
@@ -726,18 +795,16 @@
       }
     }
 
-    // Hover marks as seen
     folderWidget.addEventListener('mouseenter', markFolderSeen);
 
-    // Click marks as seen & toggles open state
     folderWidget.addEventListener('click', (e) => {
       markFolderSeen();
+      // Only toggle if not clicking a link
       if (e.target.tagName !== 'A') {
         folderWidget.classList.toggle('is-open');
       }
     });
 
-    // Close when clicking elsewhere
     document.addEventListener('click', (e) => {
       if (!folderWidget.contains(e.target)) {
         folderWidget.classList.remove('is-open');
