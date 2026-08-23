@@ -198,7 +198,7 @@
     }
 
     /* Subsection Header (Inside Notes & Essays) */
-    .subsection-divider {
+    .subsection-container {
       margin-top: 3.5rem;
       padding-top: 2rem;
       border-top: 1px dashed var(--border);
@@ -290,7 +290,9 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Horizontal Rolling Carousel for Features */
+    /* =========================================================
+       HORIZONTAL EXPANDING ROLLING CAROUSEL
+       ========================================================= */
     .features-carousel {
       display: flex;
       gap: 1.25rem;
@@ -330,12 +332,12 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(119, 136, 115, 0.15);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(119, 136, 115, 0.18);
       border-color: var(--accent);
     }
 
@@ -416,7 +418,7 @@
     }
 
     /* =========================================================
-       RE-ENGINEERED DOWN/OUT FOLDER CONTACT WIDGET
+       CUSTOM MULTI-LAYER FOLDER WIDGET
        ========================================================= */
     .folder-widget-container {
       position: fixed;
@@ -438,7 +440,7 @@
       transform: translateY(-2px);
     }
 
-    /* Soft Glow before first interaction */
+    /* Attention Glow before first interaction */
     .folder-widget-container.unseen .folder {
       animation: sageGlowPulse 2.4s infinite ease-in-out;
     }
@@ -478,7 +480,7 @@
       border-radius: 4px 4px 0 0;
     }
 
-    /* Inner Background Papers */
+    /* Layered Papers */
     .paper {
       position: absolute;
       bottom: 6px;
@@ -507,31 +509,26 @@
       background: #faf7f0;
     }
 
-    /* Expand DOWN & OUT Contact Card */
+    /* Contact Document (Desktop) */
     .paper.contact-paper {
-      position: absolute;
-      bottom: 0;
+      width: 240px;
+      height: auto;
       right: 0;
-      width: 250px;
-      background: #FFFFFF;
-      border: 1.5px solid var(--accent);
-      border-radius: 8px;
-      padding: 16px 18px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
-      z-index: 10;
-      
-      /* Hidden by default tucked inside */
+      left: auto;
+      transform: translateY(10px) scale(0.9);
+      transform-origin: bottom right;
       opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px) scale(0.85);
-      transform-origin: top right;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       pointer-events: none;
+      z-index: 3;
     }
 
     .paper.contact-paper h4 {
       font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--text);
       border-bottom: 1px solid var(--border);
@@ -588,28 +585,26 @@
       pointer-events: none;
     }
 
-    /* EXPAND DOWN & OUT TRIGGERS */
+    /* Desktop Hover / Click Open */
     .folder-widget-container:hover .folder__front,
     .folder-widget-container.is-open .folder__front {
-      transform: rotateX(-35deg);
+      transform: rotateX(-32deg);
     }
 
     .folder-widget-container:hover .paper:nth-child(1),
     .folder-widget-container.is-open .paper:nth-child(1) {
-      transform: translateX(-50%) translateY(-10px) rotate(-3deg);
+      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
     }
 
     .folder-widget-container:hover .paper:nth-child(2),
     .folder-widget-container.is-open .paper:nth-child(2) {
-      transform: translateX(-50%) translateY(-18px) rotate(2deg);
+      transform: translateX(-50%) translateY(-24px) rotate(2deg);
     }
 
-    /* Unfolds outward and downward */
     .folder-widget-container:hover .paper.contact-paper,
     .folder-widget-container.is-open .paper.contact-paper {
       opacity: 1;
-      visibility: visible;
-      transform: translateY(18px) scale(1);
+      transform: translateY(-88px) scale(1);
       pointer-events: auto;
     }
 
@@ -657,7 +652,6 @@
       .folder-widget-container:hover .paper:nth-child(2) {
         transform: none;
         opacity: 0;
-        visibility: hidden;
       }
 
       .folder-widget-container.is-open {
@@ -685,7 +679,6 @@
       .folder-widget-container.is-open .paper.contact-paper {
         position: relative;
         opacity: 1;
-        visibility: visible;
         width: 88%;
         max-width: 320px;
         transform: translateY(0) scale(1);
@@ -714,6 +707,7 @@
 </head>
 <body>
 
+  <!-- Floating Island Dock -->
   <aside class="island-dock">
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
@@ -738,9 +732,269 @@
     </a>
   </aside>
 
+  <!-- Scrollable Canvas -->
   <main class="content-area">
 
+    <!-- Top Identity Header -->
     <div class="header-intro">
       <h1>Brooklyn Rupert</h1>
       <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
     </div>
+
+    <!-- SECTION 1: HOME -->
+    <section id="home" class="page-section in-focus">
+      <h2 class="page-title">Hello, Welcome</h2>
+      <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
+
+      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
+        <p style="margin-bottom: 1.25rem;">
+          I am an honors undergraduate studying criminal justice, criminology, and psychology. 
+          My academic work and independent writing center on procedural due process, institutional policy, 
+          and forensic behavioral research.
+        </p>
+        <p>
+          Scroll through to explore my background, leadership history, media features, and field notes.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT / EXPERIENCE -->
+    <section id="about" class="page-section">
+      <h2 class="page-title">Background & Experience</h2>
+      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
+
+      <!-- Education -->
+      <div class="resume-block">
+        <h3>Education</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">University of Michigan–Dearborn</span>
+            <span class="role-date">Expected 2029</span>
+          </div>
+          <div class="role-company">Bachelor of Arts • Honors Student</div>
+          <ul>
+            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
+            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Professional Experience -->
+      <div class="resume-block">
+        <h3>Professional & Legal Experience</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Staff Writer</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">The Michigan Journal</div>
+          <ul>
+            <li>Research and report on global geopolitical developments and policy shifts.</li>
+            <li>Conduct analysis and source verification for weekly news editions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Leadership & Public Service -->
+      <div class="resume-block">
+        <h3>Leadership & Civic Engagement</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Secretary</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">Criminology and Criminal Justice Collective</div>
+          <ul>
+            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Precinct Delegate Candidate</span>
+            <span class="role-date">2026</span>
+          </div>
+          <div class="role-company">Wayne County, Michigan</div>
+          <ul>
+            <li>Engaged in grassroots civic administration and community voter representation.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">State Vice President</span>
+            <span class="role-date">2024 – 2025</span>
+          </div>
+          <div class="role-company">SkillsUSA Michigan</div>
+          <ul>
+            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: NOTES & ESSAYS (CONTAINS EMBEDDED FEATURED IN SUBSECTION) -->
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Notes & Essays</h2>
+      <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
+
+      <div id="posts-list">
+        <div class="empty-state">
+          <strong>No posts published yet</strong>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
+        </div>
+      </div>
+
+      <!-- Subsection: Featured In & Media Coverage -->
+      <div class="subsection-container">
+        <h3 class="subsection-title">Featured In & Press</h3>
+        <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
+
+        <div class="features-carousel">
+          <!-- Sample Article 1 -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="feature-outlet">News Publication</span>
+                <span class="feature-date">Year / Date</span>
+              </div>
+              <h4>Headline / Title of the Article</h4>
+              <p>A brief excerpt or sentence summarizing the story, your quotes, and what was covered.</p>
+            </div>
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
+              Read Full Story ↗
+            </a>
+          </div>
+
+          <!-- Sample Article 2 -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="feature-outlet">State / Local Media</span>
+                <span class="feature-date">Year / Date</span>
+              </div>
+              <h4>Advocacy & Leadership Spotlight</h4>
+              <p>Coverage regarding statewide representation, student leadership, or community achievements.</p>
+            </div>
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
+              Read Full Story ↗
+            </a>
+          </div>
+
+          <!-- Sample Article 3 -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="feature-outlet">Campus Feature</span>
+                <span class="feature-date">Year / Date</span>
+              </div>
+              <h4>Academic & Research Overview</h4>
+              <p>Highlights on honors presentations, symposiums, or collaborative legal research initiatives.</p>
+            </div>
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
+              Read Full Story ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
+  <div class="folder-widget-container unseen" id="contactFolder">
+    <div class="folder">
+      <div class="folder__back">
+        <div class="paper"></div>
+        <div class="paper"></div>
+        <div class="folder__front"></div>
+        <div class="folder__front right"></div>
+      </div>
+    </div>
+    
+    <!-- Contact Paper -->
+    <div class="paper contact-paper" id="contactPaper">
+      <h4>Contact Me</h4>
+      <div class="doc-row">
+        <span class="doc-label">Email</span>
+        <div class="doc-value">
+          <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">Business #</span>
+        <div class="doc-value">
+          <a href="tel:+13133064638">(313) 306-4638</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">LinkedIn</span>
+        <div class="doc-value">
+          <a href="https://www.linkedin.com/in/brooklyn-r-rupert-8497423a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklyn-r-rupert</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll & Interaction Script -->
+  <script>
+    // 1. Scroll & Island Dock Synchronizer
+    const sections = document.querySelectorAll('.page-section');
+    const dockLinks = document.querySelectorAll('.dock-link');
+
+    function syncDockState() {
+      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          section.classList.add('in-focus');
+          
+          dockLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        } else {
+          section.classList.remove('in-focus');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', syncDockState, { passive: true });
+    window.addEventListener('load', syncDockState);
+    syncDockState();
+
+    // 2. Folder Interactions & Toggle
+    const folderWidget = document.getElementById('contactFolder');
+
+    function markFolderSeen() {
+      if (folderWidget.classList.contains('unseen')) {
+        folderWidget.classList.remove('unseen');
+      }
+    }
+
+    folderWidget.addEventListener('mouseenter', markFolderSeen);
+
+    folderWidget.addEventListener('click', (e) => {
+      markFolderSeen();
+      if (e.target.tagName !== 'A') {
+        folderWidget.classList.toggle('is-open');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!folderWidget.contains(e.target)) {
+        folderWidget.classList.remove('is-open');
+      }
+    });
+  </script>
+
+</body>
+</html>
