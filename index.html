@@ -147,7 +147,7 @@
     }
 
     /* Icon Navigation Links */
-    .dock-link {
+    .dock-link, .dock-btn {
       position: relative;
       display: flex;
       align-items: center;
@@ -157,10 +157,14 @@
       border-radius: 24px;
       color: var(--text-secondary);
       text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dock-link svg {
+    .dock-link svg, .dock-btn svg {
       width: 22px;
       height: 22px;
       stroke-width: 1.75;
@@ -171,12 +175,12 @@
       transition: transform 0.2s ease;
     }
 
-    .dock-link:hover {
+    .dock-link:hover, .dock-btn:hover {
       color: var(--text);
       background: rgba(161, 188, 152, 0.35);
     }
 
-    .dock-link:hover svg {
+    .dock-link:hover svg, .dock-btn:hover svg {
       transform: scale(1.1);
     }
 
@@ -188,7 +192,7 @@
     }
 
     /* Floating Tooltips */
-    .dock-link::after {
+    .dock-link::after, .dock-btn::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
@@ -206,7 +210,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 
-    .dock-link:hover::after {
+    .dock-link:hover::after, .dock-btn:hover::after {
       opacity: 1;
       transform: translateX(0);
     }
@@ -526,6 +530,161 @@
     }
 
     /* =========================================================
+       ABOUT ME OFF-CANVAS SLIDE-OUT PANEL (SIDE DRAWER)
+       ========================================================= */
+    .about-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 25, 23, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-drawer-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .about-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      box-shadow: -12px 0 40px rgba(119, 136, 115, 0.15);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      padding: 3rem 2.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-drawer-backdrop.is-open .about-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .drawer-close {
+      background: rgba(220, 207, 192, 0.45);
+      border: 1px solid var(--border);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      background: var(--accent);
+      color: #FDF6ED;
+      transform: rotate(90deg);
+    }
+
+    .drawer-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .drawer-section h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .drawer-section p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Language Cards */
+    .lang-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.85rem;
+      box-shadow: 0 2px 8px rgba(119, 136, 115, 0.05);
+    }
+
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .lang-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .lang-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Tag Pills */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-pill {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    /* =========================================================
        CUSTOM MULTI-LAYER FOLDER WIDGET
        ========================================================= */
     .folder-widget-container {
@@ -728,7 +887,7 @@
         padding: 0.35rem 0.5rem;
         background: rgba(220, 207, 192, 0.85);
       }
-      .dock-link::after { display: none; }
+      .dock-link::after, .dock-btn::after { display: none; }
       
       main.content-area {
         padding: 3rem 1.25rem 8.5rem;
@@ -740,6 +899,11 @@
 
       .feature-card {
         flex: 0 0 280px;
+      }
+
+      .about-drawer {
+        max-width: 100vw;
+        padding: 2.5rem 1.5rem 5rem;
       }
 
       .folder-widget-container {
@@ -820,20 +984,23 @@
 
   <!-- Floating Island Dock -->
   <aside class="island-dock">
+    <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
       </svg>
     </a>
 
-    <a href="#about" class="dock-link" data-tooltip="About & Experience">
+    <!-- CV & Experience Icon -->
+    <a href="#about" class="dock-link" data-tooltip="Background & CV">
       <svg viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
         <circle cx="12" cy="7" r="4"/>
       </svg>
     </a>
 
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
+    <!-- Notes & Features Icon -->
+    <a href="#posts" class="dock-link" data-tooltip="Notes & Features">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
@@ -841,6 +1008,15 @@
         <line x1="9" y1="17" x2="13" y2="17"/>
       </svg>
     </a>
+
+    <!-- NEW: Dedicated About / Perspectives Side Panel Trigger -->
+    <button class="dock-btn" id="openDrawerBtn" data-tooltip="About Me & Languages" aria-label="Open About Me Side Panel">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+    </button>
   </aside>
 
   <!-- Scrollable Canvas -->
@@ -1045,6 +1221,71 @@
 
   </main>
 
+  <!-- =========================================================
+       ABOUT ME & PERSPECTIVES OFF-CANVAS SLIDE-OUT PANEL
+       ========================================================= -->
+  <div class="about-drawer-backdrop" id="aboutDrawerBackdrop" aria-hidden="true">
+    <aside class="about-drawer" id="aboutDrawer" data-lenis-prevent>
+      <div class="drawer-header">
+        <h3 class="drawer-title">About Me</h3>
+        <button class="drawer-close" id="closeDrawerBtn" aria-label="Close panel">✕</button>
+      </div>
+
+      <!-- Section: Biography & Academic Focus -->
+      <div class="drawer-section">
+        <h4>Background & Perspective</h4>
+        <p>
+          Based in Detroit, Michigan, my work focuses on the intersection of procedural due process, institutional policy, and behavioral analysis.
+        </p>
+        <p>
+          Whether analyzing legal precedents, examining urban walkability history, or writing on foreign policy, I aim to connect rigorous academic research with tangible civic engagement.
+        </p>
+      </div>
+
+      <!-- Section: Language Studies -->
+      <div class="drawer-section">
+        <h4>Language Studies</h4>
+        
+        <div class="lang-card">
+          <div class="lang-header">
+            <span class="lang-name">English</span>
+            <span class="lang-level">Native</span>
+          </div>
+          <p class="lang-desc">Primary language of academic publication, investigative journalism, and speech.</p>
+        </div>
+
+        <div class="lang-card">
+          <div class="lang-header">
+            <span class="lang-name">Mandarin Chinese (中文)</span>
+            <span class="lang-level">Active Study</span>
+          </div>
+          <p class="lang-desc">Self-study and tutoring focusing on spoken fundamentals, 漢字 character acquisition, and international news comprehension.</p>
+        </div>
+      </div>
+
+      <!-- Section: Research & Core Interests -->
+      <div class="drawer-section">
+        <h4>Areas of Inquiry</h4>
+        <div class="tag-grid">
+          <span class="tag-pill">Constitutional Law</span>
+          <span class="tag-pill">Behavioral Science</span>
+          <span class="tag-pill">Forensic Psychology</span>
+          <span class="tag-pill">U.S.–China Relations</span>
+          <span class="tag-pill">Urban History & Policy</span>
+          <span class="tag-pill">Grassroots Advocacy</span>
+        </div>
+      </div>
+
+      <!-- Section: Personal Notes -->
+      <div class="drawer-section">
+        <h4>Personal Pursuits</h4>
+        <p>
+          Outside of coursework and journalism, I enjoy creative writing, deep-dive media analysis, following international relations, and discovering classic 90s pop-rock albums.
+        </p>
+      </div>
+    </aside>
+  </div>
+
   <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
   <div class="folder-widget-container unseen" id="contactFolder">
     <div class="folder">
@@ -1112,19 +1353,53 @@
       });
     });
 
-    // 3. Session-aware First Load Trigger
+    // 3. Side Drawer Interactions (About Me Panel)
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const aboutDrawerBackdrop = document.getElementById('aboutDrawerBackdrop');
+
+    function openAboutDrawer() {
+      aboutDrawerBackdrop.classList.add('is-open');
+      aboutDrawerBackdrop.setAttribute('aria-hidden', 'false');
+      lenis.stop(); // Stop main page scrolling while reading panel
+    }
+
+    function closeAboutDrawer() {
+      aboutDrawerBackdrop.classList.remove('is-open');
+      aboutDrawerBackdrop.setAttribute('aria-hidden', 'true');
+      lenis.start(); // Resume main page smooth scroll
+    }
+
+    openDrawerBtn.addEventListener('click', openAboutDrawer);
+    closeDrawerBtn.addEventListener('click', closeAboutDrawer);
+
+    // Close when clicking outside drawer
+    aboutDrawerBackdrop.addEventListener('click', (e) => {
+      if (e.target === aboutDrawerBackdrop) {
+        closeAboutDrawer();
+      }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && aboutDrawerBackdrop.classList.contains('is-open')) {
+        closeAboutDrawer();
+      }
+    });
+
+    // 4. Session-aware First Load Trigger
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     if (!hasSeenIntro) {
       document.body.classList.add('first-load');
-      lenis.stop(); // Pause smooth scrolling during intro animation
+      lenis.stop();
       setTimeout(() => {
         document.body.classList.remove('first-load');
-        lenis.start(); // Resume scrolling
+        lenis.start();
         sessionStorage.setItem('hasSeenIntro', 'true');
       }, 3400);
     }
 
-    // 4. Scroll & Island Dock Synchronizer
+    // 5. Scroll & Island Dock Synchronizer
     const sections = document.querySelectorAll('.page-section');
     const dockLinks = document.querySelectorAll('.dock-link');
 
@@ -1156,7 +1431,7 @@
     window.addEventListener('load', syncDockState);
     syncDockState();
 
-    // 5. Folder Interactions & Toggle
+    // 6. Folder Interactions & Toggle
     const folderWidget = document.getElementById('contactFolder');
 
     function markFolderSeen() {
