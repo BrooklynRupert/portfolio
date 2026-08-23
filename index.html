@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Primary Meta Tags -->
   <title>Brooklyn Rupert | Portfolio</title>
   <meta name="title" content="Brooklyn Rupert | Portfolio" />
   <meta name="description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
 
-  <!-- OpenGraph / LinkedIn / iMessage / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta property="og:title" content="Brooklyn Rupert | Portfolio" />
   <meta property="og:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
   <meta property="og:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
 
-  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta name="twitter:title" content="Brooklyn Rupert | Portfolio" />
@@ -57,6 +54,73 @@
       line-height: 1.65;
       font-size: 15px;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       INTRO HERO ZOOM ANIMATION
+       ========================================================= */
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    /* Full-screen Solid Overlay for Initial State */
+    .intro-curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .intro-curtain.hide-curtain {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro-title-wrapper {
+      text-align: center;
+      transform: scale(1.35);
+      transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+    }
+
+    .intro-title-wrapper h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      line-height: 1.15;
+    }
+
+    .intro-title-wrapper p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.6rem;
+    }
+
+    /* Page elements fade in gently as intro resolves */
+    aside.island-dock,
+    .page-section,
+    .folder-widget-container {
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    body.intro-active aside.island-dock,
+    body.intro-active .page-section,
+    body.intro-active .folder-widget-container {
+      opacity: 0 !important;
+      pointer-events: none;
     }
 
     /* Floating Island / Pill Dock */
@@ -155,6 +219,7 @@
     .header-intro {
       margin-bottom: 3.5rem;
       text-align: center;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
     }
 
     .header-intro h1 {
@@ -328,729 +393,3 @@
     }
 
     .features-carousel::-webkit-scrollbar-track {
-      background: rgba(220, 207, 192, 0.4);
-      border-radius: 10px;
-    }
-
-    .features-carousel::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 10px;
-    }
-
-    .features-carousel::-webkit-scrollbar-thumb:hover {
-      background: var(--text-secondary);
-    }
-
-    .feature-card {
-      flex: 0 0 320px;
-      scroll-snap-align: start;
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transform-origin: top center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                  box-shadow 0.3s ease, 
-                  border-color 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(6px) scale(1.03);
-      box-shadow: 0 14px 32px rgba(119, 136, 115, 0.22);
-      border-color: var(--accent);
-    }
-
-    .feature-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .outlet-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      background: var(--bg);
-      padding: 0.25rem 0.55rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .outlet-badge-circle {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #004b97;
-      display: inline-block;
-    }
-
-    .feature-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .feature-card h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.35;
-      margin-bottom: 0.6rem;
-    }
-
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-    }
-
-    .feature-links-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      align-items: center;
-    }
-
-    .feature-link {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .feature-link:hover {
-      color: var(--text);
-      border-bottom-color: var(--text);
-    }
-
-    /* Empty State for Notes */
-    .empty-state {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 3.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .empty-state strong {
-      display: block;
-      color: var(--text);
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
-    }
-
-    /* =========================================================
-       CUSTOM MULTI-LAYER FOLDER WIDGET
-       ========================================================= */
-    .folder-widget-container {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 3rem;
-      z-index: 1000;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .folder {
-      position: relative;
-      width: 105px;
-      height: 72px;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-    }
-
-    .folder:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Attention Glow before first interaction */
-    .folder-widget-container.unseen .folder {
-      animation: sageGlowPulse 2.4s infinite ease-in-out;
-    }
-
-    @keyframes sageGlowPulse {
-      0% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-      50% {
-        filter: drop-shadow(0 8px 20px rgba(161, 188, 152, 0.75));
-        opacity: 1;
-      }
-      100% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-    }
-
-    .folder__back {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: var(--folder-back-color);
-      border-radius: 0px 5px 5px 5px;
-      box-shadow: 0 8px 20px -3px rgba(119, 136, 115, 0.25);
-    }
-
-    .folder__back::after {
-      content: "";
-      position: absolute;
-      bottom: 98%;
-      left: 0;
-      width: 32px;
-      height: 9px;
-      background: var(--folder-back-color);
-      border-radius: 4px 4px 0 0;
-    }
-
-    /* Layered Papers */
-    .paper {
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 86%;
-      height: 78%;
-      background: var(--paper-color);
-      border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 2;
-    }
-
-    .paper:nth-child(1) {
-      width: 78%;
-      height: 72%;
-      bottom: 9px;
-      background: #fdfaf5;
-    }
-
-    .paper:nth-child(2) {
-      width: 82%;
-      height: 75%;
-      bottom: 7px;
-      background: #faf7f0;
-    }
-
-    /* Contact Document (Desktop) */
-    .paper.contact-paper {
-      width: 240px;
-      height: auto;
-      right: 0;
-      left: auto;
-      transform: translateY(10px) scale(0.9);
-      transform-origin: bottom right;
-      opacity: 0;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .paper.contact-paper h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 8px;
-    }
-
-    .doc-row {
-      margin-bottom: 7px;
-    }
-
-    .doc-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .doc-label {
-      display: block;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .doc-value, .doc-value a {
-      font-size: 0.84rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .doc-value a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* Front Flap Elements */
-    .folder__front {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 88%;
-      background: var(--folder-color);
-      border-radius: 4px 4px 5px 5px;
-      transform-origin: bottom center;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 4;
-    }
-
-    .folder__front.right {
-      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
-      pointer-events: none;
-    }
-
-    /* Desktop Hover / Click Open */
-    .folder-widget-container:hover .folder__front,
-    .folder-widget-container.is-open .folder__front {
-      transform: rotateX(-32deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(1),
-    .folder-widget-container.is-open .paper:nth-child(1) {
-      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(2),
-    .folder-widget-container.is-open .paper:nth-child(2) {
-      transform: translateX(-50%) translateY(-24px) rotate(2deg);
-    }
-
-    .folder-widget-container:hover .paper.contact-paper,
-    .folder-widget-container.is-open .paper.contact-paper {
-      opacity: 1;
-      transform: translateY(-88px) scale(1);
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       MOBILE RESPONSIVE
-       ========================================================= */
-    @media (max-width: 860px) {
-      aside.island-dock {
-        left: 50%;
-        top: auto;
-        bottom: 1.25rem;
-        transform: translateX(-50%);
-        flex-direction: row;
-        padding: 0.35rem 0.5rem;
-        background: rgba(220, 207, 192, 0.85);
-      }
-      .dock-link::after { display: none; }
-      
-      main.content-area {
-        padding: 3rem 1.25rem 8.5rem;
-      }
-
-      .header-intro h1 {
-        font-size: 2.1rem;
-      }
-
-      .feature-card {
-        flex: 0 0 280px;
-      }
-
-      .folder-widget-container {
-        bottom: 5.8rem;
-        right: 1.25rem;
-      }
-
-      .folder {
-        width: 80px;
-        height: 54px;
-      }
-
-      .folder__back::after {
-        width: 24px;
-        height: 7px;
-      }
-
-      .folder-widget-container:hover .folder__front,
-      .folder-widget-container:hover .paper.contact-paper,
-      .folder-widget-container:hover .paper:nth-child(1),
-      .folder-widget-container:hover .paper:nth-child(2) {
-        transform: none;
-        opacity: 0;
-      }
-
-      .folder-widget-container.is-open {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(28, 25, 23, 0.45);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-        cursor: default;
-      }
-
-      .folder-widget-container.is-open .folder {
-        display: none;
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper {
-        position: relative;
-        opacity: 1;
-        width: 88%;
-        max-width: 320px;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-        padding: 1.5rem;
-        background: #FFFFFF;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        border: 2px solid var(--accent);
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper h4 {
-        font-size: 1.35rem;
-        margin-bottom: 12px;
-      }
-
-      .folder-widget-container.is-open .doc-label {
-        font-size: 0.72rem;
-      }
-
-      .folder-widget-container.is-open .doc-value,
-      .folder-widget-container.is-open .doc-value a {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Floating Island Dock -->
-  <aside class="island-dock">
-    <a href="#home" class="dock-link active" data-tooltip="Home">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
-      </svg>
-    </a>
-
-    <a href="#about" class="dock-link" data-tooltip="About & Experience">
-      <svg viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-    </a>
-
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
-      <svg viewBox="0 0 24 24">
-        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
-        <polyline points="15 3 21 9 15 9"/>
-        <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="17" x2="13" y2="17"/>
-      </svg>
-    </a>
-  </aside>
-
-  <!-- Scrollable Canvas -->
-  <main class="content-area">
-
-    <!-- Top Identity Header -->
-    <div class="header-intro">
-      <h1>Brooklyn Rupert</h1>
-      <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
-    </div>
-
-    <!-- SECTION 1: HOME -->
-    <section id="home" class="page-section in-focus">
-      <h2 class="page-title">Hello, Welcome</h2>
-      <p class="page-subtitle">A little about me, my studies, and what I’m working on.</p>
-
-      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
-        <p style="margin-bottom: 1.25rem;">
-          I am an honors undergraduate studying criminal justice, criminology, and psychology at the University of Michigan-Dearborn. 
-          This digital portfolio serves as a hub for my academic work, investigative writing, and civic involvement. 
-          If you'd like to reach me, my contact information can be found in the folder at the bottom corner of the page.
-        </p>
-        <p>
-          Scroll through to explore my background, leadership history, media features, and notes.
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
-    <section id="about" class="page-section">
-      <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Academics', leadership experience, and public service.</p>
-
-      <!-- Education -->
-      <div class="resume-block">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">University of Michigan–Dearborn</span>
-            <span class="role-date">Expected 2029</span>
-          </div>
-          <div class="role-company">Bachelor of Arts • Honors Student</div>
-          <ul>
-            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
-            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Professional Experience -->
-      <div class="resume-block">
-        <h3>Professional & Legal Experience</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Staff Writer</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">The Michigan Journal</div>
-          <ul>
-            <li>Research and report on global geopolitical developments and policy shifts.</li>
-            <li>Conduct analysis and source verification for weekly news editions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Leadership & Public Service -->
-      <div class="resume-block">
-        <h3>Leadership & Civic Engagement</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Secretary</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">Criminology and Criminal Justice Collective</div>
-          <ul>
-            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026 – 2028</span>
-          </div>
-          <div class="role-company">Wayne County, Michigan</div>
-          <ul>
-            <li>Elected in the August 4 primary to represent, advocate on behalf of, and inform a Detroit precinct home to over 1,700 residents.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">State Vice President</span>
-            <span class="role-date">2024 – 2025</span>
-          </div>
-          <div class="role-company">SkillsUSA Michigan</div>
-          <ul>
-            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: NOTES & ESSAYS (CONTAINS EMBEDDED FEATURED IN SUBSECTION) -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
-        </div>
-      </div>
-
-      <!-- Subsection: Featured In & Media Coverage -->
-      <div class="subsection-container">
-        <h3 class="subsection-title">Featured In & Press</h3>
-        <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
-
-        <div class="features-carousel">
-          <!-- WXYZ Channel 7 / ABC News Story Card -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">
-                  <span class="outlet-badge-circle"></span>
-                  WXYZ Channel 7 (ABC)
-                </span>
-                <span class="feature-date">2025</span>
-              </div>
-              <h4>Ypsilanti High School Students to Compete in NASA Global Culinary Competition</h4>
-              <p>Special feature highlighting our top 10 national ranking, culinary innovation, and competitive achievements, as covered by ABC 7 News Detroit.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Watch & Read Full Story ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- SkillsUSA WLTI -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">SkillsUSA</span>
-                <span class="feature-date">2024</span>
-              </div>
-              <h4>Advocacy & Leadership Spotlight</h4>
-              <p>Coverage regarding statewide representation, student leadership, and career & technical education advocacy in Washington, D.C.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://skillsusachampions.org/2024/09/wlti-ignites-passion-for-advocacy-in-members/" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Read Story ↗
-              </a>
-              <a href="https://youtu.be/cfe0maw1bhs?si=et-FAmcQEuSiqLDp" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Watch Recap ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- The Michigan Journal -->
-          <div class="feature-card">
-            <div>
-              <div class="feature-meta">
-                <span class="outlet-badge">The Michigan Journal</span>
-                <span class="feature-date">2026</span>
-              </div>
-              <h4>Upcoming International Analysis...</h4>
-              <p>Providing investigative analysis of the past, present, and escalating diplomatic relations between the People's Republic of China and the United States.</p>
-            </div>
-            <div class="feature-links-row">
-              <a href="https://www.wolverinemedianetwork.com/michiganjournal" target="_blank" rel="noopener noreferrer" class="feature-link">
-                Get Prepared to Read ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
-  <div class="folder-widget-container unseen" id="contactFolder">
-    <div class="folder">
-      <div class="folder__back">
-        <div class="paper"></div>
-        <div class="paper"></div>
-        <div class="folder__front"></div>
-        <div class="folder__front right"></div>
-      </div>
-    </div>
-    
-    <!-- Contact Paper -->
-    <div class="paper contact-paper" id="contactPaper">
-      <h4>Contact Me</h4>
-      <div class="doc-row">
-        <span class="doc-label">Email</span>
-        <div class="doc-value">
-          <a href="mailto:brooklynrupert7@Gmail.com">brooklynrupert7@Gmail.com</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">Business Number</span>
-        <div class="doc-value">
-          <a href="tel:+13133064638">(313) 306-4638</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">LinkedIn</span>
-        <div class="doc-value">
-          <a href="https://www.linkedin.com/in/brooklyn-r-rupert-8497423a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklyn-r-rupert</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll & Interaction Script -->
-  <script>
-    // 1. Scroll & Island Dock Synchronizer
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncDockState() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', syncDockState, { passive: true });
-    window.addEventListener('load', syncDockState);
-    syncDockState();
-
-    // 2. Folder Interactions & Toggle
-    const folderWidget = document.getElementById('contactFolder');
-
-    function markFolderSeen() {
-      if (folderWidget.classList.contains('unseen')) {
-        folderWidget.classList.remove('unseen');
-      }
-    }
-
-    folderWidget.addEventListener('mouseenter', markFolderSeen);
-
-    folderWidget.addEventListener('click', (e) => {
-      markFolderSeen();
-      if (e.target.tagName !== 'A') {
-        folderWidget.classList.toggle('is-open');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!folderWidget.contains(e.target)) {
-        folderWidget.classList.remove('is-open');
-      }
-    });
-  </script>
-
-</body>
-</html>
