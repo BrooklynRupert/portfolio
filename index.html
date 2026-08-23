@@ -197,21 +197,6 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* Subsection Titles */
-    h3.subsection-title {
-      font-family: 'Newsreader', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      margin: 3rem 0 0.25rem;
-    }
-
-    p.subsection-subtitle {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-    }
-
     /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
@@ -285,7 +270,7 @@
     }
 
     /* =========================================================
-       HORIZONTAL ROLLING CAROUSEL FOR FEATURES SUBSECTION
+       HORIZONTAL ROLLING BAR / SCROLL CAROUSEL FOR FEATURES
        ========================================================= */
     .features-carousel {
       display: flex;
@@ -297,6 +282,7 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    /* Custom Aesthetic Scrollbar */
     .features-carousel::-webkit-scrollbar {
       height: 7px;
     }
@@ -315,6 +301,7 @@
       background: var(--text-secondary);
     }
 
+    /* Feature Card styled for horizontal scrolling */
     .feature-card {
       flex: 0 0 320px;
       scroll-snap-align: start;
@@ -360,9 +347,9 @@
       font-weight: 500;
     }
 
-    .feature-card h4 {
+    .feature-card h3 {
       font-family: 'Newsreader', serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--text);
       line-height: 1.35;
@@ -718,6 +705,16 @@
       </svg>
     </a>
 
+    <!-- Newspaper / Featured In Icon -->
+    <a href="#features" class="dock-link" data-tooltip="Featured & Press">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+        <path d="M18 14h-8"/>
+        <path d="M15 18h-5"/>
+        <path d="M10 6h8v4h-8z"/>
+      </svg>
+    </a>
+
     <!-- Notes & Essays Icon -->
     <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
       <svg viewBox="0 0 24 24">
@@ -750,7 +747,7 @@
           and forensic behavioral research.
         </p>
         <p>
-          Scroll through to explore my background, leadership history, media features, and notes.
+          Scroll through to explore my background, media features, leadership history, and notes.
         </p>
       </div>
     </section>
@@ -831,21 +828,10 @@
       </div>
     </section>
 
-    <!-- SECTION 3: NOTES & ESSAYS (INCLUDES FEATURED IN AS A SUBSECTION) -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Academic Papers, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
-        </div>
-      </div>
-
-      <!-- Featured In / Press Subsection -->
-      <h3 class="subsection-title">Featured In & Media</h3>
-      <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
+    <!-- SECTION 3: FEATURED IN & PRESS (HORIZONTAL ROLLING CAROUSEL) -->
+    <section id="features" class="page-section">
+      <h2 class="page-title">Featured In & Press</h2>
+      <p class="page-subtitle">News coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
 
       <div class="features-carousel">
         <!-- Article Card 1 -->
@@ -855,7 +841,7 @@
               <span class="feature-outlet">News Publication</span>
               <span class="feature-date">Year / Date</span>
             </div>
-            <h4>Headline / Title of the Article</h4>
+            <h3>Headline / Title of the Article</h3>
             <p>A brief excerpt or sentence summarizing the story, your quotes, and what was covered.</p>
           </div>
           <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
@@ -870,7 +856,7 @@
               <span class="feature-outlet">State / Local Media</span>
               <span class="feature-date">Year / Date</span>
             </div>
-            <h4>Advocacy & Leadership Spotlight</h4>
+            <h3>Advocacy & Leadership Spotlight</h3>
             <p>Coverage regarding statewide representation, student leadership, or community achievements.</p>
           </div>
           <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
@@ -885,12 +871,25 @@
               <span class="feature-outlet">Campus Feature</span>
               <span class="feature-date">Year / Date</span>
             </div>
-            <h4>Academic & Research Overview</h4>
+            <h3>Academic & Research Overview</h3>
             <p>Highlights on honors presentations, symposiums, or collaborative legal research initiatives.</p>
           </div>
           <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
             Read Full Story ↗
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: NOTES & ESSAYS -->
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Notes & Essays</h2>
+      <p class="page-subtitle">Academic Papers, volunteer reflections, and observations.</p>
+
+      <div id="posts-list">
+        <div class="empty-state">
+          <strong>No posts published yet</strong>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
         </div>
       </div>
     </section>
@@ -979,7 +978,6 @@
 
     folderWidget.addEventListener('click', (e) => {
       markFolderSeen();
-      // Only toggle if not clicking a link
       if (e.target.tagName !== 'A') {
         folderWidget.classList.toggle('is-open');
       }
