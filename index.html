@@ -60,48 +60,57 @@
     }
 
     /* =========================================================
-       INITIAL FULLSCREEN NAME INTRO OVERLAY
+       SEAMLESS HERO TITLE INTRO CHOREOGRAPHY
        ========================================================= */
-    #introOverlay {
+    body.first-load {
+      overflow: hidden; /* Lock scroll during 2s hero stage */
+    }
+
+    /* Fullscreen initial backdrop layer */
+    body.first-load::before {
+      content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      pointer-events: all;
-      transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                  opacity 0.6s ease;
+      inset: 0;
+      background: var(--bg);
+      z-index: 500;
+      pointer-events: none;
+      animation: backdropDissolve 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
     }
 
-    #introName {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      text-align: center;
-      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-      transform-origin: center center;
+    @keyframes backdropDissolve {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
     }
 
-    /* Fade-in container content while intro runs */
-    body.is-animating main.content-area,
-    body.is-animating aside.island-dock,
-    body.is-animating .folder-widget-container {
+    /* The actual <h1> animates directly from center screen to top */
+    body.first-load .header-intro h1 {
+      position: relative;
+      z-index: 600;
+      animation: heroNameZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
+      transform: translateY(calc(50vh - 7rem)) scale(1.4);
+    }
+
+    @keyframes heroNameZoom {
+      0% {
+        transform: translateY(calc(50vh - 7rem)) scale(1.4);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Everything else fades in seamlessly as the name lands */
+    body.first-load .header-intro p,
+    body.first-load .page-section,
+    body.first-load aside.island-dock,
+    body.first-load .folder-widget-container {
       opacity: 0;
-      transition: opacity 0.8s ease;
+      animation: UIContentFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
     }
 
-    body.intro-complete main.content-area,
-    body.intro-complete aside.island-dock,
-    body.intro-complete .folder-widget-container {
-      opacity: 1;
-      transition: opacity 0.8s ease;
+    @keyframes UIContentFadeIn {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     /* Floating Island / Pill Dock */
@@ -209,6 +218,7 @@
       letter-spacing: 0.05em;
       color: var(--text);
       line-height: 1.2;
+      will-change: transform;
     }
 
     .header-intro p {
@@ -795,12 +805,7 @@
     }
   </style>
 </head>
-<body class="is-animating">
-
-  <!-- INITIAL FULLSCREEN NAME INTRO OVERLAY -->
-  <div id="introOverlay">
-    <div id="introName">Brooklyn Rupert</div>
-  </div>
+<body>
 
   <!-- Floating Island Dock -->
   <aside class="island-dock">
@@ -832,7 +837,7 @@
 
     <!-- Top Identity Header -->
     <div class="header-intro">
-      <h1 id="targetHeaderName">Brooklyn Rupert</h1>
+      <h1>Brooklyn Rupert</h1>
       <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
     </div>
 
@@ -856,7 +861,7 @@
     <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Academics', leadership experience, and public service.</p>
+      <p class="page-subtitle">Academics, leadership experience, and public service.</p>
 
       <!-- Education -->
       <div class="resume-block">
@@ -1044,53 +1049,18 @@
     </div>
   </div>
 
-  <!-- Scroll, Dock & Intro Zoom Script -->
+  <!-- Scroll, Dock & Session Script -->
   <script>
-    // 1. Initial Load Zoom-Out Name Animation (Session-Aware)
-    window.addEventListener('DOMContentLoaded', () => {
-      const overlay = document.getElementById('introOverlay');
-      const introName = document.getElementById('introName');
-      const targetHeader = document.getElementById('targetHeaderName');
-
-      // Check if user already saw the intro during this browser session
-      const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-
-      if (hasSeenIntro) {
-        // Skip animation on subsequent internal reloads
-        overlay.style.display = 'none';
-        document.body.classList.remove('is-animating');
-        document.body.classList.add('intro-complete');
-        return;
-      }
-
-      // Lock scroll while intro runs
-      document.body.style.overflow = 'hidden';
-
-      // After 2.0 seconds: smoothly zoom out and glide into resting header location
+    // 1. Session-aware First Load Trigger
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+    if (!hasSeenIntro) {
+      document.body.classList.add('first-load');
+      // Unlock scroll after intro finishes gliding
       setTimeout(() => {
-        const sourceRect = introName.getBoundingClientRect();
-        const targetRect = targetHeader.getBoundingClientRect();
-
-        const deltaX = (targetRect.left + targetRect.width / 2) - (sourceRect.left + sourceRect.width / 2);
-        const deltaY = (targetRect.top + targetRect.height / 2) - (sourceRect.top + sourceRect.height / 2);
-        const scaleFactor = targetRect.height / sourceRect.height;
-
-        introName.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleFactor})`;
-        overlay.style.backgroundColor = 'transparent';
-        document.body.classList.remove('is-animating');
-        document.body.classList.add('intro-complete');
-
-        // Cleanly remove overlay after transition completes
-        setTimeout(() => {
-          overlay.style.opacity = '0';
-          setTimeout(() => {
-            overlay.style.display = 'none';
-            document.body.style.overflow = '';
-            sessionStorage.setItem('hasSeenIntro', 'true');
-          }, 400);
-        }, 850);
-      }, 2000);
-    });
+        document.body.classList.remove('first-load');
+        sessionStorage.setItem('hasSeenIntro', 'true');
+      }, 3400);
+    }
 
     // 2. Scroll & Island Dock Synchronizer
     const sections = document.querySelectorAll('.page-section');
