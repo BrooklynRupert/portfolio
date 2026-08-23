@@ -22,6 +22,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -45,7 +46,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      z-index: 10;
+      z-index: 100;
     }
 
     .sidebar-header h1 {
@@ -73,27 +74,25 @@
       gap: 0.5rem;
     }
 
-    .sidebar-nav button {
+    .sidebar-nav a {
+      display: block;
       width: 100%;
-      text-align: left;
-      background: none;
-      border: none;
+      text-decoration: none;
       padding: 0.65rem 0.85rem;
       border-radius: var(--radius);
       font-family: inherit;
       font-size: 0.92rem;
       font-weight: 500;
       color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
 
-    .sidebar-nav button:hover {
+    .sidebar-nav a:hover {
       background: var(--accent-soft);
       color: var(--accent);
     }
 
-    .sidebar-nav button.active {
+    .sidebar-nav a.active {
       background: var(--accent-soft);
       color: var(--accent);
       font-weight: 600;
@@ -108,26 +107,38 @@
     main.content-area {
       margin-left: 280px;
       flex: 1;
-      padding: 4rem 3.5rem;
+      padding: 4rem 3.5rem 8rem;
       max-width: 900px;
     }
 
-    /* Page Visibility Controls */
+    /* Continuous Page Sections & Focus Blur Transition */
     .page-section {
-      display: none;
-      animation: fadeIn 0.25s ease-in-out;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.35;
+      filter: blur(1.5px);
+      transform: translateY(12px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .page-section.active {
-      display: block;
+    .page-section:first-of-type {
+      padding-top: 1rem;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    .page-section:last-of-type {
+      border-bottom: none;
     }
 
-    /* Typography & Layouts */
+    /* Active In-Focus State */
+    .page-section.in-focus {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0);
+    }
+
+    /* Typography & Section Styles */
     h2.page-title {
       font-family: 'Newsreader', serif;
       font-size: 2.4rem;
@@ -144,7 +155,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* Resume / CV Section Styling */
+    /* Resume / CV Section */
     .resume-block {
       margin-bottom: 2.5rem;
     }
@@ -196,32 +207,7 @@
       line-height: 1.6;
     }
 
-    /* Posts Container & Cards */
-    .post-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .post-card .post-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .post-card h3 {
-      font-size: 1.3rem;
-      color: #0f172a;
-      margin-bottom: 0.5rem;
-    }
-
-    .post-card p {
-      color: #475569;
-      font-size: 0.95rem;
-    }
-
+    /* Posts Container */
     .empty-state {
       background: var(--accent-soft);
       border: 1px dashed var(--accent);
@@ -237,29 +223,35 @@
       body { flex-direction: column; }
       aside.sidebar {
         width: 100%;
-        position: relative;
-        padding: 1.5rem;
+        position: sticky;
+        top: 0;
+        bottom: auto;
+        padding: 1.25rem 1.5rem;
         border-right: none;
         border-bottom: 1px solid var(--border);
+        background: rgba(248, 250, 252, 0.95);
+        backdrop-filter: blur(8px);
       }
       main.content-area {
         margin-left: 0;
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem 5rem;
       }
       .sidebar-nav ul {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0.3rem;
       }
-      .sidebar-nav button {
-        padding: 0.5rem 0.75rem;
+      .sidebar-nav a {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
       }
+      .sidebar-footer { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Left Sidebar -->
+  <!-- Left Sticky/Fixed Sidebar -->
   <aside class="sidebar">
     <div>
       <div class="sidebar-header">
@@ -269,9 +261,9 @@
 
       <nav class="sidebar-nav">
         <ul>
-          <li><button class="active" onclick="showPage('home', this)">Home</button></li>
-          <li><button onclick="showPage('about', this)">About & Experience</button></li>
-          <li><button onclick="showPage('posts', this)">Field Notes & Essays</button></li>
+          <li><a href="#home" id="link-home" class="active">Home</a></li>
+          <li><a href="#about" id="link-about">About & Experience</a></li>
+          <li><a href="#posts" id="link-posts">Notes & Essays</a></li>
         </ul>
       </nav>
     </div>
@@ -282,27 +274,27 @@
     </div>
   </aside>
 
-  <!-- Main View Area -->
+  <!-- Main Scrollable Content Area -->
   <main class="content-area">
 
-    <!-- PAGE 1: HOME -->
-    <section id="home" class="page-section active">
+    <!-- SECTION 1: HOME -->
+    <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.05rem; color: #334155; line-height: 1.8; margin-bottom: 2rem;">
+      <div style="font-size: 1.05rem; color: #334155; line-height: 1.8;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
           and forensic behavioral research.
         </p>
         <p>
-          Use the navigation on the left to explore my full background and experience, or browse my field dispatches and essays.
+          Scroll down to explore my background, leadership history, and dispatches.
         </p>
       </div>
     </section>
 
-    <!-- PAGE 2: ABOUT / LINKEDIN EXPERIENCE -->
+    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
@@ -323,12 +315,12 @@
         </div>
       </div>
 
-      <!-- Experience & Internships -->
+      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
           <div class="resume-header">
-            <span class="role-title">Staff Writer </span>
+            <span class="role-title">Staff Writer</span>
             <span class="role-date">2026 – Present</span>
           </div>
           <div class="role-company"><em>The Michigan Journal</em></div>
@@ -337,10 +329,8 @@
             <li>Conduct analysis and source verification for weekly news editions.</li>
           </ul>
         </div>
+      </div>
 
-        <div class="resume-item">
-          <div class="resume-header">
-          
       <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
@@ -369,23 +359,22 @@
         <div class="resume-item">
           <div class="resume-header">
             <span class="role-title">State Vice President</span>
-            <span class="role-date">2024-25</span>
+            <span class="role-date">2024–2025</span>
           </div>
           <div class="role-company">SkillsUSA Michigan</div>
           <ul>
-            <li>Represented the entire state of Michigan within career and technical education (CTE) students on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting the continual federal CTE education funding.</li>
+            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal CTE education funding.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 3: POSTS / FIELD NOTES (NO SAMPLE POSTS) -->
+    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
-      <h2 class="page-title"> Notes & Essays</h2>
+      <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
 
-      <!-- Empty Container Ready For Your Entries -->
       <div id="posts-list">
         <div class="empty-state">
           <p><strong>No posts published yet.</strong></p>
@@ -396,26 +385,40 @@
 
   </main>
 
-  <!-- Section Switching Script -->
+  <!-- Dynamic Scroll & In-Focus Observer -->
   <script>
-    function showPage(pageId, buttonElement) {
-      // Hide all pages
-      document.querySelectorAll('.page-section').forEach(section => {
-        section.classList.remove('active');
+    const sections = document.querySelectorAll('.page-section');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Highlight current section
+          entry.target.classList.add('in-focus');
+          
+          // Update active link in sidebar
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        } else {
+          // Soft blur when leaving view
+          entry.target.classList.remove('in-focus');
+        }
       });
+    }, observerOptions);
 
-      // Remove active state from all buttons
-      document.querySelectorAll('.sidebar-nav button').forEach(button => {
-        button.classList.remove('active');
-      });
-
-      // Show selected page & highlight button
-      document.getElementById(pageId).classList.add('active');
-      buttonElement.classList.add('active');
-
-      // Scroll to top
-      window.scrollTo(0, 0);
-    }
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
