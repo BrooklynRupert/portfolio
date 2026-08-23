@@ -11,16 +11,15 @@
   
   <style>
     :root {
-      --bg: #FDF6ED;              /* Warm cream base */
-      --sidebar-bg: #DCCFC0;      /* Warm taupe dock */
+      --bg: #FDF6ED;              /* Cream base */
       --card-bg: #ffffff;
-      --text: #111111;            /* Crisp black lettering */
-      --text-secondary: #2b2b2b;
-      --muted: #555555;
-      --accent: #778873;          /* Deep sage */
-      --accent-light: #A1BC98;    /* Soft sage */
-      --border: #DCCFC0;
-      --border-subtle: #eae2d6;
+      --text: #1c1917;            /* Black lettering */
+      --text-secondary: #44403c;
+      --muted: #5c6759;
+      --accent: #778873;          /* Deep Sage */
+      --accent-light: #A1BC98;    /* Soft Moss */
+      --border: #DCCFC0;          /* Warm Sand */
+      --border-subtle: #ebdcd0;
       --radius: 12px;
     }
 
@@ -36,18 +35,17 @@
       min-height: 100vh;
     }
 
-    /* Floating Island / Pill Dock */
+    /* Floating Island Dock (Left) */
     aside.island-dock {
       position: fixed;
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(220, 207, 192, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.15), 
-                  0 0 0 1px rgba(0, 0, 0, 0.04);
+      background: rgba(220, 207, 192, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.15);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -57,7 +55,6 @@
       z-index: 100;
     }
 
-    /* Icon Navigation Links */
     .dock-link {
       position: relative;
       display: flex;
@@ -66,7 +63,7 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: #333333;
+      color: var(--text-secondary);
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -74,7 +71,7 @@
     .dock-link svg {
       width: 22px;
       height: 22px;
-      stroke-width: 1.75;
+      stroke-width: 1.8;
       stroke: currentColor;
       fill: none;
       stroke-linecap: round;
@@ -83,8 +80,8 @@
     }
 
     .dock-link:hover {
-      color: #000000;
-      background: rgba(255, 255, 255, 0.4);
+      color: var(--text);
+      background: rgba(161, 188, 152, 0.3);
     }
 
     .dock-link:hover svg {
@@ -93,16 +90,15 @@
 
     .dock-link.active {
       background: var(--accent);
-      color: #ffffff;
+      color: #FDF6ED;
       border-radius: 18px;
     }
 
-    /* Tooltips */
     .dock-link::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
-      background: #111111;
+      background: #1c1917;
       color: #FDF6ED;
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
@@ -128,7 +124,6 @@
       padding: 5rem 2rem 14rem;
     }
 
-    /* Header Profile */
     .header-intro {
       margin-bottom: 3.5rem;
     }
@@ -138,7 +133,7 @@
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: #111111;
+      color: var(--text);
     }
 
     .header-intro p {
@@ -149,11 +144,11 @@
       margin-top: 0.2rem;
     }
 
-    /* Stacked Sections & Focus Effect */
+    /* Seamless Stacked Sections with Focus Transitions */
     .page-section {
       padding: 4rem 0;
       border-bottom: 1px solid var(--border);
-      opacity: 0.3;
+      opacity: 0.35;
       filter: blur(1.5px);
       transform: translateY(8px);
       transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
@@ -174,12 +169,11 @@
       transform: translateY(0);
     }
 
-    /* Section Typography */
     h2.page-title {
       font-family: 'Newsreader', serif;
       font-size: 2.3rem;
       font-weight: 600;
-      color: #111111;
+      color: var(--text);
       margin-bottom: 0.35rem;
     }
 
@@ -198,7 +192,7 @@
 
     .resume-block h3 {
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--accent);
@@ -217,8 +211,8 @@
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 0.85rem;
-      border-left: 2px solid var(--accent-light);
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
       transition: border-color 0.2s ease;
     }
 
@@ -236,7 +230,7 @@
     .role-title {
       font-weight: 600;
       font-size: 1rem;
-      color: #111111;
+      color: var(--text);
     }
 
     .role-date {
@@ -254,7 +248,7 @@
 
     .resume-item ul {
       margin-left: 1.1rem;
-      color: #2b2b2b;
+      color: var(--text-secondary);
       font-size: 0.9rem;
       line-height: 1.65;
     }
@@ -263,10 +257,10 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Notes / Essays Empty State */
+    /* Empty State for Notes */
     .empty-state {
       background: rgba(255, 255, 255, 0.7);
-      border: 1px dashed var(--accent);
+      border: 1px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
       text-align: center;
@@ -275,128 +269,129 @@
 
     .empty-state strong {
       display: block;
-      color: #111111;
+      color: var(--text);
       font-size: 1.05rem;
       margin-bottom: 0.35rem;
     }
 
-    /* ================================================= */
-    /* LOCKED BOTTOM-RIGHT ANIMATED CLIPBOARD CONTACT */
-    /* ================================================= */
+    /* =========================================================
+       LOCKED BOTTOM-RIGHT ANIMATED CLIPBOARD CONTACT WIDGET
+       ========================================================= */
     .clipboard-widget {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      z-index: 200;
+      z-index: 1000;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
 
-    /* Contact Details Card (Expands on Hover) */
-    .clipboard-card {
-      background: rgba(253, 246, 237, 0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--accent-light);
-      border-radius: 12px;
+    /* The Pop-out Contact Card */
+    .contact-card {
+      background: rgba(253, 246, 237, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 35px -5px rgba(119, 136, 115, 0.25);
+      border-radius: var(--radius);
       padding: 1.25rem 1.5rem;
-      box-shadow: 0 12px 32px rgba(119, 136, 115, 0.25);
-      margin-bottom: 0.75rem;
       width: 270px;
+      margin-bottom: 0.75rem;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(15px) scale(0.95);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px) scale(0.95);
+      transform-origin: bottom right;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
     }
 
-    .clipboard-widget:hover .clipboard-card {
+    .contact-card h4 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-card .contact-detail {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.45rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-card .contact-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contact-card a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-card a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Clipboard Button & Line-Art Animation */
+    .clipboard-btn {
+      width: 54px;
+      height: 54px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 25px -4px rgba(119, 136, 115, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--accent);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .clipboard-btn svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 1.8;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s ease;
+    }
+
+    /* Hover States: Slide Out and Return */
+    .clipboard-widget:hover .contact-card {
       opacity: 1;
       visibility: visible;
       transform: translateY(0) scale(1);
       pointer-events: auto;
     }
 
-    .clipboard-card h4 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.35rem;
-    }
-
-    .clipboard-info-item {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 0.65rem;
-    }
-
-    .clipboard-info-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .clipboard-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    .clipboard-val {
-      font-size: 0.88rem;
-      color: #111111;
-      font-weight: 500;
-      text-decoration: none;
-      word-break: break-all;
-    }
-
-    .clipboard-val:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* Clipboard Button & Line Art */
-    .clipboard-btn {
-      background: var(--sidebar-bg);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(119, 136, 115, 0.2);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
     .clipboard-widget:hover .clipboard-btn {
       background: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .clipboard-btn svg {
-      width: 24px;
-      height: 24px;
-      stroke: #111111;
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: stroke 0.25s ease, transform 0.25s ease;
+      color: #FDF6ED;
+      transform: scale(1.08) rotate(-4deg);
+      box-shadow: 0 12px 28px -2px rgba(119, 136, 115, 0.35);
     }
 
     .clipboard-widget:hover .clipboard-btn svg {
-      stroke: #ffffff;
-      transform: rotate(-6deg) scale(1.05);
+      transform: scale(1.05);
     }
 
-    /* Mobile Responsive Adjustments */
+    /* Mobile Adaptability */
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
@@ -454,7 +449,7 @@
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.02rem; color: #111111; line-height: 1.85;">
+      <div style="font-size: 1.02rem; color: #44403c; line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
@@ -465,72 +460,3 @@
         </p>
       </div>
     </section>
-
-    <section id="about" class="page-section">
-      <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
-
-      <div class="resume-block">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">University of Michigan–Dearborn</span>
-            <span class="role-date">Expected 2029</span>
-          </div>
-          <div class="role-company">Bachelor of Arts • Honors Student</div>
-          <ul>
-            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
-            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="resume-block">
-        <h3>Professional & Legal Experience</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Staff Writer</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">The Michigan Journal</div>
-          <ul>
-            <li>Research and report on global geopolitical developments and policy shifts.</li>
-            <li>Conduct analysis and source verification for weekly news editions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="resume-block">
-        <h3>Leadership & Civic Engagement</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Secretary</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">Criminology and Criminal Justice Collective</div>
-          <ul>
-            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026</span>
-          </div>
-          <div class="role-company">Wayne County, Michigan</div>
-          <ul>
-            <li>Engaged in grassroots civic administration and community voter representation.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">State Vice President</span>
-            <span class="role-date">2024 – 2025</span>
-          </div>
-          <div class="role-company">SkillsUSA Michigan</div>
-          <ul>
-            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting
-              
