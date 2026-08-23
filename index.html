@@ -197,6 +197,21 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
+    /* Subsection Titles */
+    h3.subsection-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 3.25rem 0 0.25rem;
+    }
+
+    p.subsection-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
     /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
@@ -270,7 +285,7 @@
     }
 
     /* =========================================================
-       HORIZONTAL ROLLING BAR / SCROLL CAROUSEL FOR FEATURES
+       HORIZONTAL ROLLING CAROUSEL FOR FEATURES SUBSECTION
        ========================================================= */
     .features-carousel {
       display: flex;
@@ -282,7 +297,6 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Custom Aesthetic Scrollbar */
     .features-carousel::-webkit-scrollbar {
       height: 7px;
     }
@@ -301,7 +315,6 @@
       background: var(--text-secondary);
     }
 
-    /* Feature Card styled for horizontal scrolling */
     .feature-card {
       flex: 0 0 320px;
       scroll-snap-align: start;
@@ -347,9 +360,9 @@
       font-weight: 500;
     }
 
-    .feature-card h3 {
+    .feature-card h4 {
       font-family: 'Newsreader', serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--text);
       line-height: 1.35;
@@ -507,488 +520,4 @@
       z-index: 3;
     }
 
-    .paper.contact-paper h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 8px;
-    }
-
-    .doc-row {
-      margin-bottom: 7px;
-    }
-
-    .doc-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .doc-label {
-      display: block;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .doc-value, .doc-value a {
-      font-size: 0.84rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .doc-value a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* Front Flap Elements */
-    .folder__front {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 88%;
-      background: var(--folder-color);
-      border-radius: 4px 4px 5px 5px;
-      transform-origin: bottom center;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 4;
-    }
-
-    .folder__front.right {
-      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
-      pointer-events: none;
-    }
-
-    /* Desktop Hover / Click Open */
-    .folder-widget-container:hover .folder__front,
-    .folder-widget-container.is-open .folder__front {
-      transform: rotateX(-32deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(1),
-    .folder-widget-container.is-open .paper:nth-child(1) {
-      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(2),
-    .folder-widget-container.is-open .paper:nth-child(2) {
-      transform: translateX(-50%) translateY(-24px) rotate(2deg);
-    }
-
-    .folder-widget-container:hover .paper.contact-paper,
-    .folder-widget-container.is-open .paper.contact-paper {
-      opacity: 1;
-      transform: translateY(-88px) scale(1);
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       MOBILE RESPONSIVE
-       ========================================================= */
-    @media (max-width: 860px) {
-      aside.island-dock {
-        left: 50%;
-        top: auto;
-        bottom: 1.25rem;
-        transform: translateX(-50%);
-        flex-direction: row;
-        padding: 0.35rem 0.5rem;
-        background: rgba(220, 207, 192, 0.85);
-      }
-      .dock-link::after { display: none; }
-      
-      main.content-area {
-        padding: 3rem 1.25rem 8.5rem;
-      }
-
-      .feature-card {
-        flex: 0 0 280px;
-      }
-
-      .folder-widget-container {
-        bottom: 5.8rem;
-        right: 1.25rem;
-      }
-
-      .folder {
-        width: 80px;
-        height: 54px;
-      }
-
-      .folder__back::after {
-        width: 24px;
-        height: 7px;
-      }
-
-      .folder-widget-container:hover .folder__front,
-      .folder-widget-container:hover .paper.contact-paper,
-      .folder-widget-container:hover .paper:nth-child(1),
-      .folder-widget-container:hover .paper:nth-child(2) {
-        transform: none;
-        opacity: 0;
-      }
-
-      .folder-widget-container.is-open {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(28, 25, 23, 0.45);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-        cursor: default;
-      }
-
-      .folder-widget-container.is-open .folder {
-        display: none;
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper {
-        position: relative;
-        opacity: 1;
-        width: 88%;
-        max-width: 320px;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-        padding: 1.5rem;
-        background: #FFFFFF;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        border: 2px solid var(--accent);
-      }
-
-      .folder-widget-container.is-open .paper.contact-paper h4 {
-        font-size: 1.35rem;
-        margin-bottom: 12px;
-      }
-
-      .folder-widget-container.is-open .doc-label {
-        font-size: 0.72rem;
-      }
-
-      .folder-widget-container.is-open .doc-value,
-      .folder-widget-container.is-open .doc-value a {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Floating Island Dock -->
-  <aside class="island-dock">
-    <!-- Home Icon -->
-    <a href="#home" class="dock-link active" data-tooltip="Home">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
-      </svg>
-    </a>
-
-    <!-- Profile / Experience Icon -->
-    <a href="#about" class="dock-link" data-tooltip="About & Experience">
-      <svg viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-    </a>
-
-    <!-- Newspaper / Featured In Icon -->
-    <a href="#features" class="dock-link" data-tooltip="Featured & Press">
-      <svg viewBox="0 0 24 24">
-        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
-        <path d="M18 14h-8"/>
-        <path d="M15 18h-5"/>
-        <path d="M10 6h8v4h-8z"/>
-      </svg>
-    </a>
-
-    <!-- Notes & Essays Icon -->
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
-      <svg viewBox="0 0 24 24">
-        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
-        <polyline points="15 3 21 9 15 9"/>
-        <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="17" x2="13" y2="17"/>
-      </svg>
-    </a>
-  </aside>
-
-  <!-- Scrollable Canvas -->
-  <main class="content-area">
-
-    <!-- Top Identity Header -->
-    <div class="header-intro">
-      <h1>Brooklyn Rupert</h1>
-      <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
-    </div>
-
-    <!-- SECTION 1: HOME -->
-    <section id="home" class="page-section in-focus">
-      <h2 class="page-title">Hello, Welcome</h2>
-      <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
-
-      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
-        <p style="margin-bottom: 1.25rem;">
-          I am an honors undergraduate studying criminal justice, criminology, and psychology. 
-          My academic work and independent writing center on procedural due process, institutional policy, 
-          and forensic behavioral research.
-        </p>
-        <p>
-          Scroll through to explore my background, media features, leadership history, and notes.
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
-    <section id="about" class="page-section">
-      <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
-
-      <!-- Education -->
-      <div class="resume-block">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">University of Michigan–Dearborn</span>
-            <span class="role-date">Expected 2029</span>
-          </div>
-          <div class="role-company">Bachelor of Arts • Honors Student</div>
-          <ul>
-            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
-            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Professional Experience -->
-      <div class="resume-block">
-        <h3>Professional & Legal Experience</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Staff Writer</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">The Michigan Journal</div>
-          <ul>
-            <li>Research and report on global geopolitical developments and policy shifts.</li>
-            <li>Conduct analysis and source verification for weekly news editions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Leadership & Public Service -->
-      <div class="resume-block">
-        <h3>Leadership & Civic Engagement</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Secretary</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">Criminology and Criminal Justice Collective</div>
-          <ul>
-            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026</span>
-          </div>
-          <div class="role-company">Wayne County, Michigan</div>
-          <ul>
-            <li>Engaged in grassroots civic administration and community voter representation.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">State Vice President</span>
-            <span class="role-date">2024 – 2025</span>
-          </div>
-          <div class="role-company">SkillsUSA Michigan</div>
-          <ul>
-            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: FEATURED IN & PRESS (HORIZONTAL ROLLING CAROUSEL) -->
-    <section id="features" class="page-section">
-      <h2 class="page-title">Featured In & Press</h2>
-      <p class="page-subtitle">News coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
-
-      <div class="features-carousel">
-        <!-- Article Card 1 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-meta">
-              <span class="feature-outlet">News Publication</span>
-              <span class="feature-date">Year / Date</span>
-            </div>
-            <h3>Headline / Title of the Article</h3>
-            <p>A brief excerpt or sentence summarizing the story, your quotes, and what was covered.</p>
-          </div>
-          <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-            Read Full Story ↗
-          </a>
-        </div>
-
-        <!-- Article Card 2 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-meta">
-              <span class="feature-outlet">State / Local Media</span>
-              <span class="feature-date">Year / Date</span>
-            </div>
-            <h3>Advocacy & Leadership Spotlight</h3>
-            <p>Coverage regarding statewide representation, student leadership, or community achievements.</p>
-          </div>
-          <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-            Read Full Story ↗
-          </a>
-        </div>
-
-        <!-- Article Card 3 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-meta">
-              <span class="feature-outlet">Campus Feature</span>
-              <span class="feature-date">Year / Date</span>
-            </div>
-            <h3>Academic & Research Overview</h3>
-            <p>Highlights on honors presentations, symposiums, or collaborative legal research initiatives.</p>
-          </div>
-          <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-            Read Full Story ↗
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: NOTES & ESSAYS -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Academic Papers, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <strong>No posts published yet</strong>
-          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
-  <div class="folder-widget-container unseen" id="contactFolder">
-    <div class="folder">
-      <div class="folder__back">
-        <div class="paper"></div>
-        <div class="paper"></div>
-        <div class="folder__front"></div>
-        <div class="folder__front right"></div>
-      </div>
-    </div>
-    
-    <!-- Contact Paper -->
-    <div class="paper contact-paper" id="contactPaper">
-      <h4>Contact Me</h4>
-      <div class="doc-row">
-        <span class="doc-label">Email</span>
-        <div class="doc-value">
-          <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">Business #</span>
-        <div class="doc-value">
-          <a href="tel:+13133064638">(313) 306-4638</a>
-        </div>
-      </div>
-      <div class="doc-row">
-        <span class="doc-label">LinkedIn</span>
-        <div class="doc-value">
-          <a href="https://www.linkedin.com/in/brooklyn-r-rupert-8497423a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklyn-r-rupert</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll & Interaction Script -->
-  <script>
-    // 1. Scroll & Island Dock Synchronizer
-    const sections = document.querySelectorAll('.page-section');
-    const dockLinks = document.querySelectorAll('.dock-link');
-
-    function syncDockState() {
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          section.classList.add('in-focus');
-          
-          dockLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          section.classList.remove('in-focus');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', syncDockState, { passive: true });
-    window.addEventListener('load', syncDockState);
-    syncDockState();
-
-    // 2. Folder Interactions & Toggle
-    const folderWidget = document.getElementById('contactFolder');
-
-    function markFolderSeen() {
-      if (folderWidget.classList.contains('unseen')) {
-        folderWidget.classList.remove('unseen');
-      }
-    }
-
-    folderWidget.addEventListener('mouseenter', markFolderSeen);
-
-    folderWidget.addEventListener('click', (e) => {
-      markFolderSeen();
-      if (e.target.tagName !== 'A') {
-        folderWidget.classList.toggle('is-open');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!folderWidget.contains(e.target)) {
-        folderWidget.classList.remove('is-open');
-      }
-    });
-  </script>
-
-</body>
-</html>
+    .paper.contact-
