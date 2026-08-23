@@ -5,21 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brooklyn Rupert | Portfolio</title>
   
+  <!-- Google Fonts: Arvo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg: #FDF6ED;              /* Cream base */
+      --bg: #FDF6ED;              /* Light cream canvas */
       --card-bg: #FFFFFF;
-      --text: #1c1917;            /* Black lettering */
-      --text-secondary: #2c2825;
-      --muted: #556352;
-      --accent: #778873;          /* Darker Sage */
-      --accent-light: #A1BC98;    /* Muted Sage */
-      --border: #DCCFC0;          /* Sand Accent */
-      --border-subtle: #ebdcd0;
+      --card-border: #DCCFC0;      /* Warm beige/stone */
+      --accent-soft: #A1BC98;      /* Soft sage green */
+      --accent: #778873;           /* Deep sage green */
+      --text-dark: #231b15;        /* Very dark warm brown */
+      --text-muted: #5c4d43;       /* Medium warm brown */
       --radius: 12px;
     }
 
@@ -27,25 +26,25 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Arvo', serif;
       background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
+      color: var(--text-dark);
+      line-height: 1.7;
       font-size: 15px;
       min-height: 100vh;
     }
 
-    /* Floating Island / Pill Dock (Matching the Inspiration) */
+    /* Floating Island / Pill Dock */
     aside.island-dock {
       position: fixed;
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(220, 207, 192, 0.55);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.15);
+      background: rgba(253, 246, 237, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 2px solid var(--card-border);
+      box-shadow: 0 10px 25px -5px rgba(35, 27, 21, 0.08);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -55,7 +54,6 @@
       z-index: 100;
     }
 
-    /* Icon Navigation Links */
     .dock-link {
       position: relative;
       display: flex;
@@ -64,15 +62,15 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s ease;
     }
 
     .dock-link svg {
       width: 22px;
       height: 22px;
-      stroke-width: 1.75;
+      stroke-width: 2;
       stroke: currentColor;
       fill: none;
       stroke-linecap: round;
@@ -81,38 +79,35 @@
     }
 
     .dock-link:hover {
-      color: var(--text);
-      background: rgba(161, 188, 152, 0.3);
+      color: var(--text-dark);
+      background: var(--card-border);
     }
 
     .dock-link:hover svg {
       transform: scale(1.1);
     }
 
-    /* Active State (Rounded Square Tile) */
     .dock-link.active {
-      background: var(--accent);
-      color: #FDF6ED;
+      background: var(--accent-soft);
+      color: var(--text-dark);
       border-radius: 18px;
     }
 
-    /* Floating Tooltips */
+    /* Tooltips */
     .dock-link::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
-      background: #1c1917;
-      color: #FDF6ED;
-      padding: 0.3rem 0.65rem;
+      background: var(--text-dark);
+      color: #fff;
+      padding: 0.35rem 0.75rem;
       border-radius: 6px;
       font-size: 0.75rem;
-      font-weight: 500;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .dock-link:hover::after {
@@ -120,38 +115,34 @@
       transform: translateX(0);
     }
 
-    /* Main Centered Content Canvas */
+    /* Main Content */
     main.content-area {
       max-width: 780px;
       margin: 0 auto;
-      padding: 5rem 2rem 14rem;
+      padding: 5rem 2rem 8rem;
     }
 
-    /* Header Profile Badge */
     .header-intro {
       margin-bottom: 3.5rem;
     }
 
     .header-intro h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text);
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
     }
 
     .header-intro p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 0.2rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
     }
 
-    /* Seamless Stacked Sections with Focus Transitions */
+    /* Stacked Sections with Focus Effect */
     .page-section {
       padding: 4rem 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--card-border);
       opacity: 0.3;
       filter: blur(1.5px);
       transform: translateY(8px);
@@ -162,45 +153,37 @@
       padding-top: 0;
     }
 
-    .page-section:last-of-type {
-      border-bottom: none;
-      min-height: 80vh;
-    }
-
-    /* Section In-Focus */
     .page-section.in-focus {
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);
     }
 
-    /* Section Titles */
     h2.page-title {
-      font-family: 'Newsreader', serif;
-      font-size: 2.3rem;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
       margin-bottom: 0.35rem;
     }
 
     p.page-subtitle {
-      color: var(--muted);
-      font-size: 0.98rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
       margin-bottom: 2.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
     }
 
-    /* Experience Timeline */
+    /* Resume / CV Section */
     .resume-block {
       margin-bottom: 2.75rem;
     }
 
     .resume-block h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       color: var(--accent);
       margin-bottom: 1.25rem;
       display: flex;
@@ -211,14 +194,14 @@
     .resume-block h3::after {
       content: "";
       flex: 1;
-      height: 1px;
-      background: var(--border-subtle);
+      height: 2px;
+      background: var(--card-border);
     }
 
     .resume-item {
       margin-bottom: 1.75rem;
-      padding-left: 0.75rem;
-      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent-soft);
       transition: border-color 0.2s ease;
     }
 
@@ -234,163 +217,171 @@
     }
 
     .role-title {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--text);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-dark);
     }
 
     .role-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
+      font-size: 0.82rem;
+      color: var(--text-muted);
     }
 
     .role-company {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
+      font-size: 0.9rem;
+      color: var(--text-muted);
       margin-bottom: 0.4rem;
       font-style: italic;
     }
 
     .resume-item ul {
-      margin-left: 1.1rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.65;
+      margin-left: 1.2rem;
+      color: var(--text-dark);
+      font-size: 0.92rem;
     }
 
     .resume-item li {
-      margin-bottom: 0.25rem;
-    }
-
-    /* Empty State for Notes */
-    .empty-state {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 3.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .empty-state strong {
-      display: block;
-      color: var(--text);
-      font-size: 1.05rem;
       margin-bottom: 0.35rem;
     }
 
-    /* =========================================================
-       LOCKED BOTTOM-RIGHT CLIPBOARD HOVER DRAWER
-       ========================================================= */
-    .clipboard-wrapper {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-
-    .contact-drawer {
-      background: rgba(253, 246, 237, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1.5px solid var(--accent);
+    .empty-state {
+      background: #ffffff;
+      border: 2px dashed var(--card-border);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      width: 270px;
-      box-shadow: 0 12px 30px rgba(119, 136, 115, 0.25);
-      margin-bottom: 0.75rem;
-      
-      /* Hidden by default, smoothly slides out on hover */
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(15px) scale(0.96);
-      transform-origin: bottom right;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
     }
 
-    .contact-drawer h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.6rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.3rem;
+    /* =========================================
+       BOX UNPACKING CONTACT ANIMATION
+       ========================================= */
+    .unboxing-section {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
     }
 
-    .contact-row {
-      margin-bottom: 0.5rem;
+    .box-container {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .contact-label {
-      display: block;
-      font-size: 0.7rem;
+    .box-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .box-container:hover .box-wrapper {
+      transform: translateY(-4px);
+    }
+
+    .box-svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--text-dark);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .flap-left, .flap-right {
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center top;
+    }
+
+    .box-hint {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Pop-out Contact Card */
+    .contact-reveal-card {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      overflow: hidden;
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #ffffff;
+      border: 2px solid var(--text-dark);
+      border-radius: var(--radius);
+      padding: 0 2rem;
+      margin-top: 1.5rem;
+      text-align: left;
+      box-shadow: 6px 6px 0px var(--card-border);
+    }
+
+    /* State When Opened (Stays open permanently) */
+    .box-container.opened {
+      cursor: default;
+    }
+
+    .box-container.opened .box-wrapper {
+      transform: scale(0.9);
+    }
+
+    .box-container.opened .flap-left {
+      transform: translateY(-16px) rotate(-28deg);
+    }
+
+    .box-container.opened .flap-right {
+      transform: translateY(-16px) rotate(28deg);
+    }
+
+    .box-container.opened .box-hint {
+      opacity: 0;
+      height: 0;
+      margin: 0;
+    }
+
+    .box-container.opened ~ .contact-reveal-card {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      padding: 2.2rem 2.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .contact-field label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 700;
       color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-field a, .contact-field span {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 0.95rem;
       font-weight: 700;
     }
 
-    .contact-value, .contact-value a {
-      font-size: 0.88rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .contact-value a:hover {
+    .contact-field a:hover {
       color: var(--accent);
       text-decoration: underline;
     }
 
-    /* Clipboard Button */
-    .clipboard-btn {
-      width: 52px;
-      height: 52px;
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--accent);
-      box-shadow: 0 6px 16px rgba(119, 136, 115, 0.2);
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-    }
-
-    .clipboard-btn svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.8;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: transform 0.25s ease;
-    }
-
-    /* Hover States: Drawer slides out and button highlights */
-    .clipboard-wrapper:hover .contact-drawer {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .clipboard-wrapper:hover .clipboard-btn {
-      background: var(--accent);
-      color: #FDF6ED;
-      transform: scale(1.08) rotate(-4deg);
-      border-color: var(--accent);
-    }
-
-    /* Mobile Adaptability */
+    /* Mobile Responsive */
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
@@ -401,13 +392,8 @@
         padding: 0.4rem 0.6rem;
       }
       .dock-link::after { display: none; }
-      main.content-area {
-        padding: 3rem 1.5rem 8rem;
-      }
-      .clipboard-wrapper {
-        bottom: 5.5rem;
-        right: 1.25rem;
-      }
+      main.content-area { padding: 3rem 1.5rem 7rem; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -415,28 +401,30 @@
 
   <!-- Floating Island Dock -->
   <aside class="island-dock">
-    <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
       </svg>
     </a>
-
-    <!-- Profile / Experience Icon -->
     <a href="#about" class="dock-link" data-tooltip="About & Experience">
       <svg viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
         <circle cx="12" cy="7" r="4"/>
       </svg>
     </a>
-
-    <!-- Notes & Essays Icon -->
     <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
         <line x1="9" y1="13" x2="15" y2="13"/>
         <line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+    </a>
+    <a href="#contact-box" class="dock-link" data-tooltip="Contact Box">
+      <svg viewBox="0 0 24 24">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+        <line x1="12" y1="22.08" x2="12" y2="12"/>
       </svg>
     </a>
   </aside>
@@ -455,7 +443,7 @@
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
+      <div style="color: var(--text-dark); line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
@@ -556,43 +544,61 @@
       </div>
     </section>
 
+    <!-- BOTTOM UNBOXING & CONTACT SECTION -->
+    <section id="contact-box" class="unboxing-section page-section">
+      <div class="box-container" id="interactiveBox" onclick="openBox()">
+        <div class="box-wrapper">
+          <svg class="box-svg" viewBox="0 0 100 100">
+            <!-- Left Flap -->
+            <polygon class="flap-left" points="50,15 15,35 50,55 85,35" style="fill:#FDF6ED;" />
+            <!-- Box Body Isometric Lines -->
+            <polygon points="15,35 50,55 50,90 15,70" style="fill:#FFFFFF; fill-opacity:0.6;" />
+            <polygon points="50,55 85,35 85,70 50,90" style="fill:#FFFFFF; fill-opacity:0.9;" />
+            <!-- Center Tape Accent -->
+            <line x1="50" y1="35" x2="50" y2="65" style="stroke:var(--accent); stroke-width:6;" />
+          </svg>
+        </div>
+        <p class="box-hint">✦ Click to Open Package ✦</p>
+      </div>
+
+      <!-- Pop-out Contact Info Card -->
+      <div class="contact-reveal-card" id="contactCard">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.35rem; color: var(--text-dark);">Let's Connect</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Feel free to reach out for research collaborations, writing inquiries, or legal projects.</p>
+        
+        <div class="contact-grid">
+          <div class="contact-field">
+            <label>Email</label>
+            <!-- Replace with your actual email -->
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
+          </div>
+
+          <div class="contact-field">
+            <label>Phone</label>
+            <!-- Replace with your phone number -->
+            <span>(313) 000-0000</span>
+          </div>
+
+          <div class="contact-field">
+            <label>Location</label>
+            <span>Detroit / Ypsilanti, Michigan</span>
+          </div>
+
+          <div class="contact-field">
+            <label>Academic Profiles</label>
+            <!-- Replace with your LinkedIn / GitHub links -->
+            <a href="https://linkedin.com" target="_blank">LinkedIn ↗</a> • 
+            <a href="https://github.com" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- LOCKED BOTTOM-RIGHT CLIPBOARD CONTACT WIDGET -->
-  <div class="clipboard-wrapper">
-    <div class="contact-drawer">
-      <h4>Contact Me</h4>
-      <div class="contact-row">
-        <span class="contact-label">Email</span>
-        <div class="contact-value">
-          <a href="mailto:brooklynrupert@example.com">brooklynrupert@example.com</a>
-        </div>
-      </div>
-      <div class="contact-row">
-        <span class="contact-label">Phone</span>
-        <div class="contact-value">
-          <a href="tel:+13135550198">(313) 555-0198</a>
-        </div>
-      </div>
-      <div class="contact-row" style="margin-bottom: 0;">
-        <span class="contact-label">Location</span>
-        <div class="contact-value">Detroit & Ypsilanti, MI</div>
-      </div>
-    </div>
-
-    <div class="clipboard-btn" title="Contact Details">
-      <!-- Line Art Clipboard SVG -->
-      <svg viewBox="0 0 24 24">
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-        <line x1="9" y1="12" x2="15" y2="12"/>
-        <line x1="9" y1="16" x2="13" y2="16"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Scroll & Floating Island Controller -->
+  <!-- Scroll & Interactive Unboxing Script -->
   <script>
+    // 1. Scroll & Island Active State Controller
     const sections = document.querySelectorAll('.page-section');
     const dockLinks = document.querySelectorAll('.dock-link');
 
@@ -623,6 +629,14 @@
     window.addEventListener('scroll', syncDockState, { passive: true });
     window.addEventListener('load', syncDockState);
     syncDockState();
+
+    // 2. Open Box Animation (Stays opened)
+    function openBox() {
+      const box = document.getElementById('interactiveBox');
+      if (!box.classList.contains('opened')) {
+        box.classList.add('opened');
+      }
+    }
   </script>
 
 </body>
