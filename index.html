@@ -345,19 +345,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
     }
 
-    .feature-outlet {
+    .outlet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       color: var(--accent);
       background: var(--bg);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
       border: 1px solid var(--border-subtle);
+    }
+
+    .outlet-badge-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #004b97; /* WXYZ ABC blue */
+      display: inline-block;
     }
 
     .feature-date {
@@ -852,48 +863,51 @@
         <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
 
         <div class="features-carousel">
-          <!-- Sample Article 1 -->
+          <!-- WXYZ Channel 7 / ABC News Story Card -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
-                <span class="feature-outlet">News Publication</span>
-                <span class="feature-date">Year / Date</span>
+                <span class="outlet-badge">
+                  <span class="outlet-badge-circle"></span>
+                  WXYZ Channel 7 (ABC)
+                </span>
+                <span class="feature-date">2025</span>
               </div>
-              <h4>Headline / Title of the Article</h4>
-              <p>A brief excerpt or sentence summarizing the story, your quotes, and what was covered.</p>
+              <h4>Ypsilanti High School Students to Compete in NASA Global Culinary Competition</h4>
+              <p>Special feature on regional student talent and innovative competitive achievements featured on ABC 7 News Detroit.</p>
             </div>
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Read Full Story ↗
+            <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
+              Watch & Read Full Story ↗
             </a>
           </div>
 
-          <!-- Sample Article 2 -->
+          <!-- Sample Media Card 2 -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
-                <span class="feature-outlet">State / Local Media</span>
-                <span class="feature-date">Year / Date</span>
+                <span class="outlet-badge">State / Local Media</span>
+                <span class="feature-date">2024 – 2025</span>
               </div>
               <h4>Advocacy & Leadership Spotlight</h4>
-              <p>Coverage regarding statewide representation, student leadership, or community achievements.</p>
+              <p>Coverage regarding statewide representation, student leadership, and career & technical education advocacy in Washington, D.C.</p>
             </div>
             <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Read Full Story ↗
+              Read Story ↗
             </a>
           </div>
 
-          <!-- Sample Article 3 -->
+          <!-- Sample Media Card 3 -->
           <div class="feature-card">
             <div>
               <div class="feature-meta">
-                <span class="feature-outlet">Campus Feature</span>
-                <span class="feature-date">Year / Date</span>
+                <span class="outlet-badge">Campus Feature</span>
+                <span class="feature-date">2026</span>
               </div>
               <h4>Academic & Research Overview</h4>
-              <p>Highlights on honors presentations, symposiums, or collaborative legal research initiatives.</p>
+              <p>Highlights on honors presentations, symposiums, or collaborative legal and behavioral research initiatives.</p>
             </div>
             <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
-              Read Full Story ↗
+              Read Story ↗
             </a>
           </div>
         </div>
