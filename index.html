@@ -7,12 +7,11 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg: #fcfbf9;
-      --sidebar-bg: #f7f6f2;
       --card-bg: #ffffff;
       --text: #1c1917;
       --text-secondary: #44403c;
@@ -21,7 +20,7 @@
       --accent-soft: #eef2f6;
       --border: #e7e5e4;
       --border-subtle: #f0eeea;
-      --radius: 8px;
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,98 +31,127 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.65;
-      display: flex;
-      min-height: 100vh;
       font-size: 15px;
+      min-height: 100vh;
     }
 
-    /* Fixed Left Navigation Bar */
-    aside.sidebar {
-      width: 290px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
-      padding: 3rem 2rem;
+    /* Floating Island / Pill Dock (Matching the Inspiration) */
+    aside.island-dock {
       position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 
+                  0 0 0 1px rgba(0, 0, 0, 0.04);
+      padding: 0.6rem;
+      border-radius: 40px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
       z-index: 100;
     }
 
-    .sidebar-header h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #0c0a09;
-      letter-spacing: 0.04em;
-      line-height: 1.25;
-    }
-
-    .sidebar-header p {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.4rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    nav.sidebar-nav {
-      margin-top: 3rem;
-    }
-
-    .sidebar-nav ul {
-      list-style: none;
+    /* Icon Navigation Links */
+    .dock-link {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .sidebar-nav a {
-      display: block;
-      width: 100%;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 24px;
+      color: #71717a;
       text-decoration: none;
-      padding: 0.65rem 0.9rem;
-      border-radius: var(--radius);
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: all 0.2s ease;
-      letter-spacing: -0.01em;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .sidebar-nav a:hover {
+    .dock-link svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 1.75;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .dock-link:hover {
+      color: #18181b;
       background: rgba(0, 0, 0, 0.04);
-      color: var(--text);
     }
 
-    .sidebar-nav a.active {
-      background: #ffffff;
+    .dock-link:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* Active State (Rounded Square Tile like the image) */
+    .dock-link.active {
+      background: rgba(30, 58, 138, 0.09);
       color: var(--accent);
-      font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
     }
 
-    .sidebar-footer {
-      font-size: 0.76rem;
-      color: var(--muted);
-      line-height: 1.5;
+    /* Floating Tooltips */
+    .dock-link::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 60px;
+      background: #18181b;
+      color: #ffffff;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-6px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* Main Scrollable Canvas */
+    .dock-link:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Main Centered Content Canvas */
     main.content-area {
-      margin-left: 290px;
-      flex: 1;
-      padding: 5rem 4.5rem 15rem;
-      max-width: 880px;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 14rem;
+    }
+
+    /* Header Profile Badge */
+    .header-intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .header-intro h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #0c0a09;
+    }
+
+    .header-intro p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.2rem;
     }
 
     /* Seamless Stacked Sections with Focus Transitions */
     .page-section {
-      padding: 4.5rem 0;
+      padding: 4rem 0;
       border-bottom: 1px solid var(--border);
       opacity: 0.3;
       filter: blur(1.5px);
@@ -132,7 +160,7 @@
     }
 
     .page-section:first-of-type {
-      padding-top: 0.5rem;
+      padding-top: 0;
     }
 
     .page-section:last-of-type {
@@ -140,14 +168,14 @@
       min-height: 80vh;
     }
 
-    /* When section is in active view */
+    /* Section In-Focus */
     .page-section.in-focus {
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);
     }
 
-    /* Section Typography */
+    /* Section Titles */
     h2.page-title {
       font-family: 'Newsreader', serif;
       font-size: 2.3rem;
@@ -164,7 +192,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* Experience Timeline Blocks */
+    /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
     }
@@ -236,7 +264,7 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Empty State for Field Notes */
+    /* Empty State for Notes */
     .empty-state {
       background: #ffffff;
       border: 1px dashed var(--border);
@@ -253,64 +281,63 @@
       margin-bottom: 0.35rem;
     }
 
-    /* Mobile Adaptability */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      aside.sidebar {
-        width: 100%;
-        position: sticky;
-        top: 0;
-        bottom: auto;
-        padding: 1.25rem 1.5rem;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        background: rgba(247, 246, 242, 0.95);
-        backdrop-filter: blur(8px);
-      }
-      main.content-area {
-        margin-left: 0;
-        padding: 2rem 1.5rem 6rem;
-      }
-      .sidebar-nav { margin-top: 1rem; }
-      .sidebar-nav ul {
+    /* Mobile Adaptability (Moves dock to floating bottom navigation) */
+    @media (max-width: 860px) {
+      aside.island-dock {
+        left: 50%;
+        top: auto;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
         flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.25rem;
+        padding: 0.4rem 0.6rem;
       }
-      .sidebar-nav a {
-        padding: 0.35rem 0.65rem;
-        font-size: 0.82rem;
+      .dock-link::after { display: none; }
+      main.content-area {
+        padding: 3rem 1.5rem 7rem;
       }
-      .sidebar-footer { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div>
-      <div class="sidebar-header">
-        <h1>Brooklyn Rupert</h1>
-        <p>Detroit / Ypsilanti, MI</p>
-      </div>
+  <!-- Floating Island Dock -->
+  <aside class="island-dock">
+    <!-- Home Icon -->
+    <a href="#home" class="dock-link active" data-tooltip="Home">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
+      </svg>
+    </a>
 
-      <nav class="sidebar-nav">
-        <ul>
-          <li><a href="#home" class="nav-link active">Home</a></li>
-          <li><a href="#about" class="nav-link">About & Experience</a></li>
-          <li><a href="#posts" class="nav-link">Notes & Essays</a></li>
-        </ul>
-      </nav>
-    </div>
+    <!-- Profile / Experience Icon -->
+    <a href="#about" class="dock-link" data-tooltip="About & Experience">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </a>
 
-    <div class="sidebar-footer">
-      <p>© 2026 Brooklyn Rupert</p>
-      <p>Digital Portfolio</p>
-    </div>
+    <!-- Notes & Essays Icon -->
+    <a href="#posts" class="dock-link" data-tooltip="Notes & Essays">
+      <svg viewBox="0 0 24 24">
+        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
+        <polyline points="15 3 21 9 15 9"/>
+        <line x1="9" y1="13" x2="15" y2="13"/>
+        <line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+    </a>
   </aside>
 
+  <!-- Scrollable Canvas -->
   <main class="content-area">
 
+    <!-- Top Identity Header -->
+    <div class="header-intro">
+      <h1>Brooklyn Rupert</h1>
+      <p>Detroit / Ypsilanti, MI • Digital Portfolio</p>
+    </div>
+
+    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
@@ -327,10 +354,12 @@
       </div>
     </section>
 
+    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
 
+      <!-- Education -->
       <div class="resume-block">
         <h3>Education</h3>
         <div class="resume-item">
@@ -346,6 +375,7 @@
         </div>
       </div>
 
+      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
@@ -361,6 +391,7 @@
         </div>
       </div>
 
+      <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
         <div class="resume-item">
@@ -399,6 +430,7 @@
       </div>
     </section>
 
+    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
@@ -413,11 +445,12 @@
 
   </main>
 
+  <!-- Scroll & Floating Island Controller -->
   <script>
     const sections = document.querySelectorAll('.page-section');
-    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    const dockLinks = document.querySelectorAll('.dock-link');
 
-    function syncSectionFocus() {
+    function syncDockState() {
       const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
 
       sections.forEach(section => {
@@ -428,7 +461,7 @@
         if (scrollPosition >= top && scrollPosition < top + height) {
           section.classList.add('in-focus');
           
-          navLinks.forEach(link => {
+          dockLinks.forEach(link => {
             if (link.getAttribute('href') === `#${id}`) {
               link.classList.add('active');
             } else {
@@ -441,9 +474,9 @@
       });
     }
 
-    window.addEventListener('scroll', syncSectionFocus, { passive: true });
-    window.addEventListener('load', syncSectionFocus);
-    syncSectionFocus();
+    window.addEventListener('scroll', syncDockState, { passive: true });
+    window.addEventListener('load', syncDockState);
+    syncDockState();
   </script>
 
 </body>
