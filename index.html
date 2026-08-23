@@ -11,15 +11,15 @@
   
   <style>
     :root {
-      --bg: #fcfbf9;
-      --card-bg: #ffffff;
-      --text: #1c1917;
-      --text-secondary: #44403c;
-      --muted: #78716c;
-      --accent: #1e3a8a;
-      --accent-soft: #eef2f6;
-      --border: #e7e5e4;
-      --border-subtle: #f0eeea;
+      --bg: #FDF6ED;              /* Cream background */
+      --card-bg: #FFFFFF;
+      --text: #1c1917;            /* Black lettering */
+      --text-secondary: #2c2825;
+      --muted: #556352;
+      --accent: #778873;          /* Dark Sage Accent */
+      --accent-light: #A1BC98;    /* Muted Sage */
+      --border: #DCCFC0;          /* Sand Accent */
+      --border-subtle: #ebdcd0;
       --radius: 12px;
     }
 
@@ -35,18 +35,17 @@
       min-height: 100vh;
     }
 
-    /* Floating Island / Pill Dock (Matching the Inspiration) */
+    /* Floating Island / Pill Dock */
     aside.island-dock {
       position: fixed;
       left: 2rem;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(220, 207, 192, 0.65);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 
-                  0 0 0 1px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.18);
       padding: 0.6rem;
       border-radius: 40px;
       display: flex;
@@ -65,7 +64,7 @@
       width: 46px;
       height: 46px;
       border-radius: 24px;
-      color: #71717a;
+      color: var(--text-secondary);
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -82,18 +81,18 @@
     }
 
     .dock-link:hover {
-      color: #18181b;
-      background: rgba(0, 0, 0, 0.04);
+      color: var(--text);
+      background: rgba(161, 188, 152, 0.35);
     }
 
     .dock-link:hover svg {
       transform: scale(1.1);
     }
 
-    /* Active State (Rounded Square Tile like the image) */
+    /* Active State */
     .dock-link.active {
-      background: rgba(30, 58, 138, 0.09);
-      color: var(--accent);
+      background: var(--accent);
+      color: #FDF6ED;
       border-radius: 18px;
     }
 
@@ -102,8 +101,8 @@
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
-      background: #18181b;
-      color: #ffffff;
+      background: var(--text);
+      color: #FDF6ED;
       padding: 0.3rem 0.65rem;
       border-radius: 6px;
       font-size: 0.75rem;
@@ -113,7 +112,7 @@
       pointer-events: none;
       transform: translateX(-6px);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 
     .dock-link:hover::after {
@@ -138,7 +137,7 @@
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: #0c0a09;
+      color: var(--text);
     }
 
     .header-intro p {
@@ -180,7 +179,7 @@
       font-family: 'Newsreader', serif;
       font-size: 2.3rem;
       font-weight: 600;
-      color: #0c0a09;
+      color: var(--text);
       margin-bottom: 0.35rem;
     }
 
@@ -237,7 +236,7 @@
     .role-title {
       font-weight: 600;
       font-size: 1rem;
-      color: #1c1917;
+      color: var(--text);
     }
 
     .role-date {
@@ -255,7 +254,7 @@
 
     .resume-item ul {
       margin-left: 1.1rem;
-      color: #57534e;
+      color: var(--text-secondary);
       font-size: 0.9rem;
       line-height: 1.65;
     }
@@ -266,7 +265,7 @@
 
     /* Empty State for Notes */
     .empty-state {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.75);
       border: 1px dashed var(--border);
       border-radius: var(--radius);
       padding: 3.5rem 2rem;
@@ -281,7 +280,7 @@
       margin-bottom: 0.35rem;
     }
 
-    /* Mobile Adaptability (Moves dock to floating bottom navigation) */
+    /* Mobile Adaptability */
     @media (max-width: 860px) {
       aside.island-dock {
         left: 50%;
@@ -323,7 +322,7 @@
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
         <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="17" x2="13" y2="17"/>
+        <line x1="9" y1="16" x2="13" y2="16"/>
       </svg>
     </a>
   </aside>
@@ -342,7 +341,7 @@
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.02rem; color: #44403c; line-height: 1.85;">
+      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
@@ -480,4 +479,4 @@
   </script>
 
 </body>
-</html
+</html>
