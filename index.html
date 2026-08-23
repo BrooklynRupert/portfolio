@@ -269,15 +269,42 @@
       margin-bottom: 0.25rem;
     }
 
-    /* Feature / Press Cards Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
+    /* =========================================================
+       HORIZONTAL ROLLING BAR / SCROLL CAROUSEL FOR FEATURES
+       ========================================================= */
+    .features-carousel {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5rem 0.25rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
+    /* Custom Aesthetic Scrollbar */
+    .features-carousel::-webkit-scrollbar {
+      height: 7px;
+    }
+
+    .features-carousel::-webkit-scrollbar-track {
+      background: rgba(220, 207, 192, 0.4);
+      border-radius: 10px;
+    }
+
+    .features-carousel::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+
+    .features-carousel::-webkit-scrollbar-thumb:hover {
+      background: var(--text-secondary);
+    }
+
+    /* Feature Card styled for horizontal scrolling */
     .feature-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
       background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -581,6 +608,10 @@
         padding: 3rem 1.25rem 8.5rem;
       }
 
+      .feature-card {
+        flex: 0 0 280px;
+      }
+
       .folder-widget-container {
         bottom: 5.8rem;
         right: 1.25rem;
@@ -690,7 +721,7 @@
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
         <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="16" x2="13" y2="16"/>
+        <line x1="9" y1="17" x2="13" y2="17"/>
       </svg>
     </a>
   </aside>
@@ -797,36 +828,51 @@
       </div>
     </section>
 
-    <!-- SECTION 3: FEATURED IN & PRESS -->
+    <!-- SECTION 3: FEATURED IN & PRESS (HORIZONTAL ROLLING CAROUSEL) -->
     <section id="features" class="page-section">
       <h2 class="page-title">Featured In & Press</h2>
-      <p class="page-subtitle">News coverage, interviews, and public media mentions.</p>
+      <p class="page-subtitle">News coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
 
-      <div class="features-grid">
-        <!-- Sample Article Card 1 -->
+      <div class="features-carousel">
+        <!-- Article Card 1 -->
         <div class="feature-card">
           <div>
             <div class="feature-meta">
               <span class="feature-outlet">News Publication</span>
               <span class="feature-date">Year / Date</span>
             </div>
-            <h3>Headline / Title of the Article You Were Featured In</h3>
-            <p>A brief excerpt, quote, or sentence summarizing what the story covered and your role or interview in it.</p>
+            <h3>Headline / Title of the Article</h3>
+            <p>A brief excerpt or sentence summarizing the story, your quotes, and what was covered.</p>
           </div>
           <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
             Read Full Story ↗
           </a>
         </div>
 
-        <!-- Sample Article Card 2 -->
+        <!-- Article Card 2 -->
         <div class="feature-card">
           <div>
             <div class="feature-meta">
-              <span class="feature-outlet">Local News / Press</span>
+              <span class="feature-outlet">State / Local Media</span>
               <span class="feature-date">Year / Date</span>
             </div>
             <h3>Advocacy & Leadership Spotlight</h3>
-            <p>Coverage regarding statewide representation, student leadership, or community initiative achievements.</p>
+            <p>Coverage regarding statewide representation, student leadership, or community achievements.</p>
+          </div>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
+            Read Full Story ↗
+          </a>
+        </div>
+
+        <!-- Article Card 3 -->
+        <div class="feature-card">
+          <div>
+            <div class="feature-meta">
+              <span class="feature-outlet">Campus Feature</span>
+              <span class="feature-date">Year / Date</span>
+            </div>
+            <h3>Academic & Research Overview</h3>
+            <p>Highlights on honors presentations, symposiums, or collaborative legal research initiatives.</p>
           </div>
           <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="feature-link">
             Read Full Story ↗
@@ -945,543 +991,4 @@
   </script>
 
 </body>
-</html>      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      font-size: 15px;
-      min-height: 100vh;
-    }
-
-    /* Floating Island / Pill Dock */
-    aside.island-dock {
-      position: fixed;
-      left: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(220, 207, 192, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px -5px rgba(119, 136, 115, 0.18);
-      padding: 0.6rem;
-      border-radius: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      z-index: 100;
-    }
-
-    /* Icon Navigation Links */
-    .dock-link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 24px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .dock-link svg {
-      width: 22px;
-      height: 22px;
-      stroke-width: 1.75;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: transform 0.2s ease;
-    }
-
-    .dock-link:hover {
-      color: var(--text);
-      background: rgba(161, 188, 152, 0.35);
-    }
-
-    .dock-link:hover svg {
-      transform: scale(1.1);
-    }
-
-    /* Active State */
-    .dock-link.active {
-      background: var(--accent);
-      color: #FDF6ED;
-      border-radius: 18px;
-    }
-
-    /* Floating Tooltips */
-    .dock-link::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      left: 60px;
-      background: var(--text);
-      color: #FDF6ED;
-      padding: 0.3rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(-6px);
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    }
-
-    .dock-link:hover::after {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Main Centered Content Canvas */
-    main.content-area {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 5rem 2rem 14rem;
-    }
-
-    /* Header Profile Badge */
-    .header-intro {
-      margin-bottom: 3.5rem;
-    }
-
-    .header-intro h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text);
-    }
-
-    .header-intro p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 0.2rem;
-    }
-
-    /* Seamless Stacked Sections with Focus Transitions */
-    .page-section {
-      padding: 4rem 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0.3;
-      filter: blur(1.5px);
-      transform: translateY(8px);
-      transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
-    }
-
-    .page-section:first-of-type {
-      padding-top: 0;
-    }
-
-    .page-section:last-of-type {
-      border-bottom: none;
-      min-height: 80vh;
-    }
-
-    /* Section In-Focus */
-    .page-section.in-focus {
-      opacity: 1;
-      filter: blur(0px);
-      transform: translateY(0);
-    }
-
-    /* Section Titles */
-    h2.page-title {
-      font-family: 'Newsreader', serif;
-      font-size: 2.3rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.35rem;
-    }
-
-    p.page-subtitle {
-      color: var(--muted);
-      font-size: 0.98rem;
-      margin-bottom: 2.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* Experience Timeline */
-    .resume-block {
-      margin-bottom: 2.75rem;
-    }
-
-    .resume-block h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .resume-block h3::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border-subtle);
-    }
-
-    .resume-item {
-      margin-bottom: 1.75rem;
-      padding-left: 0.75rem;
-      border-left: 2px solid var(--border);
-      transition: border-color 0.2s ease;
-    }
-
-    .resume-item:hover {
-      border-left-color: var(--accent);
-    }
-
-    .resume-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.2rem;
-    }
-
-    .role-title {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--text);
-    }
-
-    .role-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .role-company {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.4rem;
-      font-style: italic;
-    }
-
-    .resume-item ul {
-      margin-left: 1.1rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.65;
-    }
-
-    .resume-item li {
-      margin-bottom: 0.25rem;
-    }
-
-    /* =========================================================
-       PRESS & FEATURED MEDIA CARDS
-       ========================================================= */
-    .press-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-
-    .press-card {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .press-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px -3px rgba(119, 136, 115, 0.15);
-      border-color: var(--accent);
-    }
-
-    .press-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .press-outlet {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-    }
-
-    .press-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .press-card h3 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      line-height: 1.35;
-    }
-
-    .press-card p {
-      color: var(--text-secondary);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .press-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .press-link:hover {
-      color: var(--text);
-      text-decoration: underline;
-    }
-
-    .press-link svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 2;
-    }
-
-    /* Empty State for Notes */
-    .empty-state {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 3.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .empty-state strong {
-      display: block;
-      color: var(--text);
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
-    }
-
-    /* =========================================================
-       CUSTOM MULTI-LAYER FOLDER WIDGET (DESKTOP DEFAULT)
-       ========================================================= */
-    .folder-widget-container {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 3rem;
-      z-index: 1000;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .folder {
-      position: relative;
-      width: 105px;
-      height: 72px;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-    }
-
-    .folder:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Pink Attention Pulse before first interaction */
-    .folder-widget-container.unseen .folder {
-      animation: pinkGlowPulse 2.4s infinite ease-in-out;
-    }
-
-    @keyframes pinkGlowPulse {
-      0% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-      50% {
-        filter: drop-shadow(0 8px 20px rgba(161, 188, 152, 0.75));
-        opacity: 1;
-      }
-      100% {
-        filter: drop-shadow(0 4px 8px rgba(119, 136, 115, 0.3));
-        opacity: 0.92;
-      }
-    }
-
-    .folder__back {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: var(--folder-back-color);
-      border-radius: 0px 5px 5px 5px;
-      box-shadow: 0 8px 20px -3px rgba(119, 136, 115, 0.25);
-    }
-
-    .folder__back::after {
-      content: "";
-      position: absolute;
-      bottom: 98%;
-      left: 0;
-      width: 32px;
-      height: 9px;
-      background: var(--folder-back-color);
-      border-radius: 4px 4px 0 0;
-    }
-
-    /* Layered Papers */
-    .paper {
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 86%;
-      height: 78%;
-      background: var(--paper-color);
-      border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 2;
-    }
-
-    .paper:nth-child(1) {
-      width: 78%;
-      height: 72%;
-      bottom: 9px;
-      background: #fdfaf5;
-    }
-
-    .paper:nth-child(2) {
-      width: 82%;
-      height: 75%;
-      bottom: 7px;
-      background: #faf7f0;
-    }
-
-    /* Contact Document (Desktop) */
-    .paper.contact-paper {
-      width: 240px;
-      height: auto;
-      right: 0;
-      left: auto;
-      transform: translateY(10px) scale(0.9);
-      transform-origin: bottom right;
-      opacity: 0;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .paper.contact-paper h4 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 8px;
-    }
-
-    .doc-row {
-      margin-bottom: 7px;
-    }
-
-    .doc-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .doc-label {
-      display: block;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .doc-value, .doc-value a {
-      font-size: 0.84rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .doc-value a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* Front Flap Elements */
-    .folder__front {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 88%;
-      background: var(--folder-color);
-      border-radius: 4px 4px 5px 5px;
-      transform-origin: bottom center;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 4;
-    }
-
-    .folder__front.right {
-      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
-      pointer-events: none;
-    }
-
-    /* Desktop Hover / Click Open */
-    .folder-widget-container:hover .folder__front,
-    .folder-widget-container.is-open .folder__front {
-      transform: rotateX(-32deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(1),
-    .folder-widget-container.is-open .paper:nth-child(1) {
-      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
-    }
-
-    .folder-widget-container:hover .paper:nth-child(2),
-    .folder-widget-container.is-open .paper:nth-child(2) {
-      transform: translateX(-50%) translateY(-24px) rotate(2deg);
-    }
-
-    .folder-widget-container:hover .paper.contact-paper,
-    .folder-widget-container.is-open .paper.contact-paper {
-      opacity: 1;
-      transform: translateY(-88px) scale(1);
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       MOBILE RESPONSIVE & HIGH-VISIBILITY TOGGLE
-       ========================================================= */
-    @media (max-width: 860px) {
-      aside.island-dock {
-        left: 50%;
-        top: auto;
-        bottom: 1.25rem;
-        transform: translateX(-50%);
-        flex-direction: row;
-        padding: 0.35rem 0.5rem;
-        background: rgba(220, 207, 192, 0.85);
-      }
-      .dock-link::after { display: none;
+</html>
