@@ -4,41 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brooklyn Rupert | Portfolio</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg: #fdfdfc;
-      --sidebar-bg: #f8fafc;
+      --bg: #fcfbf9;
+      --sidebar-bg: #f7f6f2;
       --card-bg: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
+      --text: #1c1917;
+      --text-secondary: #44403c;
+      --muted: #78716c;
       --accent: #1e3a8a;
-      --accent-soft: #eff6ff;
-      --border: #e2e8f0;
-      --radius: 10px;
+      --accent-soft: #eef2f6;
+      --border: #e7e5e4;
+      --border-subtle: #f0eeea;
+      --radius: 8px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       display: flex;
       min-height: 100vh;
+      font-size: 15px;
     }
 
-    /* Fixed Left Sidebar */
+    /* Fixed Left Navigation Bar */
     aside.sidebar {
-      width: 280px;
+      width: 290px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
-      padding: 2.5rem 1.75rem;
+      padding: 3rem 2rem;
       position: fixed;
       top: 0;
       bottom: 0;
@@ -50,175 +54,206 @@
     }
 
     .sidebar-header h1 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #0f172a;
-      line-height: 1.2;
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0c0a09;
+      letter-spacing: 0.04em;
+      line-height: 1.25;
     }
 
     .sidebar-header p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--muted);
-      margin-top: 0.35rem;
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     nav.sidebar-nav {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
 
     .sidebar-nav ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .sidebar-nav a {
       display: block;
       width: 100%;
       text-decoration: none;
-      padding: 0.65rem 0.85rem;
+      padding: 0.65rem 0.9rem;
       border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 500;
       color: var(--muted);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
+      letter-spacing: -0.01em;
     }
 
     .sidebar-nav a:hover {
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text);
     }
 
     .sidebar-nav a.active {
-      background: var(--accent-soft);
+      background: #ffffff;
       color: var(--accent);
       font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-subtle);
     }
 
     .sidebar-footer {
-      font-size: 0.78rem;
-      color: #94a3b8;
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.5;
     }
 
-    /* Main Content Area */
+    /* Main Scrollable Canvas */
     main.content-area {
-      margin-left: 280px;
+      margin-left: 290px;
       flex: 1;
-      padding: 4rem 3.5rem 8rem;
-      max-width: 900px;
+      padding: 5rem 4.5rem 15rem;
+      max-width: 880px;
     }
 
-    /* Continuous Page Sections & Focus Blur Transition */
+    /* Seamless Stacked Sections with Focus Transitions */
     .page-section {
-      padding: 3rem 0;
+      padding: 4.5rem 0;
       border-bottom: 1px solid var(--border);
-      opacity: 0.35;
+      opacity: 0.3;
       filter: blur(1.5px);
-      transform: translateY(12px);
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
     }
 
     .page-section:first-of-type {
-      padding-top: 1rem;
+      padding-top: 0.5rem;
     }
 
     .page-section:last-of-type {
       border-bottom: none;
+      min-height: 80vh;
     }
 
-    /* Active In-Focus State */
+    /* When section is in active view */
     .page-section.in-focus {
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);
     }
 
-    /* Typography & Section Styles */
+    /* Section Typography */
     h2.page-title {
       font-family: 'Newsreader', serif;
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       font-weight: 600;
-      color: #0f172a;
-      margin-bottom: 0.5rem;
+      color: #0c0a09;
+      margin-bottom: 0.35rem;
     }
 
     p.page-subtitle {
       color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 2.5rem;
+      font-size: 0.98rem;
+      margin-bottom: 2.2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* Resume / CV Section */
+    /* Experience Timeline Blocks */
     .resume-block {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.75rem;
     }
 
     .resume-block h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       color: var(--accent);
       margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resume-block h3::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
     }
 
     .resume-item {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
+      transition: border-color 0.2s ease;
+    }
+
+    .resume-item:hover {
+      border-left-color: var(--accent);
     }
 
     .resume-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .role-title {
       font-weight: 600;
-      font-size: 1.05rem;
-      color: #0f172a;
+      font-size: 1rem;
+      color: #1c1917;
     }
 
     .role-date {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--muted);
-    }
-
-    .role-company {
-      font-size: 0.92rem;
-      color: #475569;
-      margin-bottom: 0.35rem;
       font-weight: 500;
     }
 
+    .role-company {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
     .resume-item ul {
-      margin-left: 1.2rem;
-      color: #475569;
-      font-size: 0.92rem;
-      line-height: 1.6;
+      margin-left: 1.1rem;
+      color: #57534e;
+      font-size: 0.9rem;
+      line-height: 1.65;
     }
 
-    /* Posts Container */
+    .resume-item li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Empty State for Field Notes */
     .empty-state {
-      background: var(--accent-soft);
-      border: 1px dashed var(--accent);
+      background: #ffffff;
+      border: 1px dashed var(--border);
       border-radius: var(--radius);
-      padding: 2.5rem;
+      padding: 3.5rem 2rem;
       text-align: center;
-      color: var(--accent);
-      font-size: 0.95rem;
+      color: var(--muted);
     }
 
-    /* Mobile Responsiveness */
+    .empty-state strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Mobile Adaptability */
     @media (max-width: 768px) {
       body { flex-direction: column; }
       aside.sidebar {
@@ -229,21 +264,22 @@
         padding: 1.25rem 1.5rem;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        background: rgba(248, 250, 252, 0.95);
+        background: rgba(247, 246, 242, 0.95);
         backdrop-filter: blur(8px);
       }
       main.content-area {
         margin-left: 0;
-        padding: 2rem 1.5rem 5rem;
+        padding: 2rem 1.5rem 6rem;
       }
+      .sidebar-nav { margin-top: 1rem; }
       .sidebar-nav ul {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 0.3rem;
+        gap: 0.25rem;
       }
       .sidebar-nav a {
-        padding: 0.4rem 0.75rem;
-        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.82rem;
       }
       .sidebar-footer { display: none; }
     }
@@ -251,55 +287,50 @@
 </head>
 <body>
 
-  <!-- Left Sticky/Fixed Sidebar -->
   <aside class="sidebar">
     <div>
       <div class="sidebar-header">
         <h1>Brooklyn Rupert</h1>
-        <p>Detroit/Ypsilanti, Michigan</p>
+        <p>Detroit / Ypsilanti, MI</p>
       </div>
 
       <nav class="sidebar-nav">
         <ul>
-          <li><a href="#home" id="link-home" class="active">Home</a></li>
-          <li><a href="#about" id="link-about">About & Experience</a></li>
-          <li><a href="#posts" id="link-posts">Notes & Essays</a></li>
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About & Experience</a></li>
+          <li><a href="#posts" class="nav-link">Notes & Essays</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="sidebar-footer">
       <p>© 2026 Brooklyn Rupert</p>
-      <p>Hosted on GitHub</p>
+      <p>Digital Portfolio</p>
     </div>
   </aside>
 
-  <!-- Main Scrollable Content Area -->
   <main class="content-area">
 
-    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
 
-      <div style="font-size: 1.05rem; color: #334155; line-height: 1.8;">
+      <div style="font-size: 1.02rem; color: #44403c; line-height: 1.85;">
         <p style="margin-bottom: 1.25rem;">
           I am an honors undergraduate studying criminal justice, criminology, and psychology. 
           My academic work and independent writing center on procedural due process, institutional policy, 
           and forensic behavioral research.
         </p>
         <p>
-          Scroll down to explore my background, leadership history, and dispatches.
+          Scroll through to explore my background, leadership history, and field notes.
         </p>
       </div>
     </section>
 
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
     <section id="about" class="page-section">
       <h2 class="page-title">Background & Experience</h2>
       <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
 
-      <!-- Education -->
       <div class="resume-block">
         <h3>Education</h3>
         <div class="resume-item">
@@ -315,7 +346,6 @@
         </div>
       </div>
 
-      <!-- Professional Experience -->
       <div class="resume-block">
         <h3>Professional & Legal Experience</h3>
         <div class="resume-item">
@@ -323,7 +353,7 @@
             <span class="role-title">Staff Writer</span>
             <span class="role-date">2026 – Present</span>
           </div>
-          <div class="role-company"><em>The Michigan Journal</em></div>
+          <div class="role-company">The Michigan Journal</div>
           <ul>
             <li>Research and report on global geopolitical developments and policy shifts.</li>
             <li>Conduct analysis and source verification for weekly news editions.</li>
@@ -331,7 +361,6 @@
         </div>
       </div>
 
-      <!-- Leadership & Public Service -->
       <div class="resume-block">
         <h3>Leadership & Civic Engagement</h3>
         <div class="resume-item">
@@ -359,7 +388,7 @@
         <div class="resume-item">
           <div class="resume-header">
             <span class="role-title">State Vice President</span>
-            <span class="role-date">2024–2025</span>
+            <span class="role-date">2024 – 2025</span>
           </div>
           <div class="role-company">SkillsUSA Michigan</div>
           <ul>
@@ -370,40 +399,35 @@
       </div>
     </section>
 
-    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
 
       <div id="posts-list">
         <div class="empty-state">
-          <p><strong>No posts published yet.</strong></p>
-          <p style="margin-top: 0.25rem; font-size: 0.88rem; opacity: 0.9;">New write-ups and reflections on volunteering, legal studies, and campus work will be added here.</p>
+          <strong>No posts published yet</strong>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections on volunteering, legal studies, and campus work will appear here.</p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Dynamic Scroll & In-Focus Observer -->
   <script>
     const sections = document.querySelectorAll('.page-section');
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -40% 0px',
-      threshold: 0
-    };
+    function syncSectionFocus() {
+      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Highlight current section
-          entry.target.classList.add('in-focus');
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          section.classList.add('in-focus');
           
-          // Update active link in sidebar
-          const id = entry.target.getAttribute('id');
           navLinks.forEach(link => {
             if (link.getAttribute('href') === `#${id}`) {
               link.classList.add('active');
@@ -412,401 +436,14 @@
             }
           });
         } else {
-          // Soft blur when leaving view
-          entry.target.classList.remove('in-focus');
+          section.classList.remove('in-focus');
         }
       });
-    }, observerOptions);
-
-    sections.forEach(section => observer.observe(section));
-  </script>
-
-</body>
-</html>    aside.sidebar {
-      width: 280px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
-      padding: 2.5rem 1.75rem;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 100;
     }
 
-    .sidebar-header h1 {
-      font-family: 'Newsreader', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-
-    .sidebar-header p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 0.35rem;
-    }
-
-    nav.sidebar-nav {
-      margin-top: 2.5rem;
-    }
-
-    .sidebar-nav ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .sidebar-nav a {
-      display: block;
-      width: 100%;
-      text-decoration: none;
-      padding: 0.65rem 0.85rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: all 0.25s ease;
-    }
-
-    .sidebar-nav a:hover {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    .sidebar-nav a.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .sidebar-footer {
-      font-size: 0.78rem;
-      color: #94a3b8;
-    }
-
-    /* Main Content Area */
-    main.content-area {
-      margin-left: 280px;
-      flex: 1;
-      padding: 4rem 3.5rem 8rem;
-      max-width: 900px;
-    }
-
-    /* Continuous Page Sections & Focus Blur Transition */
-    .page-section {
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0.35;
-      filter: blur(1.5px);
-      transform: translateY(12px);
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .page-section:first-of-type {
-      padding-top: 1rem;
-    }
-
-    .page-section:last-of-type {
-      border-bottom: none;
-    }
-
-    /* Active In-Focus State */
-    .page-section.in-focus {
-      opacity: 1;
-      filter: blur(0px);
-      transform: translateY(0);
-    }
-
-    /* Typography & Section Styles */
-    h2.page-title {
-      font-family: 'Newsreader', serif;
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: #0f172a;
-      margin-bottom: 0.5rem;
-    }
-
-    p.page-subtitle {
-      color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* Resume / CV Section */
-    .resume-block {
-      margin-bottom: 2.5rem;
-    }
-
-    .resume-block h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.4rem;
-    }
-
-    .resume-item {
-      margin-bottom: 1.5rem;
-    }
-
-    .resume-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.25rem;
-    }
-
-    .role-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #0f172a;
-    }
-
-    .role-date {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .role-company {
-      font-size: 0.92rem;
-      color: #475569;
-      margin-bottom: 0.35rem;
-      font-weight: 500;
-    }
-
-    .resume-item ul {
-      margin-left: 1.2rem;
-      color: #475569;
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    /* Posts Container */
-    .empty-state {
-      background: var(--accent-soft);
-      border: 1px dashed var(--accent);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      text-align: center;
-      color: var(--accent);
-      font-size: 0.95rem;
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      aside.sidebar {
-        width: 100%;
-        position: sticky;
-        top: 0;
-        bottom: auto;
-        padding: 1.25rem 1.5rem;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        background: rgba(248, 250, 252, 0.95);
-        backdrop-filter: blur(8px);
-      }
-      main.content-area {
-        margin-left: 0;
-        padding: 2rem 1.5rem 5rem;
-      }
-      .sidebar-nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-      }
-      .sidebar-nav a {
-        padding: 0.4rem 0.75rem;
-        font-size: 0.85rem;
-      }
-      .sidebar-footer { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Left Sticky/Fixed Sidebar -->
-  <aside class="sidebar">
-    <div>
-      <div class="sidebar-header">
-        <h1>Brooklyn Rupert</h1>
-        <p>Detroit/Ypsilanti, Michigan</p>
-      </div>
-
-      <nav class="sidebar-nav">
-        <ul>
-          <li><a href="#home" id="link-home" class="active">Home</a></li>
-          <li><a href="#about" id="link-about">About & Experience</a></li>
-          <li><a href="#posts" id="link-posts">Notes & Essays</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="sidebar-footer">
-      <p>© 2026 Brooklyn Rupert</p>
-      <p>Hosted on GitHub</p>
-    </div>
-  </aside>
-
-  <!-- Main Scrollable Content Area -->
-  <main class="content-area">
-
-    <!-- SECTION 1: HOME -->
-    <section id="home" class="page-section in-focus">
-      <h2 class="page-title">Hello, Welcome</h2>
-      <p class="page-subtitle">Exploring law, behavioral analysis, and public policy.</p>
-
-      <div style="font-size: 1.05rem; color: #334155; line-height: 1.8;">
-        <p style="margin-bottom: 1.25rem;">
-          I am an honors undergraduate studying criminal justice, criminology, and psychology. 
-          My academic work and independent writing center on procedural due process, institutional policy, 
-          and forensic behavioral research.
-        </p>
-        <p>
-          Scroll down to explore my background, leadership history, and dispatches.
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION 2: ABOUT / EXPERIENCE -->
-    <section id="about" class="page-section">
-      <h2 class="page-title">Background & Experience</h2>
-      <p class="page-subtitle">Curriculum Vitae, leadership history, and research credentials.</p>
-
-      <!-- Education -->
-      <div class="resume-block">
-        <h3>Education</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">University of Michigan–Dearborn</span>
-            <span class="role-date">Expected 2029</span>
-          </div>
-          <div class="role-company">Bachelor of Arts • Honors Student</div>
-          <ul>
-            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
-            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Professional Experience -->
-      <div class="resume-block">
-        <h3>Professional & Legal Experience</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Staff Writer</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company"><em>The Michigan Journal</em></div>
-          <ul>
-            <li>Research and report on global geopolitical developments and policy shifts.</li>
-            <li>Conduct analysis and source verification for weekly news editions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Leadership & Public Service -->
-      <div class="resume-block">
-        <h3>Leadership & Civic Engagement</h3>
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Secretary</span>
-            <span class="role-date">2026 – Present</span>
-          </div>
-          <div class="role-company">Criminology and Criminal Justice Collective</div>
-          <ul>
-            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">Precinct Delegate Candidate</span>
-            <span class="role-date">2026</span>
-          </div>
-          <div class="role-company">Wayne County, Michigan</div>
-          <ul>
-            <li>Engaged in grassroots civic administration and community voter representation.</li>
-          </ul>
-        </div>
-
-        <div class="resume-item">
-          <div class="resume-header">
-            <span class="role-title">State Vice President</span>
-            <span class="role-date">2024–2025</span>
-          </div>
-          <div class="role-company">SkillsUSA Michigan</div>
-          <ul>
-            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
-            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal CTE education funding.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: NOTES & ESSAYS -->
-    <section id="posts" class="page-section">
-      <h2 class="page-title">Notes & Essays</h2>
-      <p class="page-subtitle">Dispatches, volunteer reflections, and observations.</p>
-
-      <div id="posts-list">
-        <div class="empty-state">
-          <p><strong>No posts published yet.</strong></p>
-          <p style="margin-top: 0.25rem; font-size: 0.88rem; opacity: 0.9;">New write-ups and reflections on volunteering, legal studies, and campus work will be added here.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Dynamic Scroll & In-Focus Observer -->
-  <script>
-    const sections = document.querySelectorAll('.page-section');
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -40% 0px',
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Highlight current section
-          entry.target.classList.add('in-focus');
-          
-          // Update active link in sidebar
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        } else {
-          // Soft blur when leaving view
-          entry.target.classList.remove('in-focus');
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => observer.observe(section));
+    window.addEventListener('scroll', syncSectionFocus, { passive: true });
+    window.addEventListener('load', syncSectionFocus);
+    syncSectionFocus();
   </script>
 
 </body>
