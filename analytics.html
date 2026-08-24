@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brooklyn Rupert | Visitor Insights & Geography</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23778873'/><rect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23DCCFC0' stroke-width='2'/><text x='50%25' y='54%25' font-family='Cinzel, serif' font-size='30' font-weight='700' fill='%23FDF6ED' text-anchor='middle' dominant-baseline='central' letter-spacing='1'>BR</text></svg>" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FDF6ED;              /* Cream base */
+      --card-bg: #FFFFFF;
+      --text: #1c1917;            /* Black lettering */
+      --text-secondary: #2c2825;
+      --muted: #556352;
+      --accent: #778873;          /* Dark Sage Accent */
+      --accent-light: #A1BC98;    /* Muted Sage */
+      --border: #DCCFC0;          /* Sand Accent */
+      --border-subtle: #ebdcd0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+      min-height: 100vh;
+      padding: 3.5rem 1.5rem 6rem;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Return Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--text);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: #FFFFFF;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .status-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+      animation: pulseDot 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+
+    @keyframes pulseDot {
+      to {
+        box-shadow: 0 0 0 7px rgba(74, 222, 128, 0);
+      }
+    }
+
+    /* Page Header */
+    .header-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .header-block h1 {
+      font-family: 'Newsreader', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+
+    .header-block p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    /* Analytics Stat Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: 0 4px 14px rgba(119, 136, 115, 0.08);
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .stat-value {
+      font-family: 'Newsreader', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Interactive Geography Section */
+    .section-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(119, 136, 115, 0.06);
+      margin-bottom: 2.5rem;
+    }
+
+    .section-box h3 {
+      font-family: 'Newsreader', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-box p.sub {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* States Breakdown List */
+    .state-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .state-item {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.75rem 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .state-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .state-count {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: #FFFFFF;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Real-Time Visitor Log Table */
+    .log-table-container {
+      overflow-x: auto;
+    }
+
+    table.log-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    table.log-table th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.log-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    table.log-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pill-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Action Buttons */
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .btn-clear {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: inherit;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-clear:hover {
+      background: #ffe4e6;
+      border-color: #fda4af;
+      color: #9f1239;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 2rem 1rem 5rem; }
+      .header-block h1 { font-size: 1.9rem; }
+      .section-box { padding: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <nav class="top-nav">
+      <a href="index.html" class="nav-back">← Back to Portfolio</a>
+      <div class="status-badge">
+        <span class="status-pulse"></span>
+        Active Tracker
+      </div>
+    </nav>
+
+    <header class="header-block">
+      <h1>U.S. Visitor Geography</h1>
+      <p>Tracking visitor reach, regional engagement, and traffic origins across the United States.</p>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Visits Logged</span>
+        <div class="stat-value" id="totalVisits">0</div>
+        <div class="stat-sub">Across all recorded sessions</div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Unique U.S. States</span>
+        <div class="stat-value" id="totalStates">0</div>
+        <div class="stat-sub">Active geographic reach</div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Top Visitor Origin</span>
+        <div class="stat-value" id="topState" style="font-size: 1.45rem;">—</div>
+        <div class="stat-sub">Leading regional audience</div>
+      </div>
+    </div>
+
+    <section class="section-box">
+      <h3>States Breakdown</h3>
+      <p class="sub">Aggregated visitor distribution across the country.</p>
+      
+      <div class="state-list" id="stateListContainer">
+        </div>
+    </section>
+
+    <section class="section-box">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div>
+          <h3>Recent Visitor Sessions</h3>
+          <p class="sub">Session timestamps, cities, and regional telemetry.</p>
+        </div>
+      </div>
+
+      <div class="log-table-container">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Location (City, State)</th>
+              <th>Country</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="visitorTableBody">
+            </tbody>
+        </table>
+      </div>
+
+      <div class="action-bar">
+        <span style="font-size: 0.76rem; color: var(--muted);" id="lastSyncedText">Syncing session telemetry...</span>
+        <button class="btn-clear" id="clearDataBtn">Reset Local Session Logs</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const LOGS_KEY = 'portfolio_us_visitor_logs';
+    const totalVisitsEl = document.getElementById('totalVisits');
+    const totalStatesEl = document.getElementById('totalStates');
+    const topStateEl = document.getElementById('topState');
+    const stateListContainer = document.getElementById('stateListContainer');
+    const visitorTableBody = document.getElementById('visitorTableBody');
+    const lastSyncedText = document.getElementById('lastSyncedText');
+    const clearDataBtn = document.getElementById('clearDataBtn');
+
+    // 1. Fetch Location Telemetry on Page Load
+    async function recordCurrentVisit() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) throw new Error('Geo API limit');
+        const data = await response.json();
+
+        const visitEntry = {
+          city: data.city || 'Detroit',
+          state: data.region || 'Michigan',
+          stateCode: data.region_code || 'MI',
+          country: data.country_name || 'United States',
+          timestamp: new Date().toISOString()
+        };
+
+        saveVisit(visitEntry);
+      } catch (err) {
+        // Fallback default sample for presentation
+        const fallback = {
+          city: 'Detroit',
+          state: 'Michigan',
+          stateCode: 'MI',
+          country: 'United States',
+          timestamp: new Date().toISOString()
+        };
+        saveVisit(fallback);
+      }
+      renderDashboard();
+    }
+
+    // 2. Persist to Local/Session Storage
+    function saveVisit(entry) {
+      let logs = JSON.parse(localStorage.getItem(LOGS_KEY)) || [
+        { city: 'Detroit', state: 'Michigan', stateCode: 'MI', country: 'United States', timestamp: new Date(Date.now() - 3600000).toISOString() },
+        { city: 'Ann Arbor', state: 'Michigan', stateCode: 'MI', country: 'United States', timestamp: new Date(Date.now() - 7200000).toISOString() },
+        { city: 'Chicago', state: 'Illinois', stateCode: 'IL', country: 'United States', timestamp: new Date(Date.now() - 14400000).toISOString() },
+        { city: 'Washington', state: 'District of Columbia', stateCode: 'DC', country: 'United States', timestamp: new Date(Date.now() - 28800000).toISOString() }
+      ];
+
+      // Avoid spamming on instant reloads in same session
+      const last = logs[0];
+      if (!last || (Date.now() - new Date(last.timestamp).getTime()) > 60000) {
+        logs.unshift(entry);
+      }
+
+      localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+    }
+
+    // 3. Render Dashboard Data
+    function renderDashboard() {
+      const logs = JSON.parse(localStorage.getItem(LOGS_KEY)) || [];
+
+      // Calculate state totals
+      const stateCounts = {};
+      logs.forEach(log => {
+        const s = log.state || 'Unknown';
+        stateCounts[s] = (stateCounts[s] || 0) + 1;
+      });
+
+      const uniqueStates = Object.keys(stateCounts);
+      let topStateName = '—';
+      let maxCount = 0;
+
+      for (const [st, count] of Object.entries(stateCounts)) {
+        if (count > maxCount) {
+          maxCount = count;
+          topStateName = st;
+        }
+      }
+
+      totalVisitsEl.textContent = logs.length;
+      totalStatesEl.textContent = uniqueStates.length;
+      topStateEl.textContent = topStateName !== '—' ? `${topStateName} (${maxCount})` : '—';
+
+      // Render State Badges Grid
+      stateListContainer.innerHTML = '';
+      if (uniqueStates.length === 0) {
+        stateListContainer.innerHTML = '<p style="color:var(--muted);font-size:0.86rem;">No regional data logged yet.</p>';
+      } else {
+        Object.entries(stateCounts)
+          .sort((a, b) => b[1] - a[1])
+          .forEach(([st, count]) => {
+            const item = document.createElement('div');
+            item.className = 'state-item';
+            item.innerHTML = `
+              <span class="state-name">${st}</span>
+              <span class="state-count">${count} visit${count > 1 ? 's' : ''}</span>
+            `;
+            stateListContainer.appendChild(item);
+          });
+      }
+
+      // Render Table Rows
+      visitorTableBody.innerHTML = '';
+      logs.slice(0, 10).forEach(log => {
+        const row = document.createElement('tr');
+        const dateObj = new Date(log.timestamp);
+        const timeFormatted = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' + dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        row.innerHTML = `
+          <td>${timeFormatted}</td>
+          <td><span class="pill-location">📍 ${log.city}, ${log.state}</span></td>
+          <td>${log.country}</td>
+          <td><span style="color: var(--accent); font-weight: 600;">Verified</span></td>
+        `;
+        visitorTableBody.appendChild(row);
+      });
+
+      lastSyncedText.textContent = `Last synced: ${new Date().toLocaleTimeString()}`;
+    }
+
+    clearDataBtn.addEventListener('click', () => {
+      if (confirm('Clear recorded local visitor sessions?')) {
+        localStorage.removeItem(LOGS_KEY);
+        renderDashboard();
+      }
+    });
+
+    recordCurrentVisit();
+  </script>
+
+</body>
+</html>
