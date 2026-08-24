@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary Meta Tags -->
   <title>Brooklyn Rupert | Portfolio</title>
   <meta name="title" content="Brooklyn Rupert | Portfolio" />
   <meta name="description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
 
+  <!-- OpenGraph / LinkedIn / iMessage / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta property="og:title" content="Brooklyn Rupert | Portfolio" />
   <meta property="og:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
   <meta property="og:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
 
+  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://brooklynrupert.github.io/portfolio/" />
   <meta name="twitter:title" content="Brooklyn Rupert | Portfolio" />
-  <meta name="twitter:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice exploring procedural due process, institutional policy, and forensic behavioral analysis." />
+  <meta name="twitter:description" content="Honors undergraduate in Psychology and Criminology & Criminal Justice." />
   <meta name="twitter:image" content="https://brooklynrupert.github.io/portfolio/preview.png" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23778873'/><rect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23DCCFC0' stroke-width='2'/><text x='50%25' y='54%25' font-family='Cinzel, serif' font-size='30' font-weight='700' fill='%23FDF6ED' text-anchor='middle' dominant-baseline='central' letter-spacing='1'>BR</text></svg>" type="image/svg+xml">
@@ -144,7 +147,7 @@
     }
 
     /* Icon Navigation Links */
-    .dock-link {
+    .dock-link, .dock-btn {
       position: relative;
       display: flex;
       align-items: center;
@@ -154,10 +157,14 @@
       border-radius: 24px;
       color: var(--text-secondary);
       text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dock-link svg {
+    .dock-link svg, .dock-btn svg {
       width: 22px;
       height: 22px;
       stroke-width: 1.75;
@@ -168,12 +175,12 @@
       transition: transform 0.2s ease;
     }
 
-    .dock-link:hover {
+    .dock-link:hover, .dock-btn:hover {
       color: var(--text);
       background: rgba(161, 188, 152, 0.35);
     }
 
-    .dock-link:hover svg {
+    .dock-link:hover svg, .dock-btn:hover svg {
       transform: scale(1.1);
     }
 
@@ -185,7 +192,7 @@
     }
 
     /* Floating Tooltips */
-    .dock-link::after {
+    .dock-link::after, .dock-btn::after {
       content: attr(data-tooltip);
       position: absolute;
       left: 60px;
@@ -203,7 +210,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 
-    .dock-link:hover::after {
+    .dock-link:hover::after, .dock-btn:hover::after {
       opacity: 1;
       transform: translateX(0);
     }
@@ -280,135 +287,6 @@
       margin-bottom: 2.2rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* =========================================================
-       ABOUT ME & SKILLS DROPDOWN ACCORDION
-       ========================================================= */
-    .about-toggle-btn {
-      margin-top: 1.75rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.15rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--accent);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(119, 136, 115, 0.08);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .about-toggle-btn:hover {
-      background: var(--accent);
-      color: #FDF6ED;
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(119, 136, 115, 0.18);
-    }
-
-    .about-toggle-btn svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .about-toggle-btn.is-active svg {
-      transform: rotate(180deg);
-    }
-
-    .skills-drawer {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.35s ease;
-    }
-
-    .skills-drawer.is-open {
-      max-height: 800px;
-      opacity: 1;
-      margin-top: 1.75rem;
-    }
-
-    .skills-inner-box {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      box-shadow: 0 4px 20px rgba(119, 136, 115, 0.06);
-    }
-
-    .skills-category {
-      margin-bottom: 1.5rem;
-    }
-
-    .skills-category:last-child {
-      margin-bottom: 0;
-    }
-
-    .skills-category h4 {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .skill-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 0.85rem 1rem;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .skill-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.25rem;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      font-size: 0.92rem;
-      color: var(--text);
-    }
-
-    .skill-level {
-      font-size: 0.7rem;
-      color: var(--muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .skill-desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.45;
     }
 
     /* Subsection Header (Inside Notes & Essays) */
@@ -652,6 +530,161 @@
     }
 
     /* =========================================================
+       ABOUT ME OFF-CANVAS SLIDE-OUT PANEL (SIDE DRAWER)
+       ========================================================= */
+    .about-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 25, 23, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-drawer-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .about-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      box-shadow: -12px 0 40px rgba(119, 136, 115, 0.15);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      padding: 3rem 2.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-drawer-backdrop.is-open .about-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .drawer-close {
+      background: rgba(220, 207, 192, 0.45);
+      border: 1px solid var(--border);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      background: var(--accent);
+      color: #FDF6ED;
+      transform: rotate(90deg);
+    }
+
+    .drawer-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .drawer-section h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .drawer-section p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Language Cards */
+    .lang-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.85rem;
+      box-shadow: 0 2px 8px rgba(119, 136, 115, 0.05);
+    }
+
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .lang-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .lang-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Tag Pills */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-pill {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    /* =========================================================
        CUSTOM MULTI-LAYER FOLDER WIDGET
        ========================================================= */
     .folder-widget-container {
@@ -808,4 +841,620 @@
       height: 88%;
       background: var(--folder-color);
       border-radius: 4px 4px 5px 5px;
-      transform-origin:
+      transform-origin: bottom center;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 4;
+    }
+
+    .folder__front.right {
+      background: linear-gradient(135deg, transparent 20%, rgba(0, 0, 0, 0.03) 100%);
+      pointer-events: none;
+    }
+
+    /* Desktop Hover / Click Open */
+    .folder-widget-container:hover .folder__front,
+    .folder-widget-container.is-open .folder__front {
+      transform: rotateX(-32deg);
+    }
+
+    .folder-widget-container:hover .paper:nth-child(1),
+    .folder-widget-container.is-open .paper:nth-child(1) {
+      transform: translateX(-50%) translateY(-14px) rotate(-3deg);
+    }
+
+    .folder-widget-container:hover .paper:nth-child(2),
+    .folder-widget-container.is-open .paper:nth-child(2) {
+      transform: translateX(-50%) translateY(-24px) rotate(2deg);
+    }
+
+    .folder-widget-container:hover .paper.contact-paper,
+    .folder-widget-container.is-open .paper.contact-paper {
+      opacity: 1;
+      transform: translateY(-88px) scale(1);
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       MOBILE RESPONSIVE
+       ========================================================= */
+    @media (max-width: 860px) {
+      aside.island-dock {
+        left: 50%;
+        top: auto;
+        bottom: 1.25rem;
+        transform: translateX(-50%);
+        flex-direction: row;
+        padding: 0.35rem 0.5rem;
+        background: rgba(220, 207, 192, 0.85);
+      }
+      .dock-link::after, .dock-btn::after { display: none; }
+      
+      main.content-area {
+        padding: 3rem 1.25rem 8.5rem;
+      }
+
+      .header-intro h1 {
+        font-size: 2.1rem;
+      }
+
+      .feature-card {
+        flex: 0 0 280px;
+      }
+
+      .about-drawer {
+        max-width: 100vw;
+        padding: 2.5rem 1.5rem 5rem;
+      }
+
+      .folder-widget-container {
+        bottom: 5.8rem;
+        right: 1.25rem;
+      }
+
+      .folder {
+        width: 80px;
+        height: 54px;
+      }
+
+      .folder__back::after {
+        width: 24px;
+        height: 7px;
+      }
+
+      .folder-widget-container:hover .folder__front,
+      .folder-widget-container:hover .paper.contact-paper,
+      .folder-widget-container:hover .paper:nth-child(1),
+      .folder-widget-container:hover .paper:nth-child(2) {
+        transform: none;
+        opacity: 0;
+      }
+
+      .folder-widget-container.is-open {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(28, 25, 23, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        cursor: default;
+      }
+
+      .folder-widget-container.is-open .folder {
+        display: none;
+      }
+
+      .folder-widget-container.is-open .paper.contact-paper {
+        position: relative;
+        opacity: 1;
+        width: 88%;
+        max-width: 320px;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+        padding: 1.5rem;
+        background: #FFFFFF;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        border: 2px solid var(--accent);
+      }
+
+      .folder-widget-container.is-open .paper.contact-paper h4 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+      }
+
+      .folder-widget-container.is-open .doc-label {
+        font-size: 0.72rem;
+      }
+
+      .folder-widget-container.is-open .doc-value,
+      .folder-widget-container.is-open .doc-value a {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Island Dock -->
+  <aside class="island-dock">
+    <!-- Home Icon -->
+    <a href="#home" class="dock-link active" data-tooltip="Home">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
+      </svg>
+    </a>
+
+    <!-- CV & Experience Icon -->
+    <a href="#about" class="dock-link" data-tooltip="Background & CV">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </a>
+
+    <!-- Notes & Features Icon -->
+    <a href="#posts" class="dock-link" data-tooltip="Notes & Features">
+      <svg viewBox="0 0 24 24">
+        <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
+        <polyline points="15 3 21 9 15 9"/>
+        <line x1="9" y1="13" x2="15" y2="13"/>
+        <line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+    </a>
+
+    <!-- NEW: Dedicated About / Perspectives Side Panel Trigger -->
+    <button class="dock-btn" id="openDrawerBtn" data-tooltip="About Me & Languages" aria-label="Open About Me Side Panel">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Scrollable Canvas -->
+  <main class="content-area">
+
+    <!-- Top Identity Header -->
+    <div class="header-intro">
+      <h1>Brooklyn R. Rupert</h1>
+      <p>Detroit, MI • Digital Portfolio</p>
+    </div>
+
+    <!-- SECTION 1: HOME -->
+    <section id="home" class="page-section in-focus">
+      <h2 class="page-title">Hello, Welcome</h2>
+      <p class="page-subtitle">A little about me, my studies, and what I’m working on.</p>
+
+      <div style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.85;">
+        <p style="margin-bottom: 1.25rem;">
+          I am an honors undergraduate studying Criminal Justice, Criminology, and Psychology at the University of Michigan-Dearborn. 
+          This digital portfolio serves as a hub for my academic work, investigative writing, and civic engagement. 
+          If you'd like to reach me, my contact information can be found in the folder at the bottom corner of the page.
+        </p>
+        <p>
+          Scroll through to explore my background, leadership history, media features, and field notes.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT / EXPERIENCE -->
+    <section id="about" class="page-section">
+      <h2 class="page-title">Background & Experience</h2>
+      <p class="page-subtitle">Academics, leadership experience, and public service.</p>
+
+      <!-- Education -->
+      <div class="resume-block">
+        <h3>Education</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">University of Michigan–Dearborn</span>
+            <span class="role-date">Expected 2029</span>
+          </div>
+          <div class="role-company">Bachelor of Arts • Honors Student</div>
+          <ul>
+            <li><strong>Major(s):</strong> Psychology and Criminology & Criminal Justice</li>
+            <li><strong>Honors Coursework:</strong> Advanced rhetoric, ethical philosophy, constitutional law analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Professional Experience -->
+      <div class="resume-block">
+        <h3>Professional & Legal Experience</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Staff Writer</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">The Michigan Journal</div>
+          <ul>
+            <li>Research and report on global geopolitical developments and policy shifts.</li>
+            <li>Conduct analysis and source verification for weekly news editions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Leadership & Public Service -->
+      <div class="resume-block">
+        <h3>Leadership & Civic Engagement</h3>
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Secretary</span>
+            <span class="role-date">2026 – Present</span>
+          </div>
+          <div class="role-company">Criminology and Criminal Justice Collective</div>
+          <ul>
+            <li>Coordinate and maintain membership records, event scheduling, and student engagement events.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">Precinct Delegate Candidate</span>
+            <span class="role-date">2026 – 2028</span>
+          </div>
+          <div class="role-company">Wayne County, Michigan</div>
+          <ul>
+            <li>Elected in the August 4 primary to represent, advocate on behalf of, and inform a Detroit precinct home to over 1,700 residents.</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-header">
+            <span class="role-title">State Vice President</span>
+            <span class="role-date">2024 – 2025</span>
+          </div>
+          <div class="role-company">SkillsUSA Michigan</div>
+          <ul>
+            <li>Represented career and technical education (CTE) students statewide on the national stage.</li>
+            <li>Participated in Congressional advocacy in Washington, D.C. supporting federal career and technical education funding.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: NOTES & ESSAYS -->
+    <section id="posts" class="page-section">
+      <h2 class="page-title">Notes & Essays</h2>
+      <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
+
+      <div id="posts-list">
+        <div class="empty-state">
+          <strong>No posts published yet</strong>
+          <p style="font-size: 0.88rem; margin-top: 0.25rem;">New write-ups and reflections will appear here.</p>
+        </div>
+      </div>
+
+      <!-- Subsection: Featured In & Media Coverage -->
+      <div class="subsection-container">
+        <h3 class="subsection-title">Featured In & Press</h3>
+        <p class="subsection-subtitle">Past news coverage, interviews, and public media mentions. Scroll horizontally to explore.</p>
+
+        <div class="features-carousel">
+          <!-- 1. WXYZ Channel 7 / ABC News -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="outlet-badge">
+                  <span class="outlet-badge-circle"></span>
+                  WXYZ Channel 7 (ABC)
+                </span>
+                <span class="feature-date">2025</span>
+              </div>
+              <h4>Ypsilanti High School Students to Compete in NASA Global Culinary Competition</h4>
+              <p>Special feature highlighting our top 10 national ranking, culinary innovation, and competitive achievements, as covered by ABC 7 News Detroit.</p>
+            </div>
+            <div class="feature-links-row">
+              <a href="https://www.wxyz.com/news/voices/ypsilanti-high-school-students-to-compete-in-nasa-global-culinary-competition#google_vignette" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Watch & Read Full Story ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. WDIV Local 4 / ClickOnDetroit Feature -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="outlet-badge">
+                  <span class="outlet-badge-circle" style="background: #e31b23;"></span>
+                  WDIV Local 4 (NBC)
+                </span>
+                <span class="feature-date">2025</span>
+              </div>
+              <h4>Metro Detroit Students in NASA Culinary Contest</h4>
+              <p>In-studio broadcast segment covering our team's achievement as top 10 global finalists, where we joined the newsroom live to demonstrate and create our dish.</p>
+            </div>
+            <div class="feature-links-row">
+              <a href="https://www.clickondetroit.com/video/news/2025/03/09/metro-detroit-students-in-nasa-culinary-contest/" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Watch Broadcast Segment ↗
+              </a>
+            </div>
+          </div>
+          
+          <!-- 3. SkillsUSA WLTI -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="outlet-badge">SkillsUSA</span>
+                <span class="feature-date">2024</span>
+              </div>
+              <h4>Advocacy & Leadership Spotlight</h4>
+              <p>Coverage regarding statewide representation, student leadership, and career & technical education advocacy in Washington, D.C.</p>
+            </div>
+            <div class="feature-links-row">
+              <a href="https://skillsusachampions.org/2024/09/wlti-ignites-passion-for-advocacy-in-members/" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Read Story ↗
+              </a>
+              <a href="https://youtu.be/cfe0maw1bhs?si=et-FAmcQEuSiqLDp" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Watch Recap ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- 4. The Michigan Journal -->
+          <div class="feature-card">
+            <div>
+              <div class="feature-meta">
+                <span class="outlet-badge">The Michigan Journal</span>
+                <span class="feature-date">2026</span>
+              </div>
+              <h4>Upcoming International Analysis...</h4>
+              <p>Providing investigative analysis of the past, present, and escalating diplomatic relations between the People's Republic of China and the United States.</p>
+            </div>
+            <div class="feature-links-row">
+              <a href="https://www.wolverinemedianetwork.com/michiganjournal" target="_blank" rel="noopener noreferrer" class="feature-link">
+                Get Prepared to Read ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       ABOUT ME & PERSPECTIVES OFF-CANVAS SLIDE-OUT PANEL
+       ========================================================= -->
+  <div class="about-drawer-backdrop" id="aboutDrawerBackdrop" aria-hidden="true">
+    <aside class="about-drawer" id="aboutDrawer" data-lenis-prevent>
+      <div class="drawer-header">
+        <h3 class="drawer-title">About Me</h3>
+        <button class="drawer-close" id="closeDrawerBtn" aria-label="Close panel">✕</button>
+      </div>
+
+      <!-- Section: Biography & Academic Focus -->
+      <div class="drawer-section">
+        <h4>Background & Perspective</h4>
+        <p>
+          Based in Detroit, Michigan, my work focuses on the intersection of procedural due process, institutional policy, and behavioral analysis.
+        </p>
+        <p>
+          Whether analyzing legal precedents, examining urban walkability history, or writing on foreign policy, I aim to connect rigorous academic research with tangible civic engagement.
+        </p>
+      </div>
+
+      <!-- Section: Language Studies -->
+      <div class="drawer-section">
+        <h4>Language Studies</h4>
+        
+        <div class="lang-card">
+          <div class="lang-header">
+            <span class="lang-name">English</span>
+            <span class="lang-level">Native</span>
+          </div>
+          <p class="lang-desc">Primary language of academic publication, investigative journalism, and speech.</p>
+        </div>
+
+        <div class="lang-card">
+          <div class="lang-header">
+            <span class="lang-name">Mandarin Chinese (中文)</span>
+            <span class="lang-level">Active Study</span>
+          </div>
+          <p class="lang-desc">Self-study and tutoring focusing on spoken fundamentals, 漢字 character acquisition, and international news comprehension.</p>
+        </div>
+      </div>
+
+      <!-- Section: Research & Core Interests -->
+      <div class="drawer-section">
+        <h4>Areas of Inquiry</h4>
+        <div class="tag-grid">
+          <span class="tag-pill">Constitutional Law</span>
+          <span class="tag-pill">Behavioral Science</span>
+          <span class="tag-pill">Forensic Psychology</span>
+          <span class="tag-pill">U.S.–China Relations</span>
+          <span class="tag-pill">Urban History & Policy</span>
+          <span class="tag-pill">Grassroots Advocacy</span>
+        </div>
+      </div>
+
+      <!-- Section: Personal Notes -->
+      <div class="drawer-section">
+        <h4>Personal Pursuits</h4>
+        <p>
+          Outside of coursework and journalism, I enjoy creative writing, deep-dive media analysis, following international relations, and discovering classic 90s pop-rock albums.
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- LOCKED BOTTOM-RIGHT MANILA FOLDER WIDGET -->
+  <div class="folder-widget-container unseen" id="contactFolder">
+    <div class="folder">
+      <div class="folder__back">
+        <div class="paper"></div>
+        <div class="paper"></div>
+        <div class="folder__front"></div>
+        <div class="folder__front right"></div>
+      </div>
+    </div>
+    
+    <!-- Contact Paper -->
+    <div class="paper contact-paper" id="contactPaper">
+      <h4>Contact Me</h4>
+      <div class="doc-row">
+        <span class="doc-label">Email</span>
+        <div class="doc-value">
+          <a href="mailto:brooklynrupert7@Gmail.com">brooklynrupert7@Gmail.com</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">Business Number</span>
+        <div class="doc-value">
+          <a href="tel:+13133064638">(313) 306-4638</a>
+        </div>
+      </div>
+      <div class="doc-row">
+        <span class="doc-label">LinkedIn</span>
+        <div class="doc-value">
+          <a href="https://www.linkedin.com/in/brooklyn-r-rupert-8497423a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/brooklyn-r-rupert</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lenis Smooth Scroll Library -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <!-- Scripts -->
+  <script>
+    // 1. Initialize Lenis Smooth Scroll Engine
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. Smooth Scrolling on Island Dock Click
+    document.querySelectorAll('.dock-link').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          lenis.scrollTo(targetSection, { offset: -20, duration: 1.4 });
+        }
+      });
+    });
+
+    // 3. Side Drawer Interactions (About Me Panel)
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const aboutDrawerBackdrop = document.getElementById('aboutDrawerBackdrop');
+
+    function openAboutDrawer() {
+      aboutDrawerBackdrop.classList.add('is-open');
+      aboutDrawerBackdrop.setAttribute('aria-hidden', 'false');
+      lenis.stop(); // Stop main page scrolling while reading panel
+    }
+
+    function closeAboutDrawer() {
+      aboutDrawerBackdrop.classList.remove('is-open');
+      aboutDrawerBackdrop.setAttribute('aria-hidden', 'true');
+      lenis.start(); // Resume main page smooth scroll
+    }
+
+    openDrawerBtn.addEventListener('click', openAboutDrawer);
+    closeDrawerBtn.addEventListener('click', closeAboutDrawer);
+
+    // Close when clicking outside drawer
+    aboutDrawerBackdrop.addEventListener('click', (e) => {
+      if (e.target === aboutDrawerBackdrop) {
+        closeAboutDrawer();
+      }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && aboutDrawerBackdrop.classList.contains('is-open')) {
+        closeAboutDrawer();
+      }
+    });
+
+    // 4. Session-aware First Load Trigger
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+    if (!hasSeenIntro) {
+      document.body.classList.add('first-load');
+      lenis.stop();
+      setTimeout(() => {
+        document.body.classList.remove('first-load');
+        lenis.start();
+        sessionStorage.setItem('hasSeenIntro', 'true');
+      }, 3400);
+    }
+
+    // 5. Scroll & Island Dock Synchronizer
+    const sections = document.querySelectorAll('.page-section');
+    const dockLinks = document.querySelectorAll('.dock-link');
+
+    function syncDockState() {
+      const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          section.classList.add('in-focus');
+          
+          dockLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        } else {
+          section.classList.remove('in-focus');
+        }
+      });
+    }
+
+    lenis.on('scroll', syncDockState);
+    window.addEventListener('load', syncDockState);
+    syncDockState();
+
+    // 6. Folder Interactions & Toggle
+    const folderWidget = document.getElementById('contactFolder');
+
+    function markFolderSeen() {
+      if (folderWidget.classList.contains('unseen')) {
+        folderWidget.classList.remove('unseen');
+      }
+    }
+
+    folderWidget.addEventListener('mouseenter', markFolderSeen);
+
+    folderWidget.addEventListener('click', (e) => {
+      markFolderSeen();
+      if (e.target.tagName !== 'A') {
+        folderWidget.classList.toggle('is-open');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!folderWidget.contains(e.target)) {
+        folderWidget.classList.remove('is-open');
+      }
+    });
+  </script>
+
+</body>
+</html>
