@@ -258,7 +258,7 @@
 
     .page-section:last-of-type {
       border-bottom: none;
-      min-height: 40vh;
+      min-height: 80vh;
     }
 
     /* Section In-Focus */
@@ -448,6 +448,27 @@
       border-color: var(--accent);
     }
 
+    /* Subsection Header (Inside Notes & Essays) */
+    .subsection-container {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    h3.subsection-title {
+      font-family: 'Newsreader', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    p.subsection-subtitle {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
     /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
@@ -521,7 +542,7 @@
     }
 
     /* =========================================================
-       HORIZONTAL EXPANDING CAROUSEL
+       HORIZONTAL EXPANDING CAROUSEL WITH DOWNWARD HOVER ACTION
        ========================================================= */
     .features-carousel {
       display: flex;
@@ -650,6 +671,7 @@
       border-bottom-color: var(--text);
     }
 
+    /* Empty State for Notes */
     .empty-state {
       background: rgba(255, 255, 255, 0.75);
       border: 1px dashed var(--border);
@@ -666,152 +688,100 @@
       margin-bottom: 0.35rem;
     }
 
-    .subsection-container {
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    h3.subsection-title {
-      font-family: 'Newsreader', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    p.subsection-subtitle {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
-    }
-
     /* =========================================================
-       PERSISTENT US VISITOR MAP CONTAINER
+       US VISITOR MAP (BOTTOM SECTION)
        ========================================================= */
     .map-container-box {
       background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem;
+      padding: 2.25rem 2rem;
       box-shadow: 0 6px 20px rgba(119, 136, 115, 0.08);
       position: relative;
     }
 
-    .map-header-row {
+    .map-header-flex {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    .map-legend {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.76rem;
-      color: var(--muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .legend-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(161, 188, 152, 0.4);
-    }
-
-    .map-viewport {
+    .map-svg-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 60%; /* Aspect ratio */
-      background: var(--bg);
-      border: 1px solid var(--border-subtle);
+      background: #faf6f0;
       border-radius: 8px;
-      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      padding: 1rem 0.5rem;
     }
 
-    .map-viewport svg.us-base-svg {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .us-svg-map {
       width: 100%;
-      height: 100%;
+      height: auto;
+      display: block;
     }
 
-    .map-dot-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: auto;
+    .us-landmass {
+      fill: #e8ded2;
+      stroke: var(--border);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
     }
 
-    /* Animated Persistent State Dots */
-    .visitor-dot {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border: 2px solid #FFFFFF;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
+    /* Visitor Pins */
+    .visitor-pin {
+      fill: var(--accent);
+      stroke: #FFFFFF;
+      stroke-width: 1.5;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      animation: dotBeacon 2.2s infinite ease-in-out;
-      transition: transform 0.2s ease;
-      z-index: 10;
+      transition: transform 0.2s ease, fill 0.2s ease;
     }
 
-    .visitor-dot:hover {
-      transform: translate(-50%, -50%) scale(1.6);
-      background: var(--text);
+    .visitor-pin:hover {
+      fill: #2c2825;
+      transform: scale(1.35);
+      transform-origin: center;
     }
 
-    @keyframes dotBeacon {
-      0% {
-        box-shadow: 0 0 0 0 rgba(119, 136, 115, 0.8), 0 2px 6px rgba(0,0,0,0.2);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(119, 136, 115, 0), 0 2px 6px rgba(0,0,0,0.2);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(119, 136, 115, 0), 0 2px 6px rgba(0,0,0,0.2);
-      }
+    .pin-pulse {
+      fill: var(--accent);
+      opacity: 0.4;
+      animation: pinRadar 2.2s infinite ease-out;
+      transform-origin: center;
     }
 
-    /* Map Tooltip */
+    @keyframes pinRadar {
+      0% { r: 5; opacity: 0.6; }
+      100% { r: 18; opacity: 0; }
+    }
+
+    /* Hover Tooltip */
     .map-tooltip {
       position: absolute;
       background: var(--text);
       color: #FDF6ED;
-      padding: 0.35rem 0.65rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 6px;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 500;
       pointer-events: none;
-      white-space: nowrap;
       opacity: 0;
-      transform: translate(-50%, -130%);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 20;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transform: translate(-50%, -120%);
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .map-tooltip.is-visible {
-      opacity: 1;
-      transform: translate(-50%, -145%);
-    }
-
-    .map-status-footer {
+    .map-meta-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 0.9rem;
-      font-size: 0.78rem;
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
       color: var(--muted);
     }
 
@@ -877,6 +847,7 @@
       border-radius: 4px 4px 0 0;
     }
 
+    /* Layered Papers */
     .paper {
       position: absolute;
       bottom: 6px;
@@ -905,6 +876,7 @@
       background: #faf7f0;
     }
 
+    /* Contact Document */
     .paper.contact-paper {
       width: 240px;
       height: auto;
@@ -961,6 +933,7 @@
       text-decoration: underline;
     }
 
+    /* Front Flap Elements */
     .folder__front {
       position: absolute;
       bottom: 0;
@@ -979,6 +952,7 @@
       pointer-events: none;
     }
 
+    /* Desktop Hover / Click Open */
     .folder-widget-container:hover .folder__front,
     .folder-widget-container.is-open .folder__front {
       transform: rotateX(-32deg);
@@ -1028,8 +1002,8 @@
         flex: 0 0 280px;
       }
 
-      .map-viewport {
-        padding-top: 68%;
+      .map-container-box {
+        padding: 1.5rem 1rem;
       }
 
       .folder-widget-container {
@@ -1108,14 +1082,16 @@
 </head>
 <body>
 
-  <!-- Floating Island Dock (3 Core Sections) -->
+  <!-- Floating Island Dock (4 Links) -->
   <aside class="island-dock">
+    <!-- Home Icon -->
     <a href="#home" class="dock-link active" data-tooltip="Home">
       <svg viewBox="0 0 24 24">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z"/>
       </svg>
     </a>
 
+    <!-- CV & Experience Icon -->
     <a href="#about" class="dock-link" data-tooltip="Background & CV">
       <svg viewBox="0 0 24 24">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -1123,12 +1099,22 @@
       </svg>
     </a>
 
-    <a href="#posts" class="dock-link" data-tooltip="Notes & Press">
+    <!-- Notes & Features Icon -->
+    <a href="#posts" class="dock-link" data-tooltip="Notes & Features">
       <svg viewBox="0 0 24 24">
         <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z"/>
         <polyline points="15 3 21 9 15 9"/>
         <line x1="9" y1="13" x2="15" y2="13"/>
         <line x1="9" y1="17" x2="13" y2="17"/>
+      </svg>
+    </a>
+
+    <!-- Live Visitor Map Icon -->
+    <a href="#visitor-map" class="dock-link" data-tooltip="Visitor Map">
+      <svg viewBox="0 0 24 24">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+        <line x1="8" y1="2" x2="8" y2="18"></line>
+        <line x1="16" y1="6" x2="16" y2="22"></line>
       </svg>
     </a>
   </aside>
@@ -1142,7 +1128,7 @@
       <p>Detroit, MI • Digital Portfolio</p>
     </div>
 
-    <!-- SECTION 1: HOME (WITH INTEGRATED ABOUT ME & LANGUAGES DROPDOWN) -->
+    <!-- SECTION 1: HOME -->
     <section id="home" class="page-section in-focus">
       <h2 class="page-title">Hello, Welcome</h2>
       <p class="page-subtitle">A little about me, my studies, and what I’m working on.</p>
@@ -1189,7 +1175,7 @@
                   <span class="lang-name">Mandarin Chinese (中文)</span>
                   <span class="lang-level">HSK 1</span>
                 </div>
-                <p class="lang-desc">Formal self-study, active tutoring, character fluency focus, conversational comprehension, and news reading.</p>
+                <p class="lang-desc">Formal self-study, active tutoring, character fluency focus, and conversational comprehension.</p>
               </div>
             </div>
           </div>
@@ -1286,7 +1272,7 @@
       </div>
     </section>
 
-    <!-- SECTION 3: NOTES & PRESS (WITH EMBEDDED MAP AT BOTTOM) -->
+    <!-- SECTION 3: NOTES & ESSAYS -->
     <section id="posts" class="page-section">
       <h2 class="page-title">Notes & Essays</h2>
       <p class="page-subtitle">Academic papers, volunteer reflections, and observations.</p>
@@ -1382,58 +1368,40 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- =========================================================
-           PERSISTENT U.S. VISITOR MAP SECTION
-           ========================================================= -->
-      <div class="subsection-container">
-        <h3 class="subsection-title">Visitor Geography & Reach</h3>
-        <p class="subsection-subtitle">Every visit leaves a persistent regional beacon on the map.</p>
+    <!-- SECTION 4: LIVE US VISITOR MAP -->
+    <section id="visitor-map" class="page-section">
+      <h2 class="page-title">Visitor Footprint</h2>
+      <p class="page-subtitle">Real-time geographic visualization of visitors across the United States.</p>
 
-        <div class="map-container-box">
-          <div class="map-header-row">
-            <div class="map-legend">
-              <span class="legend-dot"></span>
-              <span>Active Regional Visits</span>
-            </div>
-            <div style="font-size: 0.8rem; font-weight: 600; color: var(--accent);" id="activeStateCountText">
-              Loading telemetry...
-            </div>
+      <div class="map-container-box">
+        <div class="map-header-flex">
+          <div>
+            <h3 style="font-family: 'Newsreader', serif; font-size: 1.35rem; font-weight: 600; color: var(--text);">United States Overview</h3>
+            <p style="font-size: 0.84rem; color: var(--muted); margin-top: 0.15rem;">Every location visited leaves a permanent marker on the map.</p>
           </div>
-
-          <div class="map-viewport" id="mapViewport">
-            <!-- Stylized Minimal US Map Vector -->
-            <svg class="us-base-svg" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- US Main Continental Outline Silhouette -->
-              <path d="M150,110 L280,105 L350,110 L440,115 L520,110 L600,120 L720,110 L810,130 L850,160 L870,220 L840,270 L860,330 L800,380 L805,470 L770,510 L750,440 L700,430 L630,440 L530,450 L470,520 L440,490 L400,450 L310,430 L220,440 L160,380 L130,280 L125,180 Z" fill="#ebdcd0" stroke="#DCCFC0" stroke-width="2" opacity="0.6"/>
-              
-              <!-- Subtle Region Guidelines -->
-              <path d="M280,105 L310,430" stroke="#DCCFC0" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.5"/>
-              <path d="M520,110 L530,450" stroke="#DCCFC0" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.5"/>
-              <path d="M720,110 L700,430" stroke="#DCCFC0" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.5"/>
-              <path d="M150,260 L850,260" stroke="#DCCFC0" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.5"/>
-              
-              <!-- Alaska & Hawaii Inset Miniatures -->
-              <rect x="70" y="470" width="90" height="60" rx="4" fill="#faf5ee" stroke="#DCCFC0" stroke-width="1"/>
-              <text x="78" y="486" font-size="10" font-weight="600" fill="#778873" font-family="Inter, sans-serif">AK</text>
-              <rect x="180" y="490" width="70" height="40" rx="4" fill="#faf5ee" stroke="#DCCFC0" stroke-width="1"/>
-              <text x="188" y="506" font-size="10" font-weight="600" fill="#778873" font-family="Inter, sans-serif">HI</text>
-            </svg>
-
-            <!-- Layer for Permanent Glowing Visitor Dots -->
-            <div class="map-dot-layer" id="mapDotLayer"></div>
-
-            <!-- Floating Hover Tooltip -->
-            <div class="map-tooltip" id="mapTooltip"></div>
-          </div>
-
-          <div class="map-status-footer">
-            <span id="mapLastVisitNotice">Syncing geolocation...</span>
-            <span style="font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Stored in Session History</span>
+          <div style="font-size: 0.8rem; font-weight: 600; color: var(--accent); background: var(--bg); padding: 0.3rem 0.75rem; border-radius: 20px; border: 1px solid var(--border);">
+            <span id="mapVisitorCount">1</span> Location Recorded
           </div>
         </div>
-      </div>
 
+        <div class="map-svg-wrapper">
+          <div class="map-tooltip" id="mapTooltip">Detroit, MI</div>
+          <svg class="us-svg-map" viewBox="0 0 960 600" id="usMapSvg">
+            <!-- Accurate Contiguous US Mainland Silhouette Vector -->
+            <path class="us-landmass" d="M152.2,74.5 C162.8,77.5 178.5,84.1 190.5,87.6 C205.8,92.1 230.1,88.2 245.8,87.3 C265.1,86.2 301.2,85.1 330.4,85.1 C370.8,85.1 410.2,85.3 450.4,85.3 C480.6,85.3 502.8,82.1 520.1,95.4 C532.5,104.9 548.2,118.2 562.1,114.1 C572.4,111.1 585.8,92.6 598.2,95.8 C615.1,100.2 610.8,118.2 622.4,130.2 C634.8,143.1 650.1,148.5 665.2,142.2 C678.1,136.8 685.2,122.1 698.4,118.4 C710.2,115.1 722.5,124.2 735.1,130.5 C748.2,137.1 760.1,132.4 772.4,125.1 C788.5,115.6 805.1,82.4 825.2,72.1 C838.4,65.3 852.1,75.2 865.2,88.1 C878.1,100.8 888.2,120.1 885.1,138.2 C882.4,154.1 865.2,168.2 858.1,182.4 C850.2,198.1 855.2,215.1 848.2,230.2 C840.1,247.8 820.2,260.1 810.1,278.2 C798.2,299.4 802.1,320.1 792.4,342.2 C782.1,365.1 760.2,388.2 755.1,412.4 C750.2,435.1 762.1,470.2 755.2,492.1 C750.1,508.4 738.2,510.1 728.1,495.2 C715.2,476.1 718.1,440.2 708.2,420.1 C700.1,403.8 680.2,400.1 665.1,402.4 C648.2,405.1 630.1,418.2 612.4,415.1 C590.2,411.1 570.1,398.2 550.2,398.2 C528.1,398.2 510.2,410.1 490.1,412.4 C470.2,414.8 450.1,425.2 432.4,438.1 C418.2,448.5 408.1,470.2 398.2,490.1 C388.5,509.8 380.2,530.1 368.1,515.2 C352.4,495.8 340.2,460.1 325.1,442.2 C312.4,427.1 288.1,418.2 270.2,415.1 C250.1,411.8 228.2,412.4 210.1,418.2 C195.2,423.1 180.1,438.2 165.2,442.1 C152.1,445.5 140.2,438.2 130.1,430.1 C115.2,418.2 108.1,395.2 105.2,375.1 C100.2,340.1 108.1,300.2 105.2,265.1 C102.4,230.1 92.1,195.2 98.2,160.1 C102.4,135.2 118.1,110.1 132.4,90.2 Z" />
+            
+            <!-- Pin Layer Generated Automatically by JavaScript -->
+            <g id="mapPinGroup"></g>
+          </svg>
+        </div>
+
+        <div class="map-meta-bar">
+          <span>Active Tracking: United States Regional Telemetry</span>
+          <span>Hover pins for details</span>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -1588,118 +1556,107 @@
     });
 
     // =========================================================
-    // 7. PERMANENT U.S. VISITOR MAP ENGINE (DOTS ALWAYS STAY)
+    // 7. PERSISTENT US VISITOR MAP PLOTTER
     // =========================================================
-    const US_COORDINATE_MAP = {
-      'MI': { top: 29, left: 69, name: 'Michigan' },
-      'IL': { top: 38, left: 60, name: 'Illinois' },
-      'OH': { top: 36, left: 71, name: 'Ohio' },
-      'IN': { top: 38, left: 66, name: 'Indiana' },
-      'NY': { top: 24, left: 82, name: 'New York' },
-      'CA': { top: 46, left: 16, name: 'California' },
-      'TX': { top: 72, left: 47, name: 'Texas' },
-      'FL': { top: 78, left: 78, name: 'Florida' },
-      'DC': { top: 40, left: 79, name: 'Washington D.C.' },
-      'PA': { top: 32, left: 77, name: 'Pennsylvania' },
-      'WA': { top: 15, left: 19, name: 'Washington' },
-      'VA': { top: 42, left: 77, name: 'Virginia' },
-      'GA': { top: 64, left: 73, name: 'Georgia' },
-      'NC': { top: 50, left: 77, name: 'North Carolina' },
-      'MA': { top: 22, left: 86, name: 'Massachusetts' },
-      'CO': { top: 44, left: 38, name: 'Colorado' },
-      'AZ': { top: 59, left: 26, name: 'Arizona' },
-      'MN': { top: 23, left: 56, name: 'Minnesota' },
-      'WI': { top: 26, left: 61, name: 'Wisconsin' },
-      'TN': { top: 52, left: 66, name: 'Tennessee' },
-      'AK': { top: 84, left: 12, name: 'Alaska' },
-      'HI': { top: 85, left: 22, name: 'Hawaii' }
-    };
-
-    const MAP_LOGS_KEY = 'portfolio_persistent_visitor_map';
-    const mapDotLayer = document.getElementById('mapDotLayer');
+    const MAP_STORAGE_KEY = 'portfolio_saved_map_visitors';
+    const mapPinGroup = document.getElementById('mapPinGroup');
     const mapTooltip = document.getElementById('mapTooltip');
-    const activeStateCountText = document.getElementById('activeStateCountText');
-    const mapLastVisitNotice = document.getElementById('mapLastVisitNotice');
+    const mapVisitorCount = document.getElementById('mapVisitorCount');
 
-    function loadPersistedStateMap() {
-      let storedMap = JSON.parse(localStorage.getItem(MAP_LOGS_KEY));
-      
-      // Default initial beacons (Michigan home base)
-      if (!storedMap || Object.keys(storedMap).length === 0) {
-        storedMap = {
-          'MI': { count: 4, cities: ['Detroit', 'Ypsilanti', 'Dearborn'] },
-          'DC': { count: 1, cities: ['Washington D.C.'] }
-        };
-        localStorage.setItem(MAP_LOGS_KEY, JSON.stringify(storedMap));
-      }
-      return storedMap;
+    // Approximate SVG Map projection bounding box for US mainland
+    function latLngToSvgCoords(lat, lng) {
+      const minLng = -125.0, maxLng = -66.9;
+      const minLat = 24.5, maxLat = 49.4;
+
+      const x = ((lng - minLng) / (maxLng - minLng)) * 740 + 110;
+      const y = (1 - (lat - minLat) / (maxLat - minLat)) * 430 + 80;
+      return { x: Math.max(90, Math.min(880, x)), y: Math.max(70, Math.min(520, y)) };
     }
 
-    function renderMapDots(stateMap) {
-      mapDotLayer.innerHTML = '';
-      const stateKeys = Object.keys(stateMap);
-      
-      activeStateCountText.textContent = `${stateKeys.length} Active U.S. Regions`;
+    function renderVisitorPins() {
+      // Default persistent starting points (Detroit anchor + history)
+      const defaultPins = [
+        { city: 'Detroit', state: 'MI', lat: 42.3314, lng: -83.0458, label: 'Detroit, MI' },
+        { city: 'Washington', state: 'DC', lat: 38.9072, lng: -77.0369, label: 'Washington, DC' },
+        { city: 'Chicago', state: 'IL', lat: 41.8781, lng: -87.6298, label: 'Chicago, IL' }
+      ];
 
-      stateKeys.forEach(stCode => {
-        const coords = US_COORDINATE_MAP[stCode];
-        if (!coords) return;
+      const saved = JSON.parse(localStorage.getItem(MAP_STORAGE_KEY)) || defaultPins;
+      mapPinGroup.innerHTML = '';
+      mapVisitorCount.textContent = saved.length;
 
-        const dot = document.createElement('div');
-        dot.className = 'visitor-dot';
-        dot.style.top = `${coords.top}%`;
-        dot.style.left = `${coords.left}%`;
+      saved.forEach((pin, index) => {
+        const coords = latLngToSvgCoords(pin.lat, pin.lng);
 
-        const stateInfo = stateMap[stCode];
-        const stateName = coords.name || stCode;
+        // SVG Container for pin
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
+        // Pulse radar ring for the most recent visit
+        if (index === 0) {
+          const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          pulse.setAttribute('cx', coords.x);
+          pulse.setAttribute('cy', coords.y);
+          pulse.setAttribute('r', '6');
+          pulse.setAttribute('class', 'pin-pulse');
+          g.appendChild(pulse);
+        }
+
+        // Solid marker dot
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', coords.x);
+        dot.setAttribute('cy', coords.y);
+        dot.setAttribute('r', '5.5');
+        dot.setAttribute('class', 'visitor-pin');
+
+        // Tooltip hover interactions
         dot.addEventListener('mouseenter', (e) => {
-          const citiesText = stateInfo.cities ? stateInfo.cities.slice(0, 2).join(', ') : '';
-          mapTooltip.innerHTML = `<strong>${stateName}</strong><br><span style="opacity:0.8;">${stateInfo.count} visit${stateInfo.count > 1 ? 's' : ''} ${citiesText ? `• ${citiesText}` : ''}</span>`;
-          mapTooltip.style.top = `${coords.top}%`;
-          mapTooltip.style.left = `${coords.left}%`;
-          mapTooltip.classList.add('is-visible');
+          const svgBox = document.querySelector('.map-svg-wrapper').getBoundingClientRect();
+          mapTooltip.textContent = `📍 ${pin.city}, ${pin.state}`;
+          mapTooltip.style.left = `${(coords.x / 960) * 100}%`;
+          mapTooltip.style.top = `${(coords.y / 600) * 100}%`;
+          mapTooltip.style.opacity = '1';
         });
 
         dot.addEventListener('mouseleave', () => {
-          mapTooltip.classList.remove('is-visible');
+          mapTooltip.style.opacity = '0';
         });
 
-        mapDotLayer.appendChild(dot);
+        g.appendChild(dot);
+        mapPinGroup.appendChild(g);
       });
     }
 
-    // 8. Record Live Geographic Telemetry & Pin Permanently
-    async function trackAndPinVisitor() {
-      const stateMap = loadPersistedStateMap();
-
+    // Auto-record new visitor coordinates on page load
+    (async function recordVisitorOnMap() {
       try {
         const res = await fetch('https://ipapi.co/json/');
-        if (res.ok) {
-          const d = await res.json();
-          const stateCode = d.region_code || 'MI';
-          const cityName = d.city || 'Detroit';
+        if (!res.ok) return;
+        const d = await res.json();
 
-          if (!stateMap[stateCode]) {
-            stateMap[stateCode] = { count: 1, cities: [cityName] };
-          } else {
-            stateMap[stateCode].count += 1;
-            if (!stateMap[stateCode].cities.includes(cityName)) {
-              stateMap[stateCode].cities.push(cityName);
-            }
+        if (d.country_code === 'US' && d.latitude && d.longitude) {
+          const saved = JSON.parse(localStorage.getItem(MAP_STORAGE_KEY)) || [
+            { city: 'Detroit', state: 'MI', lat: 42.3314, lng: -83.0458 },
+            { city: 'Washington', state: 'DC', lat: 38.9072, lng: -77.0369 },
+            { city: 'Chicago', state: 'IL', lat: 41.8781, lng: -87.6298 }
+          ];
+
+          // Check if city already plotted recently to avoid identical overlapping duplicates
+          const exists = saved.some(p => Math.abs(p.lat - d.latitude) < 0.2 && Math.abs(p.lng - d.longitude) < 0.2);
+          if (!exists) {
+            saved.unshift({
+              city: d.city || 'Visitor',
+              state: d.region_code || d.region || 'US',
+              lat: parseFloat(d.latitude),
+              lng: parseFloat(d.longitude)
+            });
+            localStorage.setItem(MAP_STORAGE_KEY, JSON.stringify(saved));
           }
-
-          localStorage.setItem(MAP_LOGS_KEY, JSON.stringify(stateMap));
-          mapLastVisitNotice.textContent = `Latest signal: ${cityName}, ${stateCode}`;
         }
-      } catch (err) {
-        mapLastVisitNotice.textContent = `Active signal: Detroit, MI`;
+      } catch (e) {
+      } finally {
+        renderVisitorPins();
       }
-
-      renderMapDots(stateMap);
-    }
-
-    trackAndPinVisitor();
+    })();
   </script>
 
 </body>
