@@ -1417,6 +1417,23 @@
         folderWidget.classList.remove('is-open');
       }
     });
+    // Background Geo-Telemetry Tracker for Analytics Dashboard
+    (async function trackGeo() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        if (!res.ok) return;
+        const d = await res.json();
+        const logs = JSON.parse(localStorage.getItem('portfolio_us_visitor_logs')) || [];
+        logs.unshift({
+          city: d.city || 'Unknown',
+          state: d.region || 'Unknown',
+          stateCode: d.region_code || 'US',
+          country: d.country_name || 'USA',
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('portfolio_us_visitor_logs', JSON.stringify(logs.slice(0, 50)));
+      } catch (e) {}
+    })();
   </script>
 
 </body>
