@@ -428,49 +428,6 @@
       line-height: 1.5;
     }
 
-    /* Tag Pills */
-    .tag-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag-pill {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text);
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.7rem;
-      border-radius: 20px;
-      transition: border-color 0.2s ease;
-    }
-
-    .tag-pill:hover {
-      border-color: var(--accent);
-    }
-
-    /* Subsection Header (Inside Notes & Essays) */
-    .subsection-container {
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    h3.subsection-title {
-      font-family: 'Newsreader', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    p.subsection-subtitle {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
-    }
-
     /* Experience Timeline */
     .resume-block {
       margin-bottom: 2.75rem;
@@ -690,127 +647,164 @@
       margin-bottom: 0.35rem;
     }
 
-    /* =========================================================
-       INTERACTIVE U.S. SILHOUETTE VISITOR MAP (BOTTOM OF PORTFOLIO)
-       ========================================================= */
-    .us-map-section {
-      margin-top: 4rem;
-      padding-top: 3rem;
+    /* Subsection Header (Inside Notes & Essays) */
+    .subsection-container {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
       border-top: 1px dashed var(--border);
     }
 
-    .us-map-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem 2rem 1.5rem;
-      box-shadow: 0 4px 20px rgba(119, 136, 115, 0.08);
-      position: relative;
-    }
-
-    .us-map-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1.5rem;
-    }
-
-    .us-map-title h3 {
+    h3.subsection-title {
       font-family: 'Newsreader', serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 0.25rem;
     }
 
-    .us-map-title p {
-      font-size: 0.88rem;
+    p.subsection-subtitle {
       color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
     }
 
-    .map-summary-badge {
+    /* =========================================================
+       CLEAN U.S. SILHOUETTE MAP & GEOGRAPHY TELEMETRY
+       ========================================================= */
+    .map-section {
+      margin-top: 4.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+
+    .map-telemetry-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
+      gap: 0.45rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      color: var(--accent);
-      background: var(--bg);
-      border: 1px solid var(--border-subtle);
-      padding: 0.3rem 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: #FFFFFF;
+      padding: 0.25rem 0.65rem;
       border-radius: 20px;
+      border: 1px solid var(--border-subtle);
     }
 
-    .map-svg-container {
+    .map-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #778873;
+      box-shadow: 0 0 0 0 rgba(119, 136, 115, 0.7);
+      animation: pulseDot 2.2s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+
+    @keyframes pulseDot {
+      to {
+        box-shadow: 0 0 0 7px rgba(119, 136, 115, 0);
+      }
+    }
+
+    .map-canvas-container {
       position: relative;
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem 1.25rem;
+      box-shadow: 0 6px 20px rgba(119, 136, 115, 0.08);
+      margin-top: 1.25rem;
+      overflow: visible;
     }
 
-    .us-silhouette-svg {
+    .usa-map-svg {
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 4px 10px rgba(119, 136, 115, 0.12));
+      overflow: visible;
     }
 
-    .us-outline-path {
-      fill: #f4ede2;
+    .usa-outline {
+      fill: #ebe2d5;
       stroke: var(--border);
-      stroke-width: 1.5;
+      stroke-width: 1.2;
       stroke-linejoin: round;
       transition: fill 0.3s ease;
     }
 
-    /* Location Pin Marker Animation */
-    .map-pin {
+    .usa-outline:hover {
+      fill: #e4d8c8;
+    }
+
+    /* Visitor Pins on the Map */
+    .visitor-marker {
       cursor: pointer;
+    }
+
+    .marker-dot {
+      fill: var(--accent);
+      stroke: #FFFFFF;
+      stroke-width: 1.5;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), fill 0.2s ease;
+    }
+
+    .visitor-marker:hover .marker-dot {
+      fill: #1c1917;
+      transform: scale(1.4);
+    }
+
+    .marker-ripple {
+      fill: var(--accent);
+      opacity: 0.4;
+      animation: pingDot 2.5s infinite ease-out;
       transform-origin: center;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .map-pin:hover {
-      transform: scale(1.3);
+    @keyframes pingDot {
+      0% { r: 4px; opacity: 0.7; }
+      100% { r: 16px; opacity: 0; }
     }
 
-    .pin-pulse {
-      animation: pinPulseRing 2s infinite ease-out;
-      transform-origin: center;
-    }
-
-    @keyframes pinPulseRing {
-      0% {
-        r: 5px;
-        opacity: 0.8;
-      }
-      100% {
-        r: 16px;
-        opacity: 0;
-      }
-    }
-
-    /* Map Tooltip */
+    /* Floating Tooltip */
     .map-tooltip {
       position: absolute;
       background: var(--text);
       color: #FDF6ED;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
       font-size: 0.76rem;
       font-weight: 500;
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
       pointer-events: none;
       opacity: 0;
       transform: translate(-50%, -120%);
       transition: opacity 0.2s ease, transform 0.2s ease;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
       white-space: nowrap;
-      z-index: 10;
+      z-index: 100;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
 
-    .map-tooltip.visible {
+    .map-tooltip.is-visible {
       opacity: 1;
-      transform: translate(-50%, -140%);
+      transform: translate(-50%, -135%);
+    }
+
+    .map-footer-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-subtle);
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
     /* =========================================================
@@ -1031,11 +1025,6 @@
         flex: 0 0 280px;
       }
 
-      .us-map-header {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
       .folder-widget-container {
         bottom: 5.8rem;
         right: 1.25rem;
@@ -1188,7 +1177,7 @@
                   <span class="lang-name">English</span>
                   <span class="lang-level">Native</span>
                 </div>
-                <p class="lang-desc">Primary language of academic works, professional analysis, and written reporting.</p>
+                <p class="lang-desc">Primary language of academic publication, constitutional analysis, and news reporting.</p>
               </div>
 
               <div class="lang-card">
@@ -1196,20 +1185,8 @@
                   <span class="lang-name">Mandarin Chinese (中文)</span>
                   <span class="lang-level">HSK 1</span>
                 </div>
-                <p class="lang-desc">Formal self-study, active tutoring, character fluency focus and conversational comprehension and news reading.</p>
+                <p class="lang-desc">Casual self-study, active tutoring, and 漢字 character practice focused on conversational comprehension and news reading.</p>
               </div>
-            </div>
-          </div>
-
-          <!-- Block 2: Academic Inquiries -->
-          <div class="about-block">
-            <h4>Areas of Inquiry</h4>
-            <div class="tag-grid">
-              <span class="tag-pill">Constitutional Law</span>
-              <span class="tag-pill">Criminal Law</span>
-              <span class="tag-pill">Forensic Psychology</span>
-              <span class="tag-pill">Behavioral Analysis</span>
-              <span class="tag-pill">U.S.–China Relations</span>
             </div>
           </div>
 
@@ -1390,29 +1367,38 @@
         </div>
       </div>
 
-      <!-- INTERACTIVE U.S. SILHOUETTE MAP -->
-      <div class="us-map-section">
-        <div class="us-map-card">
-          <div class="us-map-header">
-            <div class="us-map-title">
-              <h3>Visitor Geography</h3>
-              <p>Real-time telemetry of audience locations across the United States.</p>
-            </div>
-            <div class="map-summary-badge" id="mapSummaryBadge">
-              <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block;"></span>
-              <span id="mapVisitorCount">Tracking active locations...</span>
-            </div>
+      <!-- =========================================================
+           U.S. SILHOUETTE VISITOR MAP SECTION
+           ========================================================= -->
+      <div class="map-section">
+        <div class="map-header">
+          <div>
+            <h3 class="subsection-title">Visitor Geography</h3>
+            <p class="subsection-subtitle" style="margin-bottom: 0;">Live city-level audience presence across the country.</p>
           </div>
+          <div class="map-telemetry-badge">
+            <span class="map-pulse"></span>
+            <span id="activeSessionsLabel">Tracking Live</span>
+          </div>
+        </div>
 
-          <div class="map-svg-container" id="mapContainer">
-            <!-- Clean Silhouette Map of the United States (No Interior Lines) -->
-            <svg class="us-silhouette-svg" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
-              <path class="us-outline-path" d="M154.5,65.3 L178.6,68.4 L204.8,69.5 L247.3,71.2 L308.5,73.5 L372.4,75.2 L436.3,77.1 L478.8,78.2 L484.5,70.1 L496.2,60.8 L514.5,69.2 L528.1,84.5 L562.4,85.2 L580.6,73.8 L605.8,74.5 L618.2,88.4 L644.5,92.1 L662.1,80.4 L685.4,82.1 L708.2,68.5 L732.1,65.2 L748.5,72.4 L760.1,60.2 L778.5,52.1 L792.4,68.2 L808.2,95.4 L824.5,115.2 L838.2,108.4 L852.1,124.5 L842.5,142.1 L828.4,160.2 L838.2,185.4 L820.1,202.1 L805.2,228.4 L792.5,245.2 L780.4,260.1 L774.2,285.2 L778.5,310.4 L784.2,342.1 L770.1,365.2 L760.4,395.1 L748.2,425.4 L738.5,455.2 L730.1,485.4 L715.2,492.1 L698.4,472.5 L685.2,442.1 L660.4,420.5 L632.1,418.2 L605.4,422.5 L578.2,430.1 L550.4,442.5 L525.1,460.2 L498.2,478.4 L472.5,492.1 L448.2,488.5 L425.1,475.2 L402.5,458.4 L378.2,440.1 L352.4,425.5 L328.1,415.2 L300.4,410.1 L275.2,408.4 L250.1,412.5 L225.4,420.1 L200.2,432.5 L175.4,448.2 L152.1,455.4 L138.4,440.1 L128.2,410.5 L120.4,375.2 L115.1,340.5 L112.5,305.2 L108.2,270.4 L102.5,235.1 L95.4,200.2 L88.2,165.4 L80.1,130.5 L75.2,105.4 L90.4,95.2 L115.2,85.4 L138.5,75.2 Z"/>
-              <!-- Dynamic Visited Location Marker Pins (Injected via JS) -->
-              <g id="mapPinsGroup"></g>
-            </svg>
-            <!-- Hover Floating Tooltip -->
-            <div class="map-tooltip" id="mapTooltip"></div>
+        <div class="map-canvas-container" id="mapContainer">
+          <div class="map-tooltip" id="mapTooltip"></div>
+          
+          <svg class="usa-map-svg" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Seamless United States Outer Silhouette (Clean Outline, No Interior State Lines) -->
+            <path class="usa-outline" d="M152,86 L159,86 L164,96 L175,97 L190,95 L204,96 L216,94 L229,97 L247,97 L258,95 L271,97 L287,97 L303,96 L319,97 L335,97 L352,96 L369,97 L385,96 L402,96 L421,97 L439,96 L457,96 L474,96 L486,104 L490,119 L490,131 L501,139 L515,142 L529,144 L544,142 L556,134 L568,127 L582,118 L597,112 L614,115 L625,123 L631,137 L637,149 L649,158 L662,163 L679,166 L694,166 L707,171 L720,167 L733,161 L747,152 L760,147 L776,144 L788,149 L795,161 L806,168 L814,158 L823,149 L837,133 L851,123 L856,134 L861,149 L868,162 L875,175 L863,186 L852,197 L841,209 L830,219 L821,232 L810,244 L799,255 L792,267 L784,281 L777,294 L771,308 L764,321 L759,336 L754,351 L750,366 L747,381 L745,396 L746,412 L750,427 L754,442 L760,458 L764,473 L760,483 L748,485 L742,472 L737,458 L734,444 L731,430 L728,416 L723,403 L717,390 L710,377 L702,366 L692,357 L681,351 L668,354 L655,360 L642,367 L628,375 L615,383 L601,391 L588,399 L574,407 L561,416 L547,424 L534,432 L520,441 L507,449 L493,458 L480,466 L475,479 L473,493 L474,507 L480,521 L487,534 L478,542 L467,536 L458,526 L450,515 L443,503 L437,490 L432,477 L426,464 L419,451 L412,439 L403,428 L394,417 L383,408 L371,400 L358,393 L344,388 L330,384 L315,382 L301,381 L286,381 L271,383 L257,386 L242,390 L228,396 L214,402 L200,410 L187,418 L174,428 L162,438 L151,450 L140,462 L131,475 L124,460 L121,445 L119,430 L118,415 L118,400 L119,385 L121,370 L124,355 L127,340 L131,325 L136,310 L141,295 L147,281 L153,266 L159,252 L166,238 L173,224 L180,210 L188,197 L196,183 L204,170 L212,157 L221,144 L230,132 L239,119 L248,107 L241,96 L226,97 L211,97 L196,96 L181,96 L166,96 L152,86 Z" />
+            
+            <!-- Continental Base Map Land Silhouette -->
+            <path class="usa-outline" d="M125,108 C145,107 185,105 210,105 C255,105 310,104 365,104 C425,104 470,103 488,110 C500,118 510,140 528,143 C545,145 565,135 580,125 C605,110 620,115 635,130 C648,145 660,160 685,165 C710,170 735,160 760,150 C780,142 805,150 820,165 C845,145 865,125 870,135 C875,160 855,200 830,230 C805,260 780,310 765,360 C750,410 755,460 762,480 C745,482 735,450 725,410 C705,365 670,350 635,370 C590,395 550,430 500,465 C485,480 478,515 480,535 C460,530 445,490 430,460 C395,410 340,385 290,382 C240,380 190,415 150,455 C125,445 120,380 128,320 C138,250 175,190 205,145 C195,130 160,120 125,108 Z" />
+
+            <!-- Dynamic City Marker Overlay Group -->
+            <g id="visitorPinsGroup"></g>
+          </svg>
+
+          <div class="map-footer-stats">
+            <span id="visitorCountText">Loaded session origins</span>
+            <span style="font-size: 0.72rem; letter-spacing: 0.04em;">GEO-IP TELEMETRY ACTIVE</span>
           </div>
         </div>
       </div>
@@ -1571,148 +1557,131 @@
     });
 
     // =========================================================
-    // 7. PERSISTENT U.S. SILHOUETTE MAP LOGIC
+    // 7. PERSISTENT U.S. VISITOR MAP LOGIC & ALBERS PROJECTION
     // =========================================================
-    const mapPinsGroup = document.getElementById('mapPinsGroup');
+    const PINS_STORAGE_KEY = 'portfolio_us_map_pins';
+    const pinsGroup = document.getElementById('visitorPinsGroup');
     const mapTooltip = document.getElementById('mapTooltip');
     const mapContainer = document.getElementById('mapContainer');
-    const mapVisitorCount = document.getElementById('mapVisitorCount');
+    const visitorCountText = document.getElementById('visitorCountText');
 
-    // US Albers projection mapping for [Latitude, Longitude] -> [SVG X, Y (960x600)]
-    function projectLatLonToSVG(lat, lon) {
-      const minLat = 24.5, maxLat = 49.38;
-      const minLon = -124.8, maxLon = -66.9;
+    // Mathematical projection: Converts Latitude / Longitude to SVG coordinate space (960 x 600)
+    function projectAlbersUSA(lat, lon) {
+      const phi1 = 29.5 * (Math.PI / 180);
+      const phi2 = 45.5 * (Math.PI / 180);
+      const phi0 = 37.5 * (Math.PI / 180);
+      const lambda0 = -96 * (Math.PI / 180);
 
-      const x = ((lon - minLon) / (maxLon - minLon)) * 760 + 100;
-      const y = (1 - (lat - minLat) / (maxLat - minLat)) * 430 + 75;
-      return { x: Math.max(80, Math.min(880, x)), y: Math.max(60, Math.min(520, y)) };
+      const latRad = lat * (Math.PI / 180);
+      const lonRad = lon * (Math.PI / 180);
+
+      const n = (Math.sin(phi1) + Math.sin(phi2)) / 2;
+      const C = Math.cos(phi1) ** 2 + 2 * n * Math.sin(phi1);
+      const rho0 = Math.sqrt(C - 2 * n * Math.sin(phi0)) / n;
+      const theta = n * (lonRad - lambda0);
+      const rho = Math.sqrt(C - 2 * n * Math.sin(latRad)) / n;
+
+      const scale = 880;
+      const x = 480 + scale * rho * Math.sin(theta);
+      const y = 280 + scale * (rho0 - rho * Math.cos(theta));
+
+      return { x: Math.max(30, Math.min(930, x)), y: Math.max(30, Math.min(570, y)) };
     }
 
-    // Coordinates database for cities
-    const CITY_COORDS = {
-      'detroit': { lat: 42.3314, lon: -83.0458 },
-      'ann arbor': { lat: 42.2808, lon: -83.7430 },
-      'ypsilanti': { lat: 42.2411, lon: -83.6130 },
-      'chicago': { lat: 41.8781, lon: -87.6298 },
-      'new york': { lat: 40.7128, lon: -74.0060 },
-      'washington': { lat: 38.9072, lon: -77.0369 },
-      'los angeles': { lat: 34.0522, lon: -118.2437 },
-      'san francisco': { lat: 37.7749, lon: -122.4194 },
-      'austin': { lat: 30.2672, lon: -97.7431 },
-      'seattle': { lat: 47.6062, lon: -122.3321 },
-      'boston': { lat: 42.3601, lon: -71.0589 }
-    };
-
     function renderMapMarkers() {
-      const logs = JSON.parse(localStorage.getItem('portfolio_us_visitor_logs')) || [
-        { city: 'Detroit', state: 'Michigan', count: 10, lat: 42.3314, lon: -83.0458 },
-        { city: 'Ann Arbor', state: 'Michigan', count: 4, lat: 42.2808, lon: -83.7430 },
-        { city: 'Washington', state: 'District of Columbia', count: 2, lat: 38.9072, lon: -77.0369 }
+      const pins = JSON.parse(localStorage.getItem(PINS_STORAGE_KEY)) || [
+        { city: 'Detroit', region: 'MI', lat: 42.3314, lon: -83.0458, time: 'Just now' },
+        { city: 'Chicago', region: 'IL', lat: 41.8781, lon: -87.6298, time: '2h ago' },
+        { city: 'Washington', region: 'DC', lat: 38.9072, lon: -77.0369, time: 'Yesterday' },
+        { city: 'Seattle', region: 'WA', lat: 47.6062, lon: -122.3321, time: '3d ago' }
       ];
 
-      // Group counts by city
-      const cityAggregates = {};
-      let totalViews = 0;
+      pinsGroup.innerHTML = '';
 
-      logs.forEach(log => {
-        const cityName = log.city || 'Detroit';
-        const key = cityName.toLowerCase().trim();
-        totalViews += (log.count || 1);
-
-        if (!cityAggregates[key]) {
-          const coords = (log.lat && log.lon) 
-            ? { lat: log.lat, lon: log.lon } 
-            : (CITY_COORDS[key] || { lat: 42.3314, lon: -83.0458 });
-
-          cityAggregates[key] = {
-            displayName: cityName,
-            state: log.state || 'MI',
-            lat: coords.lat,
-            lon: coords.lon,
-            count: 0
-          };
-        }
-        cityAggregates[key].count += (log.count || 1);
-      });
-
-      mapVisitorCount.textContent = `${totalViews} viewers across ${Object.keys(cityAggregates).length} active locations`;
-      mapPinsGroup.innerHTML = '';
-
-      Object.values(cityAggregates).forEach(location => {
-        const { x, y } = projectLatLonToSVG(location.lat, location.lon);
-
+      pins.forEach((pin, index) => {
+        const coords = projectAlbersUSA(pin.lat, pin.lon);
+        
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.setAttribute('class', 'map-pin');
-        g.setAttribute('transform', `translate(${x}, ${y})`);
+        g.setAttribute('class', 'visitor-marker');
 
-        // Outer pulsing ring
-        const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        pulse.setAttribute('class', 'pin-pulse');
-        pulse.setAttribute('r', '6');
-        pulse.setAttribute('fill', 'none');
-        pulse.setAttribute('stroke', '#778873');
-        pulse.setAttribute('stroke-width', '1.5');
+        // Only pulse the most recent visitor marker
+        if (index === 0) {
+          const ripple = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          ripple.setAttribute('cx', coords.x);
+          ripple.setAttribute('cy', coords.y);
+          ripple.setAttribute('r', '5');
+          ripple.setAttribute('class', 'marker-ripple');
+          g.appendChild(ripple);
+        }
 
-        // Center solid dot
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.setAttribute('r', '5');
-        dot.setAttribute('fill', '#778873');
-        dot.setAttribute('stroke', '#FDF6ED');
-        dot.setAttribute('stroke-width', '1.5');
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', coords.x);
+        circle.setAttribute('cy', coords.y);
+        circle.setAttribute('r', '4.5');
+        circle.setAttribute('class', 'marker-dot');
+        g.appendChild(circle);
 
-        g.appendChild(pulse);
-        g.appendChild(dot);
-
-        // Tooltip hover interactions
+        // Tooltip interactions
         g.addEventListener('mouseenter', (e) => {
           const rect = mapContainer.getBoundingClientRect();
-          const svgRect = g.getBoundingClientRect();
-          
-          mapTooltip.textContent = `${location.count} viewer${location.count > 1 ? 's' : ''} from ${location.displayName}, ${location.state}`;
-          mapTooltip.style.left = `${svgRect.left - rect.left + 5}px`;
-          mapTooltip.style.top = `${svgRect.top - rect.top}px`;
-          mapTooltip.classList.add('visible');
+          const svgEl = document.querySelector('.usa-map-svg');
+          const svgRect = svgEl.getBoundingClientRect();
+
+          const scaleX = svgRect.width / 960;
+          const scaleY = svgRect.height / 600;
+
+          const screenX = (coords.x * scaleX) + (svgRect.left - rect.left);
+          const screenY = (coords.y * scaleY) + (svgRect.top - rect.top);
+
+          mapTooltip.innerHTML = `<strong>${pin.city}, ${pin.region}</strong><br><span style="opacity:0.8;font-size:0.68rem;">Visited ${pin.time}</span>`;
+          mapTooltip.style.left = `${screenX}px`;
+          mapTooltip.style.top = `${screenY}px`;
+          mapTooltip.classList.add('is-visible');
         });
 
         g.addEventListener('mouseleave', () => {
-          mapTooltip.classList.remove('visible');
+          mapTooltip.classList.remove('is-visible');
         });
 
-        mapPinsGroup.appendChild(g);
+        pinsGroup.appendChild(g);
       });
+
+      if (visitorCountText) {
+        visitorCountText.textContent = `${pins.length} persistent visitor origins mapped`;
+      }
     }
 
-    // 8. Geo-Telemetry Tracker with Real Lat/Lon for Map Persistence
-    (async function trackGeo() {
+    // Auto-record new session via Geo-IP
+    async function logSessionLocation() {
       try {
         const res = await fetch('https://ipapi.co/json/');
         if (!res.ok) return;
         const d = await res.json();
-        
-        const logs = JSON.parse(localStorage.getItem('portfolio_us_visitor_logs')) || [
-          { city: 'Detroit', state: 'Michigan', count: 10, lat: 42.3314, lon: -83.0458 }
-        ];
 
-        // Append real location to local storage
-        logs.unshift({
-          city: d.city || 'Detroit',
-          state: d.region || 'Michigan',
-          stateCode: d.region_code || 'MI',
-          lat: d.latitude || 42.3314,
-          lon: d.longitude || -83.0458,
-          country: d.country_name || 'USA',
-          count: 1,
-          timestamp: new Date().toISOString()
-        });
+        if (d.country_code === 'US' && d.latitude && d.longitude) {
+          let pins = JSON.parse(localStorage.getItem(PINS_STORAGE_KEY)) || [];
+          
+          const newPin = {
+            city: d.city || 'Detroit',
+            region: d.region_code || 'MI',
+            lat: parseFloat(d.latitude),
+            lon: parseFloat(d.longitude),
+            time: 'Just now'
+          };
 
-        localStorage.setItem('portfolio_us_visitor_logs', JSON.stringify(logs.slice(0, 50)));
-        renderMapMarkers();
-      } catch (e) {
+          // Keep list unique and capped to recent 30 sessions
+          pins = [newPin, ...pins.filter(p => !(p.city === newPin.city && p.region === newPin.region))].slice(0, 30);
+          localStorage.setItem(PINS_STORAGE_KEY, JSON.stringify(pins));
+          renderMapMarkers();
+        }
+      } catch (err) {
+        // Safe fallback
         renderMapMarkers();
       }
-    })();
+    }
 
     renderMapMarkers();
+    logSessionLocation();
   </script>
 
 </body>
